@@ -6,7 +6,7 @@ for H5P content types such as video, quiz, presentation, audio and games.
 
 ## Compatibility and installation
 
-This beta release supports Moodle 4.5–5.2 and PHP 8.1 or newer. Install the plugin
+Activity Icons supports Moodle 4.5–5.2 and PHP 8.1 or newer. Install the plugin
 as `local/activityicons` below Moodle's plugin webroot, then run Moodle's normal
 upgrade process. Moodle 5.1 and newer normally use `public/local/activityicons`.
 
