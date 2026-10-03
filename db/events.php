@@ -1,0 +1,13 @@
+<?php
+defined('MOODLE_INTERNAL') || die();
+
+$observers = [
+    [
+        'eventname' => '\\core\\event\\course_module_deleted',
+        'callback' => '\\local_activityicons\\local\\observer::course_module_deleted',
+    ],
+    [
+        'eventname' => '\\core\\event\\course_deleted',
+        'callback' => '\\local_activityicons\\local\\observer::course_deleted',
+    ],
+];
