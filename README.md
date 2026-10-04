@@ -4,6 +4,44 @@ Activity Icons lets course editors choose meaningful icons for Moodle activities
 Use the eight supplied icons, upload your own icons, or automatically choose icons
 for H5P content types such as video, quiz, presentation, audio and games.
 
+## Screenshots
+
+<details>
+<summary>View screenshots (5)</summary>
+
+Click a preview to open the full-size screenshot.
+
+<table>
+<tr>
+<td align="center" width="50%" valign="middle">
+<a href="https://raw.githubusercontent.com/108design/moodle-local_activityicons/main/docs/screenshots/ai-picker.jpg"><img src="https://raw.githubusercontent.com/108design/moodle-local_activityicons/main/docs/screenshots/ai-picker.jpg" width="150" height="160" alt="Choose an activity icon"></a><br>
+<sub>Choose an activity icon</sub>
+</td>
+<td align="center" width="50%" valign="middle">
+<a href="https://raw.githubusercontent.com/108design/moodle-local_activityicons/main/docs/screenshots/ai-action-button.jpg"><img src="https://raw.githubusercontent.com/108design/moodle-local_activityicons/main/docs/screenshots/ai-action-button.jpg" width="300" height="142" alt="Change icons directly in the course"></a><br>
+<sub>Change icons directly in the course</sub>
+</td>
+</tr>
+<tr>
+<td align="center" width="50%" valign="middle">
+<a href="https://raw.githubusercontent.com/108design/moodle-local_activityicons/main/docs/screenshots/ai-settings-1.jpg"><img src="https://raw.githubusercontent.com/108design/moodle-local_activityicons/main/docs/screenshots/ai-settings-1.jpg" width="220" height="160" alt="Upload icons and manage the shared pool"></a><br>
+<sub>Upload icons and manage the shared pool</sub>
+</td>
+<td align="center" width="50%" valign="middle">
+<a href="https://raw.githubusercontent.com/108design/moodle-local_activityicons/main/docs/screenshots/ai-h5p-mapping.jpg"><img src="https://raw.githubusercontent.com/108design/moodle-local_activityicons/main/docs/screenshots/ai-h5p-mapping.jpg" width="300" height="150" alt="Map H5P content types to icons"></a><br>
+<sub>Map H5P content types to icons</sub>
+</td>
+</tr>
+<tr>
+<td align="center" width="50%" valign="middle">
+<a href="https://raw.githubusercontent.com/108design/moodle-local_activityicons/main/docs/screenshots/ai-h5p-automation.jpg"><img src="https://raw.githubusercontent.com/108design/moodle-local_activityicons/main/docs/screenshots/ai-h5p-automation.jpg" width="300" height="133" alt="Configure H5P automation and display"></a><br>
+<sub>Configure H5P automation and display</sub>
+</td>
+</tr>
+</table>
+
+</details>
+
 ## Compatibility and installation
 
 Activity Icons supports Moodle 4.5–5.2 and PHP 8.1 or newer. Install the plugin
@@ -100,44 +138,6 @@ new custom icons into its shared pool requires pool-management permission;
 without it, assignments needing those new files are skipped. A course restore
 preserves the destination's site-wide H5P mapping. Review that mapping separately
 when transferring a course to another site.
-
-## Screenshots
-
-<details>
-<summary>View screenshots (5)</summary>
-
-Click a preview to open the full-size screenshot.
-
-<table>
-<tr>
-<td align="center" width="50%" valign="middle">
-<a href="https://raw.githubusercontent.com/108design/moodle-local_activityicons/main/docs/screenshots/ai-picker.jpg"><img src="https://raw.githubusercontent.com/108design/moodle-local_activityicons/main/docs/screenshots/ai-picker.jpg" width="150" height="160" alt="Choose an activity icon"></a><br>
-<sub>Choose an activity icon</sub>
-</td>
-<td align="center" width="50%" valign="middle">
-<a href="https://raw.githubusercontent.com/108design/moodle-local_activityicons/main/docs/screenshots/ai-action-button.jpg"><img src="https://raw.githubusercontent.com/108design/moodle-local_activityicons/main/docs/screenshots/ai-action-button.jpg" width="300" height="142" alt="Change icons directly in the course"></a><br>
-<sub>Change icons directly in the course</sub>
-</td>
-</tr>
-<tr>
-<td align="center" width="50%" valign="middle">
-<a href="https://raw.githubusercontent.com/108design/moodle-local_activityicons/main/docs/screenshots/ai-settings-1.jpg"><img src="https://raw.githubusercontent.com/108design/moodle-local_activityicons/main/docs/screenshots/ai-settings-1.jpg" width="220" height="160" alt="Upload icons and manage the shared pool"></a><br>
-<sub>Upload icons and manage the shared pool</sub>
-</td>
-<td align="center" width="50%" valign="middle">
-<a href="https://raw.githubusercontent.com/108design/moodle-local_activityicons/main/docs/screenshots/ai-h5p-mapping.jpg"><img src="https://raw.githubusercontent.com/108design/moodle-local_activityicons/main/docs/screenshots/ai-h5p-mapping.jpg" width="300" height="150" alt="Map H5P content types to icons"></a><br>
-<sub>Map H5P content types to icons</sub>
-</td>
-</tr>
-<tr>
-<td align="center" width="50%" valign="middle">
-<a href="https://raw.githubusercontent.com/108design/moodle-local_activityicons/main/docs/screenshots/ai-h5p-automation.jpg"><img src="https://raw.githubusercontent.com/108design/moodle-local_activityicons/main/docs/screenshots/ai-h5p-automation.jpg" width="300" height="133" alt="Configure H5P automation and display"></a><br>
-<sub>Configure H5P automation and display</sub>
-</td>
-</tr>
-</table>
-
-</details>
 
 ## License
 
