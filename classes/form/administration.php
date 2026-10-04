@@ -14,7 +14,7 @@ final class administration extends \moodleform {
         $used = \local_activityicons\local\pool::used_keys();
         $mform->addElement('header', 'poolheader', get_string('poollabels', 'local_activityicons'));
         $mform->addElement('static', 'labelsnotice', '', get_string('labelshelp', 'local_activityicons'));
-        $mform->addElement('html', \html_writer::start_div('local-activityicons-pool-grid'));
+        $mform->addElement('html', \html_writer::start_div('local-activityicons-pool-grid mb-3'));
         foreach ($entries as $entry) {
             $mform->addElement('html', \html_writer::start_div('local-activityicons-pool-card'));
             if (!isset($custom[$entry['key']])) {
@@ -114,7 +114,7 @@ final class administration extends \moodleform {
         $pending = array_values(array_diff($pending, $drop));
         $increment = $pending || $count === 500 ? 0 : 1;
         $focus = $pending[0] ?? min($count, 499);
-        $mform->addElement('html', \html_writer::start_div('local-activityicons-mappings',
+        $mform->addElement('html', \html_writer::start_div('local-activityicons-mappings mb-3',
             ['data-focus-row' => $adding ? $focus : '', 'data-toggle-row' => $toggled ?? '']));
         $row = $mform->createElement('group', 'mappingrow', '', [
             $mform->createElement('select', 'machine', get_string('h5ptypes', 'local_activityicons'),
