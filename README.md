@@ -145,4 +145,6 @@ when transferring a course to another site.
 
 ## License
 
-This is a 108design source-available commercial software license, not an open-source license. See [LICENSE.md](https://github.com/108design/moodle-local_activityicons/blob/main/LICENSE.md) for the full terms.
+**This release is available free of charge under the 108design Software License.**
+
+See [LICENSE.md](https://github.com/108design/moodle-local_activityicons/blob/main/LICENSE.md) for the full terms.
