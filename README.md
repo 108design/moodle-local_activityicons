@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/108design/moodle-local_activityicons/main/docs/branding/logo.svg" alt="Activity Icons logo" width="443" height="443">
+  <img src="https://raw.githubusercontent.com/108design/moodle-local_activityicons/main/docs/branding/logo.svg" alt="Activity Icons logo" width="125" height="125">
 </p>
 
 # 108design Activity Icons
