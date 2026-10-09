@@ -73,7 +73,8 @@ class ActivityIcons {
                 const roots = found.get(cmid);
                 const alreadyRenderedByCourse = this.config.courseid > 0 &&
                     [...roots].some(root => root.matches('[data-for="cmitem"]'));
-                return !alreadyRenderedByCourse && !this.descriptors.has(cmid) && !this.requested.has(cmid);
+                const hasIcon = [...roots].some(root => this.imageIn(root));
+                return hasIcon && !alreadyRenderedByCourse && !this.descriptors.has(cmid) && !this.requested.has(cmid);
             });
             if (unresolved.length) {
                 this.fetch(unresolved.slice(0, 100));

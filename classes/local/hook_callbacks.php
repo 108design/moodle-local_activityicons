@@ -39,7 +39,10 @@ final class hook_callbacks {
         }
 
         $dynamicsetting = get_config('local_activityicons', 'dynamicfallback');
-        $dynamicfallback = $dynamicsetting === false ? true : (bool) $dynamicsetting;
+        // core/ajax redirects to login before our promise catch when a service requires login.
+        // Keep server-rendered public course icons, but never start authenticated reads for guests.
+        $dynamicfallback = isloggedin() && !isguestuser() && $PAGE->pagelayout !== 'login'
+            && ($dynamicsetting === false ? true : (bool) $dynamicsetting);
         $hasassignments = $DB->record_exists(repository::TABLE, []);
         $hascourseauto = $DB->record_exists(repository::COURSE_TABLE, [
             'autoh5pmode' => repository::COURSE_AUTO_ENABLED,
