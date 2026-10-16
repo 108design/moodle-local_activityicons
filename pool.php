@@ -5,7 +5,17 @@ require_once($CFG->libdir . '/adminlib.php');
 require_login();
 require_capability('local/activityicons:managepool', context_system::instance());
 admin_externalpage_setup('local_activityicons');
+\local_activityicons\local\context_help::prepare();
 $PAGE->requires->css('/local/activityicons/styles.css');
+// Keep the native page heading; the decorative SVG identifies this administration tool.
+$logo = html_writer::empty_tag('img', [
+    'src' => $OUTPUT->image_url('icon', 'local_activityicons'),
+    'alt' => '', 'aria-hidden' => 'true', 'width' => 32, 'height' => 32,
+    'class' => 'local-activityicons-admin-logo',
+]);
+$PAGE->set_heading(html_writer::span($logo .
+    html_writer::span(s(get_string('pluginname', 'local_activityicons'))),
+    'local-activityicons-admin-heading'), false);
 $url = new moodle_url('/local/activityicons/pool.php');
 $upload = new \local_activityicons\form\pool_icon($url);
 $form = new \local_activityicons\form\administration($url);
@@ -31,8 +41,9 @@ $PAGE->requires->js_call_amd('local_activityicons/mapping', 'init', [[
     'deleteSelected' => get_string('deleteiconsselected', 'local_activityicons'),
 ]]);
 echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('pluginname', 'local_activityicons'));
-echo html_writer::tag('p', get_string('adminintro', 'local_activityicons'));
+echo html_writer::tag('p', get_string('adminintro', 'local_activityicons') .
+    \local_activityicons\local\context_help::icon('overview'));
 $upload->display();
 $form->display();
+echo \local_activityicons\local\context_help::render();
 echo $OUTPUT->footer();

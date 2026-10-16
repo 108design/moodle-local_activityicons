@@ -34,7 +34,7 @@ $string['resetdone'] = 'Die ursprünglichen Moodle-Modulicons wurden wiederherge
 $string['activityicon'] = 'Aktivitätsicon';
 $string['activityicon_help'] = 'Wählen Sie das ursprüngliche Icon des Aktivitätstyps oder ein Icon aus dem gemeinsamen Pool. Für H5P können Sie außerdem die Kursregel übernehmen oder den H5P-Typ dieser Aktivität unabhängig davon erkennen lassen.';
 $string['autoh5p'] = 'Nicht zugewiesene H5P-Aktivitäten automatisch klassifizieren';
-$string['autoh5p_desc'] = 'Wenn aktiviert, erhalten H5P-Aktivitäten ohne ausdrückliche Auswahl ein Icon passend zu ihrer obersten H5P-Bibliothek. Nach der Installation ist dies deaktiviert, damit bestehende Kurse nicht unbemerkt verändert werden.';
+$string['autoh5p_desc'] = 'Prüfe die Typzuordnung, bevor Du die Automatik einschaltest.';
 $string['h5pmapping'] = 'Manuelle H5P-Typzuordnung';
 $string['h5pmapping_desc'] = 'Eine Zuordnung pro Zeile, z. B. H5P.InteractiveVideo=video. Verwenden Sie den H5P-Maschinennamen ohne Versionsnummer. Groß-/Kleinschreibung spielt keine Rolle. Leerzeilen und Kommentare mit # sind erlaubt. Eine leere Liste verwendet für alle Typen das Ersatzicon. Verfügbare Icon-Schlüssel:';
 $string['mappinginvalidline'] = 'Ungültige oder doppelte Zuordnung {$a}. Wählen Sie einen gültigen H5P-Typ und ein Icon. Jeder Typ darf nur einmal zugeordnet werden.';
@@ -66,18 +66,18 @@ $string['iconaudio'] = 'Audio';
 $string['iconimage'] = 'Bild';
 $string['icongame'] = 'Spiel';
 $string['iconh5p'] = 'H5P (sonstige Typen)';
-$string['adminintro'] = 'Verwalten Sie hier den gemeinsamen Icon-Pool, die H5P-Zuordnung und die Automatik. Die Bereiche lassen sich einzeln auf- und zuklappen. Speichern Sie Änderungen an Bezeichnungen und Einstellungen, bevor Sie weitere Icons hinzufügen.';
+$string['adminintro'] = 'Verwalte hier den gemeinsamen Icon-Pool und die automatische H5P-Zuordnung.';
 $string['batchupload'] = 'Icons hinzufügen';
 $string['iconfiles'] = 'Icon-Dateien';
-$string['batchhelp'] = 'Ziehen Sie mehrere SVG-, PNG- oder WebP-Dateien gleichzeitig in das Feld (maximal 50 pro Upload, je 1 MB; Rasterbilder maximal 2048 × 2048 Pixel). Die Dateinamen dienen zunächst als Bezeichnungen und können anschließend im Pool geändert werden. Bereits vorhandene Icons bleiben erhalten; identische Dateien werden nicht doppelt angelegt. Icons sind öffentlich abrufbare Gestaltungsdateien. SVG muss statisch sein und eine viewBox besitzen; aktive oder externe Inhalte sind nicht erlaubt.';
+$string['batchhelp'] = 'Füge eigene Icons für Deine Kurse hinzu.';
 $string['batchrequired'] = 'Wählen Sie 1 bis 50 Icon-Dateien aus.';
 $string['batchinvalid'] = 'Die Datei „{$a}“ ist kein unterstütztes, sicheres Icon. Es wurde kein Icon aus diesem Stapel übernommen.';
 $string['batchsaved'] = '{$a} unterschiedliche Icons aus dem Upload stehen im Pool zur Verfügung. Sie können ihre Bezeichnungen jetzt bearbeiten.';
 $string['adminsaved'] = 'Die Einstellungen und Bezeichnungen wurden gespeichert.';
 $string['poollabels'] = 'Icon-Pool und Bezeichnungen';
-$string['labelshelp'] = 'Bezeichnungen eigener Icons können jederzeit geändert werden. Die Zuordnungen bleiben dabei erhalten. Neue Uploads verwenden zunächst den Dateinamen ohne Endung. Wählen Sie ein oder mehrere eigene Icons im Raster aus und löschen Sie diese gemeinsam. Verwendete oder zugeordnete Icons sind gesperrt und nicht auswählbar.';
+$string['labelshelp'] = 'Benenne eigene Icons um oder entferne unbenutzte Icons.';
 $string['iconkey'] = 'Schlüssel für die Zuordnung';
-$string['mappinghelp'] = 'Fügen Sie eine Zuordnung hinzu, wählen Sie einen H5P-Inhaltstyp und danach das Icon im visuellen Picker. Jeder Typ darf nur einmal zugeordnet sein. Das × markiert eine Zeile zum Entfernen; mit ↶ machen Sie dies rückgängig. Erst „Änderungen speichern“ übernimmt Änderungen und entfernt markierte Zuordnungen.';
+$string['mappinghelp'] = 'Ordne jedem H5P-Typ das passende Icon zu.';
 $string['sitebehaviour'] = 'Automatik und Darstellung';
 $string['dynamichelp'] = 'Ergänzt Icon-Zuordnungen in dynamisch geladenen Standardlisten, beispielsweise Zeitleiste und zuletzt aufgerufene Aktivitäten.';
 $string['adminlink'] = 'Icon-Pool, H5P-Zuordnung und Website-Automatik verwalten';
@@ -99,3 +99,41 @@ $string['deleteiconsconfirm'] = '{$a->selected} eigene Icons wurden ausgewählt.
 $string['iconsdeletedbatch'] = '{$a->deleted} Icons wurden gelöscht. {$a->kept} verwendete oder zugeordnete Icons wurden beibehalten.';
 $string['selecticonsfirst'] = 'Wählen Sie mindestens ein eigenes Icon aus.';
 $string['invalidiconselection'] = 'Die Icon-Auswahl ist ungültig.';
+
+$string['settingshelp'] = 'Hilfe zu Aktivitätsicons';
+
+$string['contexthelptopics'] = 'Hilfethemen';
+
+$string['settingshelpmore'] = 'Mehr dazu im Hilfepanel';
+
+$string['settingshelp_overview'] = 'Aktivitätsicons verwalten';
+
+$string['overview_help'] = 'Uploads haben eine eigene Aktion. Sichere Änderungen an Bezeichnungen und Einstellungen vorher mit „Änderungen speichern“.';
+
+$string['settingshelp_overview_article'] = '<p>Erweitere den gemeinsamen Pool über <strong>Icons hinzufügen</strong>. Unter <strong>Icon-Pool und Bezeichnungen</strong> bearbeitest Du die Namen; unter <strong>Manuelle H5P-Typzuordnung</strong> wählst Du passende Icons für H5P-Typen.</p><p>Uploads haben eine eigene Aktion. Sichere Bezeichnungen, Zuordnungen und Einstellungen mit <strong>Änderungen speichern</strong>, bevor Du einen Upload beginnst. Das Aufklappen eines Bereichs oder Öffnen der Hilfe speichert nichts.</p><p>Kursverantwortliche können die Automatik für ihren Kurs gesondert einstellen. Eine individuelle Auswahl an einer Aktivität hat Vorrang vor automatischen Zuordnungen.</p>';
+
+$string['settingshelp_pool'] = 'Icons hinzufügen und verwalten';
+
+$string['pool_help'] = 'Icons stehen kursübergreifend bereit und sind öffentlich abrufbar. Verwendete Icons sind vor dem Löschen geschützt.';
+
+$string['settingshelp_pool_article'] = '<p>Wähle unter <strong>Icons hinzufügen</strong> bis zu 50 SVG-, PNG- oder WebP-Dateien mit jeweils höchstens 1 MB. Rasterbilder dürfen maximal 2048 × 2048 Pixel groß sein. SVG-Dateien müssen statisch sein und eine viewBox besitzen.</p><p>Verwende ausschließlich Gestaltungsdateien, die öffentlich abrufbar sein dürfen. Hochgeladene Icons stehen kursübergreifend bereit. Vermeide private Angaben und Motive, die Du nicht weitergeben darfst.</p><p>Unter <strong>Icon-Pool und Bezeichnungen</strong> kannst Du eigene Icons umbenennen und die Änderungen speichern. Bestehende Zuordnungen bleiben erhalten. Wähle unbenutzte eigene Icons und <strong>Ausgewählte Icons löschen</strong>, um die Löschung zu prüfen. Verwendete Icons sowie Zuordnungen zu H5P-Typen oder zum Ersatzicon sind geschützt; mitgelieferte Icons lassen sich hier nicht entfernen.</p>';
+
+$string['settingshelp_mapping'] = 'H5P-Typen zuordnen';
+
+$string['mapping_help'] = 'Wähle je H5P-Typ ein Icon. Zum Entfernen markierte Zeilen werden erst beim Speichern gelöscht; vorher kannst Du die Markierung zurücknehmen.';
+
+$string['settingshelp_mapping_article'] = '<p>Wähle unter <strong>Manuelle H5P-Typzuordnung</strong> die Aktion <strong>Zuordnung hinzufügen</strong>, anschließend den H5P-Inhaltstyp und sein Icon. Jeder Typ hat eine Zuordnung, die für seine verschiedenen Versionen gilt.</p><p>Mit × markierst Du eine Zuordnung zum Entfernen; ↶ nimmt die Markierung zurück. Erst <strong>Änderungen speichern</strong> übernimmt die Bearbeitung. Wähle für nicht zugeordnete Typen ein <strong>Icon für nicht zugeordnete H5P-Typen</strong> oder behalte das originale Moodle-H5P-Icon.</p><p>Die Zuordnung greift, wenn die H5P-Typerkennung verwendet wird. Eine ausdrücklich an der Aktivität gewählte Darstellung hat weiterhin Vorrang.</p>';
+
+$string['settingshelp_behaviour'] = 'Automatik und Darstellung';
+
+$string['behaviour_help'] = 'Die Website-Automatik gilt für H5P-Aktivitäten ohne individuelle Auswahl, deren Kurs die Website-Vorgabe verwendet. Kurse können davon abweichen.';
+
+$string['settingshelp_behaviour_article'] = '<p><strong>Nicht zugewiesene H5P-Aktivitäten automatisch klassifizieren</strong> legt die Website-Vorgabe fest. Diese Option ist nach der Installation ausgeschaltet, damit bestehende Kurse ihre Darstellung behalten. Prüfe vor dem Einschalten die Typzuordnungen und das Ersatzicon.</p><p>Ein Kurs kann die automatische H5P-Zuordnung unabhängig davon ein- oder ausschalten. An einer Aktivität behält <strong>Originalicon verwenden</strong> das Moodle-Icon bei; ein gewähltes Pool-Icon legt die Darstellung fest. <strong>H5P-Typ erkennen</strong> verwendet die Typerkennung unabhängig von der Kursvorgabe.</p><p><strong>Dynamisch geladene Aktivitätslisten ergänzen</strong> zeigt konfigurierte Icons auch in Standardlisten wie Zeitleiste und Zuletzt besuchte Elemente. Die Inhalte der Aktivitäten ändern sich dadurch nicht.</p><p>Die websiteweiten Schalter werden nur Personen angezeigt, die die Website-Konfiguration ändern dürfen.</p>';
+
+$string['overview'] = $string['settingshelp_overview'];
+
+$string['pool'] = $string['settingshelp_pool'];
+
+$string['mapping'] = $string['settingshelp_mapping'];
+
+$string['behaviour'] = $string['settingshelp_behaviour'];

@@ -1,3 +1,37 @@
+/* Product identity belongs only to the capability-protected pool administration heading. */
+#page-admin-local-activityicons-pool .local-activityicons-admin-heading {
+    display: inline-flex;
+    align-items: center;
+    gap: .35em;
+    max-width: 100%;
+}
+
+#page-admin-local-activityicons-pool .local-activityicons-admin-logo {
+    width: 1em;
+    height: 1em;
+    flex: 0 0 auto;
+    object-fit: contain;
+}
+
+/* Keep native site-administration search above the plugin identity on narrow screens. */
+@media (max-width: 575.98px) {
+    #page-admin-local-activityicons-pool #page-header .d-flex:has(> .header-actions-container) {
+        flex-wrap: wrap;
+        row-gap: .5rem;
+    }
+
+    #page-admin-local-activityicons-pool #page-header .d-flex:has(> .header-actions-container) > .me-auto {
+        flex: 1 0 100%;
+    }
+
+    #page-admin-local-activityicons-pool #page-header .header-actions-container {
+        order: -1;
+        flex: 0 0 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
 .activityiconcontainer.local-activityicons-custom:not(.isbranded) .activityicon {
     filter: var(--activity-icon-filter, none);
 }

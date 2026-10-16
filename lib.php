@@ -82,3 +82,8 @@ function local_activityicons_coursemodule_edit_post_actions($data, $course) {
     }
     return $data;
 }
+
+/** Contextual administration help only after the permitted pool page registers it. */
+function local_activityicons_render_navbar_output(\renderer_base $renderer): string {
+    return \local_activityicons\local\context_help::navbar($renderer);
+}

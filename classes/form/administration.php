@@ -13,7 +13,8 @@ final class administration extends \moodleform {
         $custom = \local_activityicons\local\pool::records();
         $used = \local_activityicons\local\pool::used_keys();
         $mform->addElement('header', 'poolheader', get_string('poollabels', 'local_activityicons'));
-        $mform->addElement('static', 'labelsnotice', '', get_string('labelshelp', 'local_activityicons'));
+        $mform->addElement('static', 'labelsnotice', '', get_string('labelshelp', 'local_activityicons') .
+            \local_activityicons\local\context_help::icon('pool'));
         $mform->addElement('html', \html_writer::start_div('local-activityicons-pool-grid mb-3'));
         foreach ($entries as $entry) {
             $mform->addElement('html', \html_writer::start_div('local-activityicons-pool-card'));
@@ -74,7 +75,8 @@ final class administration extends \moodleform {
             $mform->registerNoSubmitButton('deleteiconsubmit');
         }
         $mform->addElement('header', 'mappingheader', get_string('h5pmapping', 'local_activityicons'));
-        $mform->addElement('static', 'mappingnotice', '', get_string('mappinghelp', 'local_activityicons'));
+        $mform->addElement('static', 'mappingnotice', '', get_string('mappinghelp', 'local_activityicons') .
+            \local_activityicons\local\context_help::icon('mapping'));
         $defaults = \local_activityicons\local\administration::defaults();
         $count = $this->optional_param('mappingcount', count($defaults->machine), PARAM_INT);
         if ($count < 0 || $count > 500) {
@@ -158,13 +160,12 @@ final class administration extends \moodleform {
         $mform->addElement('select', 'h5pfallback', get_string('h5pfallback', 'local_activityicons'),
             ['default' => get_string('h5pfallbackdefault', 'local_activityicons')] +
             \local_activityicons\local\icon_catalog::key_options());
-        $mform->addElement('static', 'fallbacknotice', '', get_string('h5pfallback_desc', 'local_activityicons'));
         if (has_capability('moodle/site:config', \context_system::instance())) {
             $mform->addElement('header', 'behaviourheader', get_string('sitebehaviour', 'local_activityicons'));
             $mform->addElement('advcheckbox', 'autoh5p', get_string('autoh5p', 'local_activityicons'));
-            $mform->addElement('static', 'autonotice', '', get_string('autoh5p_desc', 'local_activityicons'));
+            $mform->addElement('static', 'autonotice', '', get_string('autoh5p_desc', 'local_activityicons') .
+            \local_activityicons\local\context_help::icon('behaviour'));
             $mform->addElement('advcheckbox', 'dynamicfallback', get_string('dynamicfallback', 'local_activityicons'));
-            $mform->addElement('static', 'dynamicnotice', '', get_string('dynamichelp', 'local_activityicons'));
         }
         $this->add_action_buttons(false);
     }

@@ -9,7 +9,8 @@ final class pool_icon extends \moodleform {
     protected function definition(): void {
         $mform = $this->_form;
         $mform->addElement('header', 'uploadheader', get_string('batchupload', 'local_activityicons'));
-        $mform->addElement('static', 'uploadnotice', '', get_string('batchhelp', 'local_activityicons'));
+        $mform->addElement('static', 'uploadnotice', '', get_string('batchhelp', 'local_activityicons') .
+            \local_activityicons\local\context_help::icon('pool'));
         $mform->addElement('filemanager', 'iconfiles', get_string('iconfiles', 'local_activityicons'), null, [
             'maxbytes' => \local_activityicons\local\image_validator::MAX_BYTES,
             'maxfiles' => 50, 'subdirs' => 0, 'accepted_types' => ['.svg', '.png', '.webp'],

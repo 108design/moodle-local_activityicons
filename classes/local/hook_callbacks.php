@@ -2,9 +2,42 @@
 namespace local_activityicons\local;
 
 use core\hook\output\before_http_headers;
+use core\hook\output\before_standard_head_html_generation;
 
 /** Moodle output integration for server-rendered and dynamically inserted activity icons. */
 final class hook_callbacks {
+    /** Decorate only this plugin's existing link in the native administration index/search. */
+    public static function before_standard_head_html(before_standard_head_html_generation $hook): void {
+        global $CFG, $PAGE;
+
+        $adminsearch = new \moodle_url('/' . $CFG->admin . '/search.php');
+        if (during_initial_install() || $PAGE->url->get_path() !== $adminsearch->get_path()) {
+            return;
+        }
+        if (!isloggedin() || isguestuser()
+                || !has_capability('local/activityicons:managepool', \context_system::instance())) {
+            return;
+        }
+
+        // CSS keeps the native link text, search highlighting, accessible name and destination intact.
+        $link = json_encode((new \moodle_url('/local/activityicons/pool.php'))->out(false),
+            JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+        $image = json_encode($hook->renderer->image_url('icon', 'local_activityicons')->out(false),
+            JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+        $css = <<<CSS
+body#page-admin-search #region-main a[href={$link}]::before {
+    content: "";
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-inline-end: .35em;
+    vertical-align: -.125em;
+    background: url({$image}) center / contain no-repeat;
+}
+CSS;
+        $hook->add_html(\html_writer::tag('style', $css, ['id' => 'local-activityicons-admin-index-brand']));
+    }
+
     public static function before_http_headers(before_http_headers $hook): void {
         global $DB, $PAGE;
 

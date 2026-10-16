@@ -34,7 +34,7 @@ $string['resetdone'] = 'Original Moodle module icons have been restored. Course 
 $string['activityicon'] = 'Activity icon';
 $string['activityicon_help'] = 'Choose the original activity-type icon or an icon from the shared pool. H5P activities additionally allow following the course policy or detecting this activity’s H5P type independently.';
 $string['autoh5p'] = 'Automatically classify unassigned H5P activities';
-$string['autoh5p_desc'] = 'When enabled, H5P activities without an explicit selection use an icon based on their top-level H5P library. Installation leaves this disabled to avoid changing existing courses silently.';
+$string['autoh5p_desc'] = 'Review the type mapping before enabling automation.';
 $string['h5pmapping'] = 'Manual H5P type mapping';
 $string['h5pmapping_desc'] = 'One mapping per line, e.g. H5P.InteractiveVideo=video. Use the H5P machine name without a version number. Matching is case-insensitive. Blank lines and # comments are allowed. An empty list uses the fallback for all types. Available icon keys:';
 $string['mappinginvalidline'] = 'Invalid or duplicate mapping {$a}. Choose a valid H5P type and an icon. Each type can only be mapped once.';
@@ -66,18 +66,18 @@ $string['iconaudio'] = 'Audio';
 $string['iconimage'] = 'Image';
 $string['icongame'] = 'Game';
 $string['iconh5p'] = 'H5P (other types)';
-$string['adminintro'] = 'Manage the shared icon pool, H5P mapping and automation here. Each section can be expanded or collapsed. Save changes to labels and settings before adding more icons.';
+$string['adminintro'] = 'Manage the shared icon pool and automatic H5P mapping here.';
 $string['batchupload'] = 'Add icons';
 $string['iconfiles'] = 'Icon files';
-$string['batchhelp'] = 'Drop multiple SVG, PNG or WebP files together (up to 50 per upload, 1 MB each; raster images up to 2048 × 2048 pixels). Filenames become the initial labels, which you can edit in the pool afterwards. Existing icons are retained; identical files are not duplicated. Icons are public decorative assets. SVG must be static and include a viewBox; active or external content is not allowed.';
+$string['batchhelp'] = 'Add your own icons for use in courses.';
 $string['batchrequired'] = 'Choose between 1 and 50 icon files.';
 $string['batchinvalid'] = 'The file “{$a}” is not a supported, safe icon. No icons from this batch were imported.';
 $string['batchsaved'] = '{$a} distinct icons from the upload are available in the pool. You can now edit their labels.';
 $string['adminsaved'] = 'Settings and labels saved.';
 $string['poollabels'] = 'Icon pool and labels';
-$string['labelshelp'] = 'Custom labels can be changed at any time without affecting assignments. New uploads initially use the filename without its extension. Select one or more custom icons in the grid to delete them together. Icons that are used or assigned are locked and cannot be selected.';
+$string['labelshelp'] = 'Rename your custom icons or remove unused icons.';
 $string['iconkey'] = 'Mapping key';
-$string['mappinghelp'] = 'Add a mapping, choose an H5P content type and then select its icon in the visual picker. Each type can only be mapped once. The × marks a row for removal; ↶ undoes this. Only Save changes applies edits and removes marked mappings.';
+$string['mappinghelp'] = 'Choose the matching icon for each H5P type.';
 $string['sitebehaviour'] = 'Automation and display';
 $string['dynamichelp'] = 'Enhance dynamically loaded standard activity lists, such as Timeline and Recently accessed items.';
 $string['adminlink'] = 'Manage the icon pool, H5P mapping and site automation';
@@ -99,3 +99,41 @@ $string['deleteiconsconfirm'] = '{$a->selected} custom icons are selected. Unuse
 $string['iconsdeletedbatch'] = '{$a->deleted} icons were deleted. {$a->kept} icons in use or assigned were kept.';
 $string['selecticonsfirst'] = 'Select at least one custom icon.';
 $string['invalidiconselection'] = 'The icon selection is invalid.';
+
+$string['settingshelp'] = 'Activity Icons Help';
+
+$string['contexthelptopics'] = 'Help Topics';
+
+$string['settingshelpmore'] = 'More in the help panel';
+
+$string['settingshelp_overview'] = 'Manage Activity Icons';
+
+$string['overview_help'] = 'Uploads have their own action. Save edited labels and settings with Save changes before starting an upload.';
+
+$string['settingshelp_overview_article'] = '<p>Use <strong>Add icons</strong> to extend the shared pool. Edit names in <strong>Icon pool and labels</strong>, then choose icons for H5P types in <strong>Manual H5P type mapping</strong>.</p><p>Uploads have their own action. Use <strong>Save changes</strong> for labels, mappings and settings before starting an upload. Expanding a section or opening help does not save edits.</p><p>Course administrators can manage their course policy separately. An individual activity choice takes precedence over automatic choices.</p>';
+
+$string['settingshelp_pool'] = 'Add and Manage Icons';
+
+$string['pool_help'] = 'Pool icons are shared across courses and publicly accessible. Icons currently in use are protected from deletion.';
+
+$string['settingshelp_pool_article'] = '<p>In <strong>Add icons</strong>, choose up to 50 SVG, PNG or WebP files, at most 1 MB each. Raster images may be up to 2048 × 2048 pixels. SVG files must be static and include a viewBox.</p><p>Use only decorative artwork suitable for public access. Uploaded icons are available across courses; avoid private information or artwork you may not redistribute.</p><p>In <strong>Icon pool and labels</strong>, rename custom icons and save your changes. Renaming does not change existing assignments. Select unused custom icons and choose <strong>Delete selected icons</strong> to review deletion. Icons used by activities, type mappings or the fallback are protected; bundled icons cannot be removed here.</p>';
+
+$string['settingshelp_mapping'] = 'Map H5P Types';
+
+$string['mapping_help'] = 'Choose one icon per H5P type. Marked removals take effect only when you save; the undo control restores a marked row before saving.';
+
+$string['settingshelp_mapping_article'] = '<p>In <strong>Manual H5P type mapping</strong>, use <strong>Add mapping</strong>, choose an H5P content type and select its icon. Each type has one mapping, shared across its versions.</p><p>Use × to mark a mapping for removal or ↶ to undo that choice. <strong>Save changes</strong> applies the edits. Choose an <strong>Icon for unmapped H5P types</strong> for types without a mapping, or retain the original Moodle H5P icon.</p><p>These mappings are used when H5P type detection applies. An explicit choice for an individual activity still takes precedence.</p>';
+
+$string['settingshelp_behaviour'] = 'Automation and Display';
+
+$string['behaviour_help'] = 'Site automation affects H5P activities that have no individual choice and follow the site policy. Courses can override it.';
+
+$string['settingshelp_behaviour_article'] = '<p><strong>Automatically classify unassigned H5P activities</strong> supplies a site default. It starts disabled so installing the plugin does not silently change existing courses. Review your type mappings and fallback before enabling it.</p><p>A course can enable or disable automatic H5P icons independently. For an activity, <strong>Use original icon</strong> keeps the native icon, a selected pool icon fixes that choice, and <strong>Detect H5P type</strong> requests type detection independently of the course policy.</p><p><strong>Enhance dynamically loaded activity lists</strong> also applies configured icons in standard lists such as Timeline and Recently accessed items. It does not change the activity content.</p><p>Site-wide switches are available only to users allowed to change site configuration.</p>';
+
+$string['overview'] = $string['settingshelp_overview'];
+
+$string['pool'] = $string['settingshelp_pool'];
+
+$string['mapping'] = $string['settingshelp_mapping'];
+
+$string['behaviour'] = $string['settingshelp_behaviour'];
