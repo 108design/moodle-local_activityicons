@@ -85,10 +85,18 @@ final class context_help {
         ]) . \html_writer::tag('select', $options, [
             'id' => 'local-activityicons-help-topic', 'class' => 'form-select custom-select',
         ]);
+        // Shared help-panel identity: no link or action; close remains beside the topic selector.
+        $brand = \html_writer::tag('span', \html_writer::empty_tag('img', [
+            'src' => $PAGE->get_renderer('core')->image_url('helpbrand', 'local_activityicons')->out(false),
+            'alt' => '', 'width' => 25, 'height' => 24,
+        ]), [
+            'class' => 'local-activityicons-help-brand', 'role' => 'img', 'aria-label' => '108design',
+            'title' => '108design', 'tabindex' => '0', 'data-toggle' => 'tooltip', 'data-bs-toggle' => 'tooltip',
+        ]);
         $header = \html_writer::tag('header', \html_writer::tag('h2', $title, [
             'id' => 'local-activityicons-context-help-title', 'class' => 'sr-only visually-hidden', 'tabindex' => '-1',
-        ]) . \html_writer::div($choice, 'local-activityicons-help-choices') . $close,
-            ['class' => 'local-activityicons-help-header']);
+        ]) . \html_writer::div($choice, 'local-activityicons-help-choices') . $brand . $close,
+            ['class' => 'local-activityicons-help-header local-activityicons-help-header-branded']);
         return \html_writer::tag('aside', $header
             . \html_writer::div($articles, 'local-activityicons-help-content', ['tabindex' => '0']), [
                 'id' => 'local-activityicons-context-help', 'class' => 'local-activityicons-context-help',
