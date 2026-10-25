@@ -1,4 +1,16 @@
 <?php
+/**
+ * This file is part of a 108design source-available software product.
+ *
+ * Use and modification are permitted only under the Software License included
+ * with this distribution. See LICENSE.md for the full terms.
+ *
+ * File documentation for classes/local/hook_callbacks.php.
+ *
+ * @package   local_activityicons
+ * @copyright 2026 Andreas Giesen <andreas@108design.com>
+ * @license   See LICENSE.md for the full terms.
+ */
 namespace local_activityicons\local;
 
 use core\hook\output\before_http_headers;
@@ -85,7 +97,6 @@ CSS;
             return;
         }
 
-        $PAGE->requires->css('/local/activityicons/styles.css');
         $PAGE->requires->js_call_amd('local_activityicons/activityicons', 'init', [[
             'courseid' => $iscourse ? $courseid : 0,
             'currentcmid' => (int) ($PAGE->cm->id ?? 0),

@@ -149,3 +149,7 @@ body.local-activityicons-help-legacy-drawers.local-activityicons-help-open .draw
     grid-row: 2;
     align-self: center;
 }
+
+.local-activityicons-setting-control {display:flex;align-items:center;gap:8px;min-width:0;}
+.local-activityicons-setting-control > fieldset {flex:1;min-width:0;margin:0;}
+.local-activityicons-setting-control > .local-activityicons-context-help-icon {flex:0 0 auto;margin:0!important;}

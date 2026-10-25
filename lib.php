@@ -1,4 +1,16 @@
 <?php
+/**
+ * This file is part of a 108design source-available software product.
+ *
+ * Use and modification are permitted only under the Software License included
+ * with this distribution. See LICENSE.md for the full terms.
+ *
+ * File documentation for lib.php.
+ *
+ * @package   local_activityicons
+ * @copyright 2026 Andreas Giesen <andreas@108design.com>
+ * @license   See LICENSE.md for the full terms.
+ */
 
 /** Pool assets are explicitly public decorative resources; private uploads are not supported. */
 function local_activityicons_pluginfile($course, $cm, context $context, string $filearea,
@@ -45,8 +57,6 @@ function local_activityicons_coursemodule_standard_elements($formwrapper, $mform
             get_string('selectiondefault', 'local_activityicons'),
         \local_activityicons\local\repository::SELECTION_AUTO =>
             get_string('selectionauto', 'local_activityicons'),
-        get_string('bundledicons', 'local_activityicons') =>
-            \local_activityicons\local\icon_catalog::form_options(),
     ];
     $cm = $formwrapper->get_coursemodule();
     $ish5p = \local_activityicons\local\h5p_resolver::supports_module(
@@ -55,8 +65,13 @@ function local_activityicons_coursemodule_standard_elements($formwrapper, $mform
     if (!$ish5p) {
         unset($options['inherit'], $options['auto']);
     }
-    $mform->addElement('select', 'local_activityicons_selection',
-        get_string('activityicon', 'local_activityicons'), $options);
+    $groups = [
+        get_string('activityicon', 'local_activityicons') => array_map('s', $options),
+        get_string('bundledicons', 'local_activityicons') =>
+            array_map('s', \local_activityicons\local\icon_catalog::form_options()),
+    ];
+    $mform->addElement('selectgroups', 'local_activityicons_selection',
+        get_string('activityicon', 'local_activityicons'), $groups);
     $mform->addHelpButton('local_activityicons_selection', 'activityicon', 'local_activityicons');
 
     if ($cm && (int) $cm->course === (int) $COURSE->id) {

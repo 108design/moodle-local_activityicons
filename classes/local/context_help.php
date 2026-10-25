@@ -1,4 +1,16 @@
 <?php
+/**
+ * This file is part of a 108design source-available software product.
+ *
+ * Use and modification are permitted only under the Software License included
+ * with this distribution. See LICENSE.md for the full terms.
+ *
+ * File documentation for classes/local/context_help.php.
+ *
+ * @package   local_activityicons
+ * @copyright 2026 Andreas Giesen
+ * @license   See LICENSE.md for the full terms.
+ */
 // Copyright (C) 2026 Andreas Giesen. See LICENSE.md.
 namespace local_activityicons\local;
 

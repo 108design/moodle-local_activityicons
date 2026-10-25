@@ -1,3 +1,15 @@
+/**
+ * This file is part of a 108design source-available software product.
+ *
+ * Use and modification are permitted only under the Software License included
+ * with this distribution. See LICENSE.md for the full terms.
+ *
+ * File documentation for amd/src/context_help_form.js.
+ *
+ * @package   local_activityicons
+ * @copyright 2026 Andreas Giesen
+ * @license   See LICENSE.md for the full terms.
+ */
 // Copyright (C) 2026 Andreas Giesen. See LICENSE.md.
 
 /** Align help in our registered forms without changing fields or their values. */
@@ -7,8 +19,11 @@ export const init = () => {
         if (!navigation) return;
         const help = navigation.querySelector('.local-activityicons-help-navbar');
         const children = [...navigation.children];
-        const anchor = children.find(node => node.classList.contains('divider')) ||
-            children.find(node => node.matches('[data-region="usermenu"], .usermenu-container'));
+        const userMenu = children.find(node => node.matches('[data-region="usermenu"], .usermenu-container'));
+        const userIndex = userMenu ? children.indexOf(userMenu) : children.length;
+        // Older Moodle places its divider after the user menu, outside the help insertion area.
+        const anchor = children.find((node, index) => index < userIndex &&
+            node.classList.contains('divider')) || userMenu;
         if (help && anchor && (help.parentElement !== navigation || help.nextElementSibling !== anchor)) {
             navigation.insertBefore(help, anchor);
         }
@@ -17,13 +32,32 @@ export const init = () => {
     alignNavbarHelp();
     if (navigation) new MutationObserver(alignNavbarHelp).observe(navigation, {childList: true});
 
+    // Move only the linked icon from its placeholder to the native control.
+    document.querySelectorAll('[data-activityicons-help-field]').forEach(holder => {
+        const name = holder.dataset.activityiconsHelpField;
+        const field = document.getElementById('id_' + name);
+        const item = field?.closest('.fitem');
+        const column = item?.querySelector('.felement, .checkbox');
+        const icon = holder.querySelector('.local-activityicons-context-help-icon');
+        const control = name === 'iconfiles' ? document.getElementById('id_iconfiles_fieldset') :
+            field?.closest('.form-check') || field;
+        if (!column || !icon || !control || !column.contains(control)) return;
+        const row = document.createElement('div');
+        row.className = 'local-activityicons-setting-control';
+        if (name === 'iconfiles') row.classList.add('w-100');
+        control.before(row);
+        row.append(control, icon);
+        const placeholder = holder.closest('.fitem');
+        if (placeholder && placeholder !== item) placeholder.remove();
+    });
+
     const align = () => {
         document.querySelectorAll('.mform .fitem').forEach(row => {
             const labelColumn = [...row.children].find(node => node.classList.contains('col-form-label'));
             const fieldColumn = [...row.children].find(node =>
                 node.classList.contains('felement') || node.classList.contains('checkbox'));
             if (!labelColumn || !fieldColumn) return;
-            const checkbox = [...fieldColumn.children].find(node => node.classList.contains('form-check'));
+            const checkbox = fieldColumn.querySelector('.form-check');
             const icons = [...row.querySelectorAll(
                 '.help-icon, .form-label-addon [data-toggle="popover"], .form-check > div [data-toggle="popover"]'
             )].filter(icon => icon.closest('.fitem') === row && (

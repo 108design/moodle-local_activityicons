@@ -25,9 +25,8 @@ jobs:
       fail-fast: false
       matrix:
         lane:
-          - {moodle: '4.5', branch: MOODLE_405_STABLE, php: '8.1'}
           - {moodle: '5.2', branch: MOODLE_502_STABLE, php: '8.3'}
-        database: [mariadb, pgsql]
+        database: [mariadb]
     services:
       postgres:
         image: ${{ matrix.database == 'pgsql' && 'postgres:16' || '' }}

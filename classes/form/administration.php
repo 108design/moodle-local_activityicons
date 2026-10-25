@@ -1,4 +1,16 @@
 <?php
+/**
+ * This file is part of a 108design source-available software product.
+ *
+ * Use and modification are permitted only under the Software License included
+ * with this distribution. See LICENSE.md for the full terms.
+ *
+ * File documentation for classes/form/administration.php.
+ *
+ * @package   local_activityicons
+ * @copyright 2026 Andreas Giesen <andreas@108design.com>
+ * @license   See LICENSE.md for the full terms.
+ */
 namespace local_activityicons\form;
 defined('MOODLE_INTERNAL') || die();
 global $CFG;
@@ -160,12 +172,17 @@ final class administration extends \moodleform {
         $mform->addElement('select', 'h5pfallback', get_string('h5pfallback', 'local_activityicons'),
             ['default' => get_string('h5pfallbackdefault', 'local_activityicons')] +
             \local_activityicons\local\icon_catalog::key_options());
+        $mform->addHelpButton('h5pfallback', 'h5pfallback', 'local_activityicons');
+        $mform->addElement('static', 'h5pfallbacklinkedhelp', '', \html_writer::span(\local_activityicons\local\context_help::icon('mapping'), '', ['data-activityicons-help-field' => 'h5pfallback']));
         if (has_capability('moodle/site:config', \context_system::instance())) {
             $mform->addElement('header', 'behaviourheader', get_string('sitebehaviour', 'local_activityicons'));
             $mform->addElement('advcheckbox', 'autoh5p', get_string('autoh5p', 'local_activityicons'));
-            $mform->addElement('static', 'autonotice', '', get_string('autoh5p_desc', 'local_activityicons') .
-            \local_activityicons\local\context_help::icon('behaviour'));
+            $mform->addHelpButton('autoh5p', 'autoh5p', 'local_activityicons');
+            $mform->addElement('static', 'autoh5plinkedhelp', '', \html_writer::span(\local_activityicons\local\context_help::icon('behaviour'), '', ['data-activityicons-help-field' => 'autoh5p']));
+            $mform->addElement('static', 'autonotice', '', get_string('autoh5p_desc', 'local_activityicons'));
             $mform->addElement('advcheckbox', 'dynamicfallback', get_string('dynamicfallback', 'local_activityicons'));
+            $mform->addHelpButton('dynamicfallback', 'dynamicfallback', 'local_activityicons');
+            $mform->addElement('static', 'dynamicfallbacklinkedhelp', '', \html_writer::span(\local_activityicons\local\context_help::icon('behaviour'), '', ['data-activityicons-help-field' => 'dynamicfallback']));
         }
         $this->add_action_buttons(false);
     }

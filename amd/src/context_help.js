@@ -1,8 +1,20 @@
+/**
+ * This file is part of a 108design source-available software product.
+ *
+ * Use and modification are permitted only under the Software License included
+ * with this distribution. See LICENSE.md for the full terms.
+ *
+ * File documentation for amd/src/context_help.js.
+ *
+ * @package   local_activityicons
+ * @copyright 2026 Andreas Giesen
+ * @license   See LICENSE.md for the full terms.
+ */
 // Copyright (C) 2026 Andreas Giesen. See LICENSE.md.
 import {publish, subscribe} from 'core/pubsub';
 import DrawerEvents from 'core/drawer_events';
 import Drawers from 'theme_boost/drawers';
-import {Popover} from 'bootstrap';
+import Popover from 'theme_boost/bootstrap/popover';
 
 /** Nonmodal contextual help; use native exclusive drawer coordination when available. */
 export const init = config => {
@@ -83,10 +95,11 @@ export const init = config => {
         event.preventDefault();
         if (button && !panel.hidden) { hide(); return; }
         const popover = link?.closest('.popover');
-        // Moodle 5.3 describes the popover body, rather than its outer wrapper.
-        const describedId = popover?.querySelector('.popover-body')?.id || popover?.id;
-        const icon = describedId
-            ? document.querySelector(`.help-icon[aria-describedby="${CSS.escape(describedId)}"]`) : null;
+        // Moodle adapters may describe the outer popover or its body; match the actual trigger.
+        const describedIds = [popover?.id, popover?.querySelector('.popover-body')?.id].filter(Boolean);
+        const icon = [...document.querySelectorAll('.help-icon[aria-describedby]')]
+            .find(candidate => candidate.getAttribute('aria-describedby').split(/\s+/)
+                .some(id => describedIds.includes(id)));
         const trigger = button || icon || document.querySelector('[data-activityicons-help-open]');
         if (topic) {
             document.querySelectorAll('.help-icon').forEach(icon => Popover.getInstance(icon)?.hide());

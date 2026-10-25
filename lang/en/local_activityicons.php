@@ -1,4 +1,16 @@
 <?php
+/**
+ * This file is part of a 108design source-available software product.
+ *
+ * Use and modification are permitted only under the Software License included
+ * with this distribution. See LICENSE.md for the full terms.
+ *
+ * File documentation for lang/en/local_activityicons.php.
+ *
+ * @package   local_activityicons
+ * @copyright 2026 Andreas Giesen <andreas@108design.com>
+ * @license   See LICENSE.md for the full terms.
+ */
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Activity Icons';
@@ -137,3 +149,10 @@ $string['pool'] = $string['settingshelp_pool'];
 $string['mapping'] = $string['settingshelp_mapping'];
 
 $string['behaviour'] = $string['settingshelp_behaviour'];
+
+$string['cachedef_h5ptypes'] = 'H5P content types for activity icons';
+
+$string['iconfiles_help'] = 'Upload decorative icons suitable for public access. Removing a file from this draft does not delete an existing pool icon.';
+$string['h5pfallback_help'] = 'This icon is used for H5P types without a mapping. An individual activity choice takes precedence.';
+$string['autoh5p_help'] = 'The site default applies to courses that inherit it. Courses can enable or disable automatic H5P icons separately.';
+$string['dynamicfallback_help'] = 'Apply configured icons in standard activity lists that load dynamically, such as Timeline and Recently accessed items.';

@@ -1,4 +1,16 @@
 <?php
+/**
+ * This file is part of a 108design source-available software product.
+ *
+ * Use and modification are permitted only under the Software License included
+ * with this distribution. See LICENSE.md for the full terms.
+ *
+ * File documentation for pool.php.
+ *
+ * @package   local_activityicons
+ * @copyright 2026 Andreas Giesen <andreas@108design.com>
+ * @license   See LICENSE.md for the full terms.
+ */
 require('../../config.php');
 require_once($CFG->libdir . '/adminlib.php');
 
@@ -6,7 +18,6 @@ require_login();
 require_capability('local/activityicons:managepool', context_system::instance());
 admin_externalpage_setup('local_activityicons');
 \local_activityicons\local\context_help::prepare();
-$PAGE->requires->css('/local/activityicons/styles.css');
 // Keep the native page heading; the decorative SVG identifies this administration tool.
 $logo = html_writer::empty_tag('img', [
     'src' => $OUTPUT->image_url('icon', 'local_activityicons'),
