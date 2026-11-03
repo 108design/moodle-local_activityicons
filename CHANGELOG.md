@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.12.1 (2026110300) - 2026-11-03
+
+Fixes activity icons being applied to another activity through prerequisite links, embedded activity links or adjacent images. Keeps each icon picker attached to its own activity in nested layouts and limits activity-link matching to the current Moodle installation, including installations in a subdirectory.
+
 ## 1.12.0 (2026103000) - 2026-10-30
 
 Licence update for compliance with the Moodle Marketplace Provider Terms of Use. Adds Section 6a, a limited permission for Moodle to host, distribute, translate, adapt, promote and review the submitted Software and listing materials, including use by authorised contractors. The 108design source-available licence remains in place; customer rights and third-party licences are preserved. Runtime behaviour is unchanged from GitHub release 1.11.0.

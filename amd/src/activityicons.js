@@ -14,6 +14,29 @@ import Ajax from 'core/ajax';
 import Modal from 'core/modal';
 import Notification from 'core/notification';
 import {add as addToast} from 'core/toast';
+import Config from 'core/config';
+
+const courseItemSelector = '[data-for="cmitem"]';
+
+/** Return a module id only for a standard activity view in this Moodle installation. */
+const activityId = link => {
+    if (!link?.matches('a[href]')) {
+        return null;
+    }
+    try {
+        const base = new URL(Config.wwwroot);
+        const url = new URL(link.href, window.location.href);
+        const modulePath = base.pathname.replace(/\/$/, '') + '/mod/';
+        if (url.origin !== base.origin || !url.pathname.startsWith(modulePath)
+                || !/^[^/]+\/view\.php$/.test(url.pathname.slice(modulePath.length))) {
+            return null;
+        }
+        const cmid = url.searchParams.get('id');
+        return cmid && /^\d+$/.test(cmid) ? cmid : null;
+    } catch (error) {
+        return null;
+    }
+};
 
 let instance = null;
 
@@ -55,16 +78,9 @@ class ActivityIcons {
             addFoundRoot(found, String(node.dataset.id), node);
         });
         document.querySelectorAll('a[href*="/mod/"][href*="id="]').forEach(link => {
-            try {
-                const url = new URL(link.href, window.location.href);
-                const isActivityView = url.origin === window.location.origin &&
-                    /\/(?:mod)\/[^/]+\/view\.php$/.test(url.pathname);
-                const cmid = isActivityView ? url.searchParams.get('id') : null;
-                if (cmid && /^\d+$/.test(cmid)) {
-                    addFoundRoot(found, cmid, link);
-                }
-            } catch (error) {
-                // Ignore malformed third-party links.
+            const cmid = activityId(link);
+            if (cmid) {
+                addFoundRoot(found, cmid, link);
             }
         });
 
@@ -95,26 +111,37 @@ class ActivityIcons {
     }
 
     imageIn(root) {
-        const item = root.matches('[data-for="cmitem"]') ? root : root.closest('[data-for="cmitem"]');
-        if (item) {
-            return item.querySelector('img.activityicon, .activityiconcontainer img, img[src*="/mod/"][src*="icon"]');
+        const item = root.matches(courseItemSelector) ? root : root.closest(courseItemSelector);
+        const cmid = root === item ? item.dataset.id : activityId(root);
+        if (!cmid) {
+            return null;
         }
 
-        const nested = root.querySelector('img.activityicon, img.moduleIcon, .activityiconcontainer img, img.icon, ' +
-            'img[src*="/mod/"][src*="icon"]');
-        if (nested || !root.matches('a')) {
-            return nested;
+        // A shared course row is insufficient: an image can link to a different activity.
+        const belongs = image => {
+            const link = image.closest('a[href]');
+            return image.closest(courseItemSelector) === item && (!link || activityId(link) === cmid);
+        };
+        if (item && (root === item || item.dataset.id === cmid)) {
+            return [...item.querySelectorAll(
+                'img.activityicon, .activityiconcontainer img, img[src*="/mod/"][src*="icon"]'
+            )].find(belongs) || null;
         }
 
-        // Some third-party renderers place the activity icon directly before the activity link.
+        const nested = [...root.querySelectorAll(
+            'img.activityicon, img.moduleIcon, .activityiconcontainer img, img.icon, ' +
+            'img[src*="/mod/"][src*="icon"]'
+        )].find(belongs);
+        if (nested || item || !root.matches('a')) {
+            return nested || null;
+        }
+
+        // Retain third-party adjacent icons, but never borrow an image linked to another module.
         const previous = root.previousElementSibling;
-        if (previous?.matches('img.activityicon, img.moduleIcon, img.icon')) {
-            return previous;
-        }
-        if (previous?.childElementCount === 1) {
-            return previous.querySelector('img.activityicon, img.moduleIcon, img.icon');
-        }
-        return null;
+        const selector = 'img.activityicon, img.moduleIcon, img.icon';
+        const adjacent = previous?.matches(selector) ? previous
+            : previous?.childElementCount === 1 ? previous.querySelector(selector) : null;
+        return adjacent && belongs(adjacent) ? adjacent : null;
     }
 
     apply(root, descriptor) {
@@ -131,8 +158,10 @@ class ActivityIcons {
     }
 
     addEditButton(item, cmid) {
-        const container = item.querySelector('.activityiconcontainer');
-        if (!container || container.querySelector('[data-local-activityicons-edit]')) {
+        const container = [...item.querySelectorAll('.activityiconcontainer')]
+            .find(node => node.closest(courseItemSelector) === item);
+        if (!container || [...container.querySelectorAll('[data-local-activityicons-edit]')]
+                .some(button => button.closest(courseItemSelector) === item)) {
             return;
         }
         const button = element('button', 'local-activityicons-edit', this.config.strings.choose);
