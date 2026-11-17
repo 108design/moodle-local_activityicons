@@ -208,12 +208,14 @@ final class h5p_resolver {
     ): ?string {
         $mapping ??= self::configured_mapping();
         $fallback ??= self::fallback_icon();
-        return $mapping[self::normalise_machine_name($machinename)] ?? $fallback;
+        $resolved = $mapping[self::normalise_machine_name($machinename)] ?? $fallback;
+        return $resolved === repository::SELECTION_DEFAULT ? null : $resolved;
     }
 
     /** Parse the intentionally low-level one-entry-per-line mapping format. */
     public static function parse_mapping(string $mapping): array {
         $result = [];
+        $valid = array_fill_keys([repository::SELECTION_DEFAULT, ...icon_catalog::keys()], true);
         foreach (preg_split('/\R/', $mapping) ?: [] as $line) {
             $line = trim($line);
             if ($line === '' || str_starts_with($line, '#') || !str_contains($line, '=')) {
@@ -222,7 +224,7 @@ final class h5p_resolver {
             [$machine, $iconkey] = array_map('trim', explode('=', $line, 2));
             $machine = self::normalise_machine_name($machine);
             $iconkey = strtolower($iconkey);
-            if ($machine !== '' && in_array($iconkey, icon_catalog::keys(), true)) {
+            if ($machine !== '' && isset($valid[$iconkey])) {
                 $result[$machine] = $iconkey;
             }
         }
@@ -232,6 +234,7 @@ final class h5p_resolver {
     /** Validate administrator input before saving it; never silently lose a misspelled mapping. */
     public static function validate_mapping(string $mapping): string {
         $seen = [];
+        $valid = array_fill_keys([repository::SELECTION_DEFAULT, ...icon_catalog::keys()], true);
         foreach (preg_split('/\R/', $mapping) ?: [] as $index => $line) {
             $line = trim($line);
             if ($line === '' || str_starts_with($line, '#')) {
@@ -240,7 +243,7 @@ final class h5p_resolver {
             $parts = explode('=', $line);
             $machine = self::normalise_machine_name(trim($parts[0]));
             if (count($parts) !== 2 || !preg_match('/^[a-z][a-z0-9_]*$/', $machine)
-                    || !in_array(strtolower(trim($parts[1] ?? '')), icon_catalog::keys(), true)
+                    || !isset($valid[strtolower(trim($parts[1] ?? ''))])
                     || isset($seen[$machine])) {
                 return get_string('mappinginvalidline', 'local_activityicons', $index + 1);
             }
@@ -296,6 +299,27 @@ final class h5p_resolver {
             set_config('h5pmapping', implode("\n", $lines), 'local_activityicons');
         } finally {
             $lock->release();
+        }
+    }
+
+    /** Keep unaffected mapping text and give affected H5P types an explicit Moodle original. Caller holds the pool lock. */
+    public static function reset_deleted_icons(array $keys): void {
+        $deleted = array_fill_keys($keys, true);
+        $mapping = get_config('local_activityicons', 'h5pmapping');
+        if ($mapping !== false) {
+            $updated = preg_replace_callback('/^([^\r\n=]+=[\t ]*)([^\r\n]+)(?=\r?$)/m',
+                static function(array $parts) use ($deleted): string {
+                    if (str_starts_with(ltrim($parts[1]), '#') || !isset($deleted[strtolower(trim($parts[2]))])) {
+                        return $parts[0];
+                    }
+                    return $parts[1] . repository::SELECTION_DEFAULT;
+                }, $mapping);
+            if ($updated !== $mapping) {
+                set_config('h5pmapping', $updated, 'local_activityicons');
+            }
+        }
+        if (isset($deleted[get_config('local_activityicons', 'h5pfallback')])) {
+            set_config('h5pfallback', repository::SELECTION_DEFAULT, 'local_activityicons');
         }
     }
 

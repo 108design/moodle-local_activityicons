@@ -13,6 +13,7 @@
  */
 import Modal from 'core/modal';
 import Notification from 'core/notification';
+import {bind, controls, markChoice} from 'local_activityicons/picker_filter';
 
 const node = (tag, classes, text = '') => {
     const element = document.createElement(tag);
@@ -58,12 +59,9 @@ const enhance = (select, config) => {
     trigger.addEventListener('click', async() => {
         try {
             const body = node('div', '');
-            const label = node('label', 'w-100', config.search);
-            const search = node('input', 'form-control mb-3');
-            search.type = 'search';
-            search.dataset.mappingSearch = '1';
-            label.append(search);
-            body.append(label);
+            const filters = controls(config, config.type ? {} : config.pools);
+            filters.querySelector('[data-icon-search]').dataset.mappingSearch = '1';
+            body.append(filters);
             const grid = node('div', config.type ? 'local-activityicons-type-picker' : 'local-activityicons-picker');
             grid.dataset.mappingChoices = '1';
             config.catalog.forEach(icon => {
@@ -71,10 +69,13 @@ const enhance = (select, config) => {
                     'btn local-activityicons-choice');
                 button.type = 'button';
                 button.dataset.iconkey = icon.key;
-                button.dataset.search = `${icon.label} ${icon.search || ''}`.toLocaleLowerCase();
+                if (icon.key !== 'default') {
+                    markChoice(button, icon);
+                }
                 button.setAttribute('aria-pressed', String(select.value === icon.key));
                 if (icon.url) {
                     const image = node('img', 'activityicon');
+                    image.loading = 'lazy';
                     image.src = icon.url;
                     image.alt = '';
                     button.append(image);
@@ -93,13 +94,9 @@ const enhance = (select, config) => {
                 footer: close.outerHTML, returnElement: trigger, removeOnClose: true});
             const root = modal.getRoot()[0];
             root.querySelector('[data-mapping-close]').addEventListener('click', () => modal.hide());
-            root.querySelector('[data-mapping-search]').addEventListener('input', event => {
-                const query = event.target.value.trim().toLocaleLowerCase();
-                root.querySelectorAll('[data-iconkey]').forEach(button => {
-                    button.hidden = !button.dataset.search.includes(query);
-                });
-            });
-            root.querySelector('[data-mapping-choices]').addEventListener('click', event => {
+            const choices = root.querySelector('[data-mapping-choices]');
+            bind(root, choices);
+            choices.addEventListener('click', event => {
                 const choice = event.target.closest('[data-iconkey]');
                 if (!choice) {
                     return;
@@ -115,26 +112,44 @@ const enhance = (select, config) => {
     });
 };
 
+/** Offer only the operations shared by all marked icons. */
+export const initPool = () => {
+    const form = document.querySelector('[data-activityicons-pool-form]');
+    if (!form) {
+        return;
+    }
+    const checkboxes = Array.from(form.querySelectorAll('[data-pool-actions]'));
+    const select = form.querySelector('select[name="action"]');
+    const submit = form.querySelector('button[type="submit"]');
+    const update = () => {
+        const checked = checkboxes.filter(box => box.checked);
+        checkboxes.forEach(box => box.closest('.local-activityicons-pool-card').classList.toggle('is-selected', box.checked));
+        Array.from(select.options).filter(option => option.value).forEach(option => {
+            const allowed = checked.every(box => box.dataset.poolActions.split(' ').includes(option.value));
+            option.disabled = !allowed;
+            option.hidden = !allowed;
+        });
+        if (select.selectedOptions[0]?.disabled) {
+            select.value = '';
+        }
+        select.disabled = !checked.length;
+        submit.disabled = !checked.length || !select.value;
+    };
+    form.addEventListener('change', update);
+    update();
+};
+
 /**
  * Progressive enhancement: native selects remain usable if this module cannot load.
  * @param {Object} config Catalog and translated labels.
  */
 export const init = config => {
-    const deleteButton = document.querySelector('[name="deleteiconsubmit"]');
-    if (deleteButton) {
-        const selections = Array.from(document.querySelectorAll('input[name^="deleteicons["]:not(:disabled)'));
-        const updateDeleteSelection = () => {
-            const selected = selections.filter(checkbox => checkbox.checked);
-            selections.forEach(checkbox => checkbox.closest('.local-activityicons-pool-card')
-                .classList.toggle('is-delete-selected', checkbox.checked));
-            deleteButton.disabled = selected.length === 0;
-            deleteButton.value = selected.length ? `${config.deleteSelected} (${selected.length})` : config.deleteSelected;
-        };
-        selections.forEach(checkbox => checkbox.addEventListener('change', updateDeleteSelection));
-        updateDeleteSelection();
-    }
     // Moodle templates may discard custom classes; repeated field names are stable.
     document.querySelectorAll('select[name^="mappingicon["]').forEach(select => enhance(select, config));
+    const fallback = document.querySelector('select[name="h5pfallback"]');
+    if (fallback) {
+        enhance(fallback, {...config, choose: config.chooseFallback});
+    }
     document.querySelectorAll('select[name^="machine["]').forEach(select => {
         const catalog = Array.from(select.options).filter(option => option.value).map(option => ({
             key: option.value,

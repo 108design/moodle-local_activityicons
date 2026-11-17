@@ -62,5 +62,48 @@ function xmldb_local_activityicons_upgrade(int $oldversion): bool {
         upgrade_plugin_savepoint(true, 2026091112, 'local', 'activityicons');
     }
 
+    if ($oldversion < 2026111701) {
+        $groups = new xmldb_table('local_activityicons_groups');
+        $groups->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE);
+        $groups->add_field('name', XMLDB_TYPE_CHAR, '100', null, XMLDB_NOTNULL);
+        $groups->add_field('sortorder', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL);
+        $groups->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+        if (!$dbman->table_exists($groups)) {
+            $dbman->create_table($groups);
+        }
+
+        $members = new xmldb_table('local_activityicons_grpicon');
+        $members->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE);
+        $members->add_field('groupid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL);
+        $members->add_field('iconkey', XMLDB_TYPE_CHAR, '64', null, XMLDB_NOTNULL);
+        $members->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+        $members->add_key('group_fk', XMLDB_KEY_FOREIGN, ['groupid'], 'local_activityicons_groups', ['id']);
+        $members->add_index('groupicon_uix', XMLDB_INDEX_UNIQUE, ['groupid', 'iconkey']);
+        if (!$dbman->table_exists($members)) {
+            $dbman->create_table($members);
+        }
+
+        $pool = new xmldb_table('local_activityicons_pool');
+        $groupid = new xmldb_field('groupid', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'label');
+        if (!$dbman->field_exists($pool, $groupid)) {
+            $dbman->add_field($pool, $groupid);
+        }
+        $groupindex = new xmldb_index('group_ix', XMLDB_INDEX_NOTUNIQUE, ['groupid']);
+        if (!$dbman->index_exists($pool, $groupindex)) {
+            $dbman->add_index($pool, $groupindex);
+        }
+
+        upgrade_plugin_savepoint(true, 2026111701, 'local', 'activityicons');
+    }
+
+    if ($oldversion < 2026111704) {
+        $table = new xmldb_table('local_activityicons_groups');
+        $field = new xmldb_field('referenceicon', XMLDB_TYPE_CHAR, '64', null, null, null, null, 'sortorder');
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+        upgrade_plugin_savepoint(true, 2026111704, 'local', 'activityicons');
+    }
+
     return true;
 }

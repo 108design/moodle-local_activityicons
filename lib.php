@@ -68,9 +68,10 @@ function local_activityicons_coursemodule_standard_elements($formwrapper, $mform
     }
     $groups = [
         get_string('activityicon', 'local_activityicons') => array_map('s', $options),
-        get_string('bundledicons', 'local_activityicons') =>
-            array_map('s', \local_activityicons\local\icon_catalog::form_options()),
     ];
+    foreach (\local_activityicons\local\icon_catalog::form_groups() as $label => $entries) {
+        $groups[s($label)] = array_map('s', $entries);
+    }
     $mform->addElement('selectgroups', 'local_activityicons_selection',
         get_string('activityicon', 'local_activityicons'), $groups);
     $mform->addHelpButton('local_activityicons_selection', 'activityicon', 'local_activityicons');

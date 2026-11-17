@@ -40,41 +40,75 @@ final class pool {
 
     /** Save validated bytes; content-derived keys make cross-site restore independent of local IDs. */
     public static function store(string $label, string $filename, string $bytes): \stdClass {
+        return self::store_batch([[$label, $filename, $bytes]])[0];
+    }
+
+    /**
+     * Validate and import a complete batch under the pool lock. A repeated upload keeps its current group.
+     *
+     * @param iterable $files Label, original name and bytes for each upload.
+     * @param int $groupid Destination, or 0 for Custom Icons.
+     * @return \stdClass[] Stored records.
+     */
+    public static function store_batch(iterable $files, int $groupid = 0): array {
         global $DB;
-        $image = image_validator::sanitise($filename, $bytes);
-        $key = 'custom_' . substr(hash('sha256', $image['content']), 0, 40);
-        $label = trim(clean_param($label, PARAM_TEXT));
-        if ($label === '' || \core_text::strlen($label) > 100) {
-            throw new \invalid_parameter_exception(get_string('invalidlabel', 'local_activityicons'));
-        }
-        $factory = \core\lock\lock_config::get_lock_factory('local_activityicons');
-        $lock = $factory->get_lock('poolmetadata', 10);
-        if (!$lock) {
-            throw new \moodle_exception('locktimeout', 'error');
-        }
+        $lock = self::metadata_lock();
         try {
+            pool_groups::require_destination($groupid);
             $transaction = $DB->start_delegated_transaction();
-            $record = $DB->get_record(self::TABLE, ['iconkey' => $key]);
-            if (!$record) {
-                $record = (object) ['iconkey' => $key, 'label' => $label, 'timecreated' => time()];
-                $record->id = $DB->insert_record(self::TABLE, $record);
+            try {
+                $records = [];
+                foreach ($files as [$label, $filename, $bytes]) {
+                    $image = image_validator::sanitise($filename, $bytes);
+                    $label = trim(clean_param($label, PARAM_TEXT));
+                    if ($label === '' || \core_text::strlen($label) > 100) {
+                        throw new \invalid_parameter_exception(get_string('invalidlabel', 'local_activityicons'));
+                    }
+                    $records[] = self::store_validated($label, $image, $groupid);
+                }
+                $transaction->allow_commit();
+            } catch (\Throwable $exception) {
+                $transaction->rollback($exception);
             }
-            $fs = get_file_storage();
-            $contextid = \context_system::instance()->id;
-            $name = 'icon.' . $image['extension'];
-            if (!$fs->file_exists($contextid, 'local_activityicons', self::FILEAREA, $record->id, '/', $name)) {
-                $fs->create_file_from_string([
-                    'contextid' => $contextid, 'component' => 'local_activityicons',
-                    'filearea' => self::FILEAREA, 'itemid' => $record->id, 'filepath' => '/',
-                    'filename' => $name, 'mimetype' => $image['mimetype'], 'userid' => 0,
-                ], $image['content']);
-            }
-            $transaction->allow_commit();
             self::reset_cache();
-            return $record;
+            return $records;
         } finally {
             $lock->release();
         }
+    }
+
+    /** Share the existing writer lock with the group editor. */
+    public static function metadata_lock(): \core\lock\lock {
+        $lock = \core\lock\lock_config::get_lock_factory('local_activityicons')->get_lock('poolmetadata', 10);
+        if (!$lock) {
+            throw new \moodle_exception('locktimeout', 'error');
+        }
+        return $lock;
+    }
+
+    /** Add the file only when the content key is new or its expected file is missing. */
+    private static function store_validated(string $label, array $image, int $groupid): \stdClass {
+        global $DB;
+        $key = 'custom_' . substr(hash('sha256', $image['content']), 0, 40);
+        $record = $DB->get_record(self::TABLE, ['iconkey' => $key]);
+        if (!$record) {
+            $record = (object) ['iconkey' => $key, 'label' => $label, 'timecreated' => time()];
+            if ($groupid) {
+                $record->groupid = $groupid;
+            }
+            $record->id = $DB->insert_record(self::TABLE, $record);
+        }
+        $fs = get_file_storage();
+        $contextid = \context_system::instance()->id;
+        $name = 'icon.' . $image['extension'];
+        if (!$fs->file_exists($contextid, 'local_activityicons', self::FILEAREA, $record->id, '/', $name)) {
+            $fs->create_file_from_string([
+                'contextid' => $contextid, 'component' => 'local_activityicons',
+                'filearea' => self::FILEAREA, 'itemid' => $record->id, 'filepath' => '/',
+                'filename' => $name, 'mimetype' => $image['mimetype'], 'userid' => 0,
+            ], $image['content']);
+        }
+        return $record;
     }
 
     public static function reset_cache(): void {
@@ -102,38 +136,122 @@ final class pool {
         }
     }
 
-    /** Delete every currently unused selected asset and retain referenced selections. */
-    public static function delete_unused_batch(array $ids): array {
+    /** The advanced action is available only to site configuration administrators. */
+    public static function developer_mode_enabled(): bool {
+        $context = \context_system::instance();
+        return has_capability('moodle/site:config', $context)
+            && has_capability('local/activityicons:managepool', $context)
+            && (bool) get_config('local_activityicons', 'developermode');
+    }
+
+    /** Return exact direct assignments, H5P types and fallback usage for each selected icon. */
+    public static function deletion_usage(array $records): array {
+        global $DB;
+        if (!$records) {
+            return [];
+        }
+        $ids = array_column($records, 'id', 'iconkey');
+        $fallback = get_config('local_activityicons', 'h5pfallback');
+        $usage = [];
+        foreach ($ids as $key => $id) {
+            $usage[$id] = ['assignments' => [], 'types' => [], 'fallback' => $key === $fallback];
+        }
+        [$insql, $params] = $DB->get_in_or_equal(array_keys($ids), SQL_PARAMS_NAMED, 'icon');
+        $params['mode'] = repository::MODE_MANUAL;
+        $references = $DB->get_records_select(repository::TABLE, "mode = :mode AND iconkey $insql", $params,
+            'id', 'id,courseid,iconkey');
+        foreach ($references as $reference) {
+            $usage[$ids[$reference->iconkey]]['assignments'][(int) $reference->id] = (int) $reference->courseid;
+        }
+        foreach (h5p_resolver::configured_mapping() as $machine => $key) {
+            if (isset($ids[$key])) {
+                $usage[$ids[$key]]['types'][] = 'H5P.' . $machine;
+            }
+        }
+        foreach ($usage as &$details) {
+            sort($details['types']);
+        }
+        unset($details);
+        ksort($usage);
+        return $usage;
+    }
+
+    /** Bind a confirmation to the selected icon ids and the usage that the admin reviewed. */
+    public static function usage_hash(array $usage): string {
+        return hash('sha256', json_encode($usage, JSON_THROW_ON_ERROR));
+    }
+
+    /** Protect used icons unless an administrator explicitly confirmed their current usage. */
+    public static function delete_unused_batch(array $ids, bool $force = false, ?string $confirmedusage = null): array {
         global $DB;
         require_capability('local/activityicons:managepool', \context_system::instance());
         $ids = array_values(array_unique(array_filter(array_map('intval', $ids), fn($id) => $id > 0)));
         if (!$ids || count($ids) > 500) {
             throw new \invalid_parameter_exception(get_string('invalidiconselection', 'local_activityicons'));
         }
-        $lock = \core\lock\lock_config::get_lock_factory('local_activityicons')->get_lock('poolmetadata', 10);
-        if (!$lock) {
-            throw new \moodle_exception('locktimeout', 'error');
-        }
+        $lock = self::metadata_lock();
         try {
             self::reset_cache();
-            // Drop request-local config acceleration after waiting for another writer's lock.
             \cache::make('core', 'config')->delete('local_activityicons');
             $records = $DB->get_records_list(self::TABLE, 'id', $ids);
-            $used = self::used_keys();
-            $kept = array_filter($records, fn($record) => isset($used[$record->iconkey]));
+            $usage = self::deletion_usage($records);
+            if ($force) {
+                require_capability('moodle/site:config', \context_system::instance());
+                if (!self::developer_mode_enabled()) {
+                    throw new \moodle_exception('developermodedisabled', 'local_activityicons');
+                }
+                if ($confirmedusage === null || !hash_equals(self::usage_hash($usage), $confirmedusage)) {
+                    throw new \moodle_exception('deleteusagechanged', 'local_activityicons');
+                }
+            }
+            $kept = $force ? [] : array_filter($records, static function($record) use ($usage): bool {
+                $details = $usage[$record->id];
+                return $details['assignments'] || $details['types'] || $details['fallback'];
+            });
             $deletable = array_diff_key($records, $kept);
             $transaction = $DB->start_delegated_transaction();
-            foreach ($deletable as $record) {
-                get_file_storage()->delete_area_files(\context_system::instance()->id,
-                    'local_activityicons', self::FILEAREA, $record->id);
-                $DB->delete_records(self::TABLE, ['id' => $record->id]);
+            $courses = [];
+            try {
+                if ($force && $deletable) {
+                    $courses = self::reset_deleted_references($deletable, $usage);
+                }
+                foreach ($deletable as $record) {
+                    get_file_storage()->delete_area_files(\context_system::instance()->id,
+                        'local_activityicons', self::FILEAREA, $record->id);
+                    pool_groups::remove_upload_links($record->iconkey);
+                    $DB->delete_records(self::TABLE, ['id' => $record->id]);
+                }
+                $transaction->allow_commit();
+            } catch (\Throwable $exception) {
+                $transaction->rollback($exception);
             }
-            $transaction->allow_commit();
             self::reset_cache();
+            foreach ($courses as $courseid) {
+                \course_modinfo::purge_course_cache($courseid);
+            }
             return ['deleted' => count($deletable), 'kept' => count($kept)];
         } finally {
             $lock->release();
         }
+    }
+
+    /** Replace direct activity choices and affected H5P rules before removing a file. */
+    private static function reset_deleted_references(array $records, array $usage): array {
+        global $DB;
+        $courses = [];
+        foreach ($records as $record) {
+            foreach ($usage[$record->id]['assignments'] as $assignmentid => $courseid) {
+                $DB->update_record(repository::TABLE, (object) [
+                    'id' => $assignmentid,
+                    'mode' => repository::MODE_DEFAULT,
+                    'iconkey' => null,
+                    'timemodified' => time(),
+                ]);
+                $courses[$courseid] = $courseid;
+            }
+        }
+        h5p_resolver::reset_deleted_icons(array_column($records, 'iconkey'));
+        return $courses;
     }
 
     public static function file(int $id): ?\stored_file {

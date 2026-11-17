@@ -16,6 +16,7 @@ import Modal from 'core/modal';
 import Notification from 'core/notification';
 import {add as addToast} from 'core/toast';
 import Config from 'core/config';
+import {bind, controls, markChoice} from 'local_activityicons/picker_filter';
 
 const courseItemSelector = '[data-for="cmitem"]';
 
@@ -151,6 +152,7 @@ class ActivityIcons {
             return;
         }
         image.src = descriptor.url;
+        image.classList.toggle('nofilter', !descriptor.filtered);
         const container = image.closest('.activityiconcontainer');
         if (container) {
             container.classList.toggle('isbranded', Boolean(descriptor.branded));
@@ -179,12 +181,7 @@ class ActivityIcons {
 
     pickerBody(cmid) {
         const body = element('div');
-        const label = element('label', 'w-100', this.config.strings.search);
-        const search = element('input', 'form-control mb-3');
-        search.type = 'search';
-        search.dataset.iconSearch = '1';
-        label.append(search);
-        body.append(label);
+        body.append(controls(this.config.strings, this.config.pools));
         const root = element('div', 'local-activityicons-picker');
         const ish5p = (this.config.h5pcmids || []).includes(cmid);
         let current = this.selections.get(String(cmid)) || 'inherit';
@@ -213,10 +210,13 @@ class ActivityIcons {
             const button = element('button', 'btn local-activityicons-choice');
             button.type = 'button';
             button.dataset.selection = choice.selection;
-            button.dataset.search = `${choice.label} ${choice.search || ''}`.toLocaleLowerCase();
+            if (choice.selection.startsWith('icon:')) {
+                markChoice(button, choice);
+            }
             button.setAttribute('aria-pressed', choice.selection === current ? 'true' : 'false');
             if (choice.url) {
                 const image = element('img', 'activityicon');
+                image.loading = 'lazy';
                 image.src = choice.url;
                 image.alt = '';
                 button.append(image);
@@ -250,12 +250,7 @@ class ActivityIcons {
         const modalRoot = modal.getRoot()[0];
         modalRoot.querySelector('[data-local-activityicons-close]').addEventListener('click', () => modal.hide());
         const picker = modalRoot.querySelector('.local-activityicons-picker');
-        modalRoot.querySelector('[data-icon-search]').addEventListener('input', event => {
-            const query = event.target.value.trim().toLocaleLowerCase();
-            picker.querySelectorAll('[data-selection]').forEach(button => {
-                button.hidden = button.dataset.selection.startsWith('icon:') && !button.dataset.search.includes(query);
-            });
-        });
+        bind(modalRoot, picker);
         picker.addEventListener('click', async event => {
             const button = event.target.closest('[data-selection]');
             if (!button || button.disabled) {

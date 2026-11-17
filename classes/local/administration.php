@@ -14,26 +14,26 @@
  */
 namespace local_activityicons\local;
 
-/** Shared validation/persistence for the unified Moodle administration page. */
+/** Shared validation/persistence for the Activity Icons administration tabs. */
 final class administration {
-    public static function defaults(): \stdClass {
-        $data = new \stdClass();
-        foreach (['autoh5p' => 0, 'dynamicfallback' => 1, 'h5pfallback' => 'h5p',
-                'h5pmapping' => h5p_resolver::default_mapping_text()] as $name => $default) {
-            $value = get_config('local_activityicons', $name);
-            $data->$name = $value === false ? $default : $value;
-        }
-        $data->labels = [];
-        foreach (pool::records() as $record) {
-            $data->labels[$record->id] = $record->label;
-        }
-        $data->machine = [];
-        $data->mappingicon = [];
-        foreach (h5p_resolver::parse_mapping($data->h5pmapping) as $machine => $key) {
+    /** Current values for the H5P Mapping tab. */
+    public static function mapping_defaults(): \stdClass {
+        $fallback = get_config('local_activityicons', 'h5pfallback');
+        $data = (object) ['h5pfallback' => $fallback === false ? 'h5p' : $fallback, 'machine' => [], 'mappingicon' => []];
+        foreach (h5p_resolver::configured_mapping() as $machine => $key) {
             $data->machine[] = 'H5P.' . $machine;
             $data->mappingicon[] = $key;
         }
-        unset($data->h5pmapping);
+        return $data;
+    }
+
+    /** Current site switches, including the default for installations without stored values. */
+    public static function setting_defaults(): \stdClass {
+        $data = new \stdClass();
+        foreach (['autoh5p' => 0, 'dynamicfallback' => 1, 'developermode' => 0] as $name => $default) {
+            $value = get_config('local_activityicons', $name);
+            $data->$name = $value === false ? $default : (int) $value;
+        }
         return $data;
     }
 
@@ -52,7 +52,9 @@ final class administration {
             if ($machine === '' && $key === '') {
                 continue;
             }
-            icon_catalog::normalise($key);
+            if ($key !== repository::SELECTION_DEFAULT) {
+                icon_catalog::normalise($key);
+            }
             $lines[] = $machine . '=' . $key;
         }
         return implode("\n", $lines);
@@ -84,57 +86,74 @@ final class administration {
         return $options;
     }
 
-    public static function save(\stdClass $data): void {
+    /** Save only the H5P rules and fallback. */
+    public static function save_mapping(\stdClass $data): void {
+        self::write(static function() use ($data): void {
+            $mapping = self::mapping_input($data);
+            $error = h5p_resolver::validate_mapping($mapping);
+            if ($error !== '') {
+                throw new \invalid_parameter_exception($error);
+            }
+            if ($data->h5pfallback !== repository::SELECTION_DEFAULT) {
+                icon_catalog::normalise($data->h5pfallback);
+            }
+            set_config('h5pmapping', $mapping, 'local_activityicons');
+            set_config('h5pfallback', $data->h5pfallback, 'local_activityicons');
+        });
+    }
+
+    /** Update labels without submitting mappings or settings. */
+    public static function save_labels(array $labels): void {
+        self::write(static function() use ($labels): void {
+            global $DB;
+            $records = [];
+            foreach (pool::records() as $record) {
+                $records[$record->id] = $record;
+            }
+            $updates = [];
+            foreach ((array) $labels as $id => $label) {
+                $label = trim(clean_param($label, PARAM_TEXT));
+                if (!isset($records[$id]) || $label === '' || \core_text::strlen($label) > 100) {
+                    throw new \invalid_parameter_exception(get_string('invalidlabel', 'local_activityicons'));
+                }
+                $updates[$id] = $label;
+            }
+            foreach ($updates as $id => $label) {
+                if ($records[$id]->label !== $label) {
+                    $DB->set_field(pool::TABLE, 'label', $label, ['id' => $id]);
+                }
+            }
+        });
+    }
+
+    /** Update site switches without rewriting stored mapping text. */
+    public static function save_settings(\stdClass $data): void {
+        require_capability('moodle/site:config', \context_system::instance());
+        self::write(static function() use ($data): void {
+            foreach (['autoh5p', 'dynamicfallback', 'developermode'] as $name) {
+                set_config($name, !empty($data->$name) ? 1 : 0, 'local_activityicons');
+            }
+        });
+    }
+
+    /** Use the same lock as pool deletion and assignments. */
+    private static function write(callable $callback): void {
+        global $DB;
         require_capability('local/activityicons:managepool', \context_system::instance());
-        $lock = \core\lock\lock_config::get_lock_factory('local_activityicons')->get_lock('poolmetadata', 10);
-        if (!$lock) {
-            throw new \moodle_exception('locktimeout', 'error');
-        }
+        $lock = pool::metadata_lock();
         try {
             pool::reset_cache();
-            self::save_locked($data);
+            $transaction = $DB->start_delegated_transaction();
+            try {
+                $callback();
+                $transaction->allow_commit();
+            } catch (\Throwable $error) {
+                $transaction->rollback($error);
+            }
+            pool::reset_cache();
         } finally {
             $lock->release();
         }
-    }
-
-    private static function save_locked(\stdClass $data): void {
-        global $DB;
-        $mapping = self::mapping_input($data);
-        $error = h5p_resolver::validate_mapping($mapping);
-        if ($error !== '') {
-            throw new \invalid_parameter_exception($error);
-        }
-        if ($data->h5pfallback !== 'default') {
-            icon_catalog::normalise($data->h5pfallback);
-        }
-        $records = [];
-        foreach (pool::records() as $record) {
-            $records[$record->id] = $record;
-        }
-        $labels = [];
-        foreach ((array) ($data->labels ?? []) as $id => $label) {
-            $label = trim(clean_param($label, PARAM_TEXT));
-            if (!isset($records[$id]) || $label === '' || \core_text::strlen($label) > 100) {
-                throw new \invalid_parameter_exception(get_string('invalidlabel', 'local_activityicons'));
-            }
-            $labels[$id] = $label;
-        }
-        $transaction = $DB->start_delegated_transaction();
-        foreach ($labels as $id => $label) {
-            if ($records[$id]->label !== $label) {
-                $DB->set_field(pool::TABLE, 'label', $label, ['id' => $id]);
-            }
-        }
-        set_config('h5pmapping', $mapping, 'local_activityicons');
-        set_config('h5pfallback', $data->h5pfallback, 'local_activityicons');
-        // General site behaviour remains restricted to site administrators.
-        if (has_capability('moodle/site:config', \context_system::instance())) {
-            set_config('autoh5p', empty($data->autoh5p) ? 0 : 1, 'local_activityicons');
-            set_config('dynamicfallback', empty($data->dynamicfallback) ? 0 : 1, 'local_activityicons');
-        }
-        $transaction->allow_commit();
-        pool::reset_cache();
     }
 
     /** Read only the current user's draft and validate the complete batch before any pool write. */
@@ -160,19 +179,20 @@ final class administration {
         return $files;
     }
 
-    public static function import_draft(int $draftid): int {
-        global $DB;
+    /** Import the validated draft into the chosen group in one transaction. */
+    public static function import_draft(int $draftid, int $groupid = 0): int {
         $files = self::validated_draft($draftid);
-        $transaction = $DB->start_delegated_transaction();
-        $keys = [];
+        $records = pool::store_batch(self::draft_entries($files), $groupid);
+        return count(array_unique(array_column($records, 'iconkey')));
+    }
+
+    /** Yield one file's content at a time so the batch does not keep all raster data in memory. */
+    private static function draft_entries(array $files): \Generator {
         foreach ($files as $file) {
             $label = trim(clean_param(pathinfo($file->get_filename(), PATHINFO_FILENAME), PARAM_TEXT));
             $label = \core_text::substr($label, 0, 100);
-            $record = pool::store($label !== '' ? $label : get_string('activityicon', 'local_activityicons'),
-                $file->get_filename(), $file->get_content());
-            $keys[$record->iconkey] = true;
+            yield [$label !== '' ? $label : get_string('activityicon', 'local_activityicons'),
+                $file->get_filename(), $file->get_content()];
         }
-        $transaction->allow_commit();
-        return count($keys);
     }
 }

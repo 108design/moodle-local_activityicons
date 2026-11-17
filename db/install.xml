@@ -1,17 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="local/activityicons/db" VERSION="2026091003" COMMENT="XMLDB file for Activity Icons">
+<XMLDB PATH="local/activityicons/db" VERSION="2026111704" COMMENT="XMLDB file for Activity Icons">
   <TABLES>
+    <TABLE NAME="local_activityicons_groups" COMMENT="Site-defined icon pools">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="sortorder" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="referenceicon" TYPE="char" LENGTH="64" NOTNULL="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="local_activityicons_grpicon" COMMENT="Bundled icon references in site-defined pools">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="groupid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="iconkey" TYPE="char" LENGTH="64" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="group_fk" TYPE="foreign" FIELDS="groupid" REFTABLE="local_activityicons_groups" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="groupicon_uix" UNIQUE="true" FIELDS="groupid, iconkey"/>
+      </INDEXES>
+    </TABLE>
     <TABLE NAME="local_activityicons_pool" COMMENT="Shared immutable custom icon assets">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="iconkey" TYPE="char" LENGTH="64" NOTNULL="true"/>
         <FIELD NAME="label" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="groupid" TYPE="int" LENGTH="10" NOTNULL="false"/>
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
         <KEY NAME="iconkey_uq" TYPE="unique" FIELDS="iconkey"/>
       </KEYS>
+      <INDEXES>
+        <INDEX NAME="group_ix" UNIQUE="false" FIELDS="groupid"/>
+      </INDEXES>
     </TABLE>
     <TABLE NAME="local_activityicons_map" COMMENT="Per-course-module activity icon selections">
       <FIELDS>

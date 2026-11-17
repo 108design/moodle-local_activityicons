@@ -24,6 +24,24 @@ final class delete_icons extends \moodleform {
         $mform = $this->_form;
         $mform->addElement('hidden', 'ids', $this->_customdata['ids'] ?? '');
         $mform->setType('ids', PARAM_SEQUENCE);
-        $this->add_action_buttons(true, get_string('delete'));
+        $force = $this->_customdata['force'] ?? false;
+        $mform->addElement('hidden', 'force', $force);
+        $mform->setType('force', PARAM_BOOL);
+        $mform->addElement('hidden', 'usagehash', $this->_customdata['usagehash'] ?? '');
+        $mform->setType('usagehash', PARAM_ALPHANUM);
+        if ($force) {
+            $mform->addElement('advcheckbox', 'confirmoriginal', get_string('confirmoriginal', 'local_activityicons'));
+            $mform->setType('confirmoriginal', PARAM_BOOL);
+        }
+        $this->add_action_buttons(true,
+            $force ? get_string('deleteandreset', 'local_activityicons') : get_string('delete'));
+    }
+
+    public function validation($data, $files): array {
+        $errors = parent::validation($data, $files);
+        if (!empty($data['force']) && empty($data['confirmoriginal'])) {
+            $errors['confirmoriginal'] = get_string('confirmoriginalrequired', 'local_activityicons');
+        }
+        return $errors;
     }
 }

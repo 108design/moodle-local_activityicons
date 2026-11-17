@@ -38,16 +38,27 @@ if ($data = $form->get_data()) {
         \core\output\notification::NOTIFY_SUCCESS);
 }
 $form->set_data(['autoh5pmode' => $repository->get_course_auto_mode($courseid)]);
+\local_activityicons\local\context_help::prepare();
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('coursemanage', 'local_activityicons'));
 echo html_writer::tag('p', get_string('coursemanage_desc', 'local_activityicons'));
 $form->display();
-if (has_capability('local/activityicons:managepool', context_system::instance())) {
-    echo html_writer::tag('p', html_writer::link(new moodle_url('/local/activityicons/pool.php'),
-        get_string('adminlink', 'local_activityicons')));
+if (has_capability('moodle/site:config', context_system::instance())) {
+    $component = 'local_activityicons';
+    echo html_writer::start_tag('details', ['class' => 'card mt-4 mb-4 local-activityicons-course-admin']);
+    echo html_writer::tag('summary', get_string('courseadmin', $component), ['class' => 'card-header fw-semibold font-weight-bold']);
+    echo html_writer::start_div('card-body');
+    if (has_capability('local/activityicons:managepool', context_system::instance())) {
+        echo html_writer::div(html_writer::link(new moodle_url('/local/activityicons/pool.php'),
+            get_string('adminlink', $component), ['class' => 'btn btn-secondary']), 'mb-4');
+    }
+    echo $OUTPUT->heading(get_string('resetall', $component), 3, 'h5');
+    echo html_writer::tag('p', get_string('resetall_desc', $component) . ' ' .
+        \local_activityicons\local\context_help::icon('courseadmin'), ['class' => 'mb-3']);
+    echo html_writer::link(new moodle_url('/local/activityicons/reset.php', ['id' => $courseid]),
+        get_string('resetall', $component), ['class' => 'btn btn-outline-danger local-activityicons-quiet-danger']);
+    echo html_writer::end_div();
+    echo html_writer::end_tag('details');
 }
-echo $OUTPUT->heading(get_string('resetall', 'local_activityicons'), 3);
-echo html_writer::tag('p', get_string('resetall_desc', 'local_activityicons'));
-echo html_writer::link(new moodle_url('/local/activityicons/reset.php', ['id' => $courseid]),
-    get_string('resetall', 'local_activityicons'), ['class' => 'btn btn-outline-danger']);
+echo \local_activityicons\local\context_help::render();
 echo $OUTPUT->footer();

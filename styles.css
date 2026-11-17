@@ -1,12 +1,12 @@
 /* Product identity belongs only to the capability-protected pool administration heading. */
-#page-admin-local-activityicons-pool .local-activityicons-admin-heading {
+.local-activityicons-admin-heading {
     display: inline-flex;
     align-items: center;
     gap: .35em;
     max-width: 100%;
 }
 
-#page-admin-local-activityicons-pool .local-activityicons-admin-logo {
+.local-activityicons-admin-logo {
     width: 1em;
     height: 1em;
     flex: 0 0 auto;
@@ -15,16 +15,16 @@
 
 /* Keep native site-administration search above the plugin identity on narrow screens. */
 @media (max-width: 575.98px) {
-    #page-admin-local-activityicons-pool #page-header .d-flex:has(> .header-actions-container) {
+    #page-header .d-flex:has(> .header-actions-container) {
         flex-wrap: wrap;
         row-gap: .5rem;
     }
 
-    #page-admin-local-activityicons-pool #page-header .d-flex:has(> .header-actions-container) > .me-auto {
+    #page-header .d-flex:has(> .header-actions-container) > .me-auto {
         flex: 1 0 100%;
     }
 
-    #page-admin-local-activityicons-pool #page-header .header-actions-container {
+    #page-header .header-actions-container {
         order: -1;
         flex: 0 0 100%;
         display: flex;
@@ -61,6 +61,21 @@
 .local-activityicons-edit::after {
     content: "✎";
     font-size: .78rem;
+}
+
+.local-activityicons-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.local-activityicons-filters label {
+    flex: 1 1 12rem;
+    min-width: 0;
+}
+
+.local-activityicons-filters [data-icon-empty] {
+    flex-basis: 100%;
 }
 
 .local-activityicons-picker {
@@ -112,15 +127,15 @@
 }
 
 /* Only these two dense editors depart from Moodle's label/content columns. */
-#page-admin-local-activityicons-pool #id_poolheadercontainer > .fitem > .col-form-label,
-#page-admin-local-activityicons-pool #fitem_id_mappingnotice > .col-form-label,
+#id_poolheadercontainer > .fitem > .col-form-label,
+#fitem_id_mappingnotice > .col-form-label,
 .local-activityicons-pool-card > .fitem > .col-form-label,
 .local-activityicons-mappings > .fitem > .col-form-label {
     display: none !important;
 }
 
-#page-admin-local-activityicons-pool #id_poolheadercontainer > .fitem > .felement,
-#page-admin-local-activityicons-pool #fitem_id_mappingnotice > .felement,
+#id_poolheadercontainer > .fitem > .felement,
+#fitem_id_mappingnotice > .felement,
 .local-activityicons-pool-card > .fitem > .felement,
 .local-activityicons-mappings > .fitem > .felement {
     flex: 0 0 100%;
@@ -149,96 +164,31 @@
     overflow-wrap: anywhere;
 }
 
-.local-activityicons-pool-card.is-delete-selected {
-    border-color: var(--bs-danger, #dc3545);
-    background: var(--bs-danger-bg-subtle, #f8d7da);
+.local-activityicons-pool-card.is-selected {
+    border-color: var(--bs-primary, #0f6cbf);
 }
 
 .local-activityicons-pool-card .local-activityicons-preview {
     display: block;
     width: 2rem;
     height: 2rem;
-    margin: 0 auto;
     object-fit: contain;
 }
 
-.local-activityicons-pool-card .fitem {
-    width: 100%;
-    min-width: 0;
-    margin: 0 !important;
-}
-
-.local-activityicons-pool-card .felement {
-    padding: 0;
-}
-
-.local-activityicons-pool-card [data-fieldtype="group"] > div > .d-flex {
-    flex-direction: column;
-    gap: .5rem;
-}
-
 .local-activityicons-pool-card input[type="text"] {
-    width: 100%;
     min-width: 0;
     max-width: 100%;
     padding: .3rem .35rem;
     text-align: center;
 }
 
-.local-activityicons-pool-card [data-fieldtype="static"] {
-    font-size: .8rem;
+.local-activityicons-pool-card .local-activityicons-pool-check {
+    align-self: flex-end;
+    margin: 0;
 }
 
-#page-admin-local-activityicons-pool .local-activityicons-pool-card label.local-activityicons-pool-delete,
-#page-admin-local-activityicons-pool .local-activityicons-pool-card label:has(input[name^="deleteicons["]),
-#page-admin-local-activityicons-pool .local-activityicons-pool-delete-tooltip {
-    position: absolute !important;
-    inset-inline-end: .3rem !important;
-    inset-block-start: .3rem !important;
-    width: 1.1rem !important;
-    min-width: 1.1rem !important;
-    height: 1.1rem !important;
-    min-height: 1.1rem !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border-radius: .2rem;
-    float: none !important;
-    transform: none !important;
-    box-sizing: border-box;
-}
-
-#page-admin-local-activityicons-pool .local-activityicons-pool-card label.local-activityicons-pool-delete,
-#page-admin-local-activityicons-pool .local-activityicons-pool-card label:has(input[name^="deleteicons["]) {
-    display: block !important;
-}
-
-#page-admin-local-activityicons-pool .local-activityicons-pool-delete-tooltip {
-    display: block;
-    cursor: not-allowed;
-}
-
-#page-admin-local-activityicons-pool .local-activityicons-pool-card label input[name^="deleteicons["],
-#page-admin-local-activityicons-pool .local-activityicons-pool-delete-tooltip input[name^="deleteicons["] {
-    position: static !important;
-    inset: auto !important;
-    display: block;
-    width: 100% !important;
-    min-width: 100% !important;
-    height: 100% !important;
-    min-height: 100% !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    float: none !important;
-    transform: none !important;
-    box-sizing: border-box;
-}
-
-#page-admin-local-activityicons-pool .local-activityicons-pool-delete-tooltip input[name^="deleteicons["] {
-    pointer-events: none;
-}
-
-#page-admin-local-activityicons-pool input[name="deleteiconsubmit"] {
-    margin-top: .75rem;
+.local-activityicons-pool-actions select {
+    max-width: 100%;
 }
 
 .local-activityicons-mappings {
@@ -401,4 +351,95 @@
     .local-activityicons-picker {
         grid-template-columns: minmax(0, 1fr);
     }
+}
+
+.local-activityicons-pool-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 12.5rem), 1fr));
+    gap: 1rem;
+}
+
+.local-activityicons-pool-overview .card-header,
+.local-activityicons-pool-overview .card-footer {
+    background-color: var(--bs-secondary-bg, #e9ecef);
+}
+
+[data-bs-theme="dark"] .local-activityicons-pool-overview .card-header,
+[data-bs-theme="dark"] .local-activityicons-pool-overview .card-footer {
+    background-color: var(--bs-secondary-bg, #343a40);
+}
+
+.local-activityicons-pool-view:hover {
+    text-decoration: none;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .local-activityicons-pool-overview > .card {
+        transition: transform 150ms ease-out;
+    }
+
+    .local-activityicons-pool-overview > .card:hover {
+        transform: scale(1.012);
+    }
+}
+
+.local-activityicons-pool-view:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: -2px;
+    border-radius: inherit;
+    z-index: 1;
+}
+
+.local-activityicons-pool-overview .card-footer {
+    min-height: 2.375rem;
+    padding: .15rem .5rem;
+}
+
+.local-activityicons-pool-overview .card-footer .btn-icon {
+    width: 2rem;
+    height: 2rem;
+    padding: .25rem;
+}
+
+.local-activityicons-pool-overview .card-header {
+    overflow-wrap: anywhere;
+}
+
+.local-activityicons-pool-overview .card-body {
+    min-height: 7rem;
+    background-color: var(--bs-white, #fff);
+}
+
+[data-bs-theme="dark"] .local-activityicons-pool-overview .card-body {
+    background-color: var(--bs-body-bg, #212529);
+}
+
+.local-activityicons-pool-overview .local-activityicons-pool-reference {
+    width: 3rem;
+    height: 3rem;
+    margin: 0;
+    object-fit: contain;
+}
+
+.local-activityicons-course-admin > summary {
+    cursor: pointer;
+}
+
+.local-activityicons-course-admin .local-activityicons-quiet-danger {
+    --bs-btn-hover-color: var(--bs-danger, var(--danger, #dc3545));
+    --bs-btn-hover-bg: var(--bs-danger-bg-subtle, rgba(220, 53, 69, .09));
+    --bs-btn-hover-border-color: var(--bs-danger, var(--danger, #dc3545));
+}
+
+.local-activityicons-course-admin .btn-outline-danger.local-activityicons-quiet-danger:hover,
+.local-activityicons-course-admin .btn-outline-danger.local-activityicons-quiet-danger:focus-visible {
+    color: var(--bs-danger, var(--danger, #dc3545));
+    background-color: var(--bs-danger-bg-subtle, rgba(220, 53, 69, .09));
+    border-color: currentColor;
+}
+
+.local-activityicons-reset-confirm .btn-danger:hover,
+.local-activityicons-reset-confirm .btn-danger:focus-visible {
+    color: var(--bs-btn-color, #fff);
+    background-color: var(--bs-btn-hover-bg, var(--danger, #dc3545));
 }

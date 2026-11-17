@@ -78,10 +78,10 @@ final class pool_test extends \advanced_testcase {
         $record = reset($records);
         $key = $record->iconkey;
         $hash = pool::file($record->id)->get_contenthash();
-        $data = \local_activityicons\local\administration::defaults();
-        $data->labels[$record->id] = 'Renamed icon';
+        $data = \local_activityicons\local\administration::mapping_defaults();
+        \local_activityicons\local\administration::save_labels([$record->id => 'Renamed icon']);
         $data->h5pmapping = 'H5P.InteractiveVideo=' . $key;
-        \local_activityicons\local\administration::save($data);
+        \local_activityicons\local\administration::save_mapping($data);
         $this->assertSame('Renamed icon', pool::records()[$key]->label);
         $this->assertSame($hash, pool::file($record->id)->get_contenthash());
         $this->assertSame($key, h5p_resolver::configured_mapping()['interactivevideo']);
@@ -118,80 +118,35 @@ final class pool_test extends \advanced_testcase {
         $this->setUser($user);
         $this->assertFalse(has_capability('local/activityicons:managepool', \context_system::instance()));
         $this->expectException(\required_capability_exception::class);
-        \local_activityicons\local\administration::save(\local_activityicons\local\administration::defaults());
+        \local_activityicons\local\administration::save_mapping(\local_activityicons\local\administration::mapping_defaults());
     }
 
-    public function test_administration_form_submits_editable_labels(): void {
+    public function test_pool_labels_can_change_independently_of_h5p_settings(): void {
+        $this->resetAfterTest();
+        $this->setAdminUser();
+        $record = pool::store('Original', 'line.svg', self::SVG);
+        set_config('h5pmapping', 'H5P.Video=video', 'local_activityicons');
+        \local_activityicons\local\administration::save_labels([$record->id => 'Updated']);
+        $this->assertSame('Updated', pool::records()[$record->iconkey]->label);
+        $this->assertSame('H5P.Video=video', get_config('local_activityicons', 'h5pmapping'));
+    }
+
+    public function test_catalogue_pool_only_allows_copying(): void {
         global $PAGE;
         $this->resetAfterTest();
         $this->setAdminUser();
         $PAGE->set_context(\context_system::instance());
-        $record = pool::store('Original label', 'line.svg', self::SVG);
-        $data = \local_activityicons\local\administration::defaults();
-        $data->labels[$record->id] = 'Updated label';
-        \local_activityicons\form\administration::mock_submit((array) $data);
-        $form = new \local_activityicons\form\administration();
-        $submitted = $form->get_data();
-        $this->assertNotNull($submitted);
-        $this->assertSame('Updated label', $submitted->labels[$record->id]);
-        \local_activityicons\local\administration::save($submitted);
-        $this->assertSame('Updated label', pool::records()[$record->iconkey]->label);
-    }
-
-    public function test_compact_form_keeps_native_controls_and_accessible_actions(): void {
-        global $PAGE;
-        $this->resetAfterTest();
-        $this->setAdminUser();
-        $PAGE->set_context(\context_system::instance());
-        $record = pool::store('Editable label', 'line.svg', self::SVG);
-        $locked = pool::store('Assigned label', 'assigned.svg',
-            str_replace('M2 2L22 22', 'M1 1L10 10', self::SVG));
-        set_config('h5pfallback', $locked->iconkey, 'local_activityicons');
-        $form = new \local_activityicons\form\administration();
-        $form->set_data(\local_activityicons\local\administration::defaults());
-        $doc = new \DOMDocument();
-        $previous = libxml_use_internal_errors(true);
-        try {
-            $doc->loadHTML('<?xml encoding="UTF-8">' . $form->render());
-        } finally {
-            libxml_clear_errors();
-            libxml_use_internal_errors($previous);
-        }
-        $xpath = new \DOMXPath($doc);
-        $cards = '//div[contains(concat(" ", @class, " "), " local-activityicons-pool-card ")]';
-        $this->assertSame(count(icon_catalog::keys()), $xpath->query($cards)->length);
-        $this->assertSame(1, $xpath->query($cards . '//input[@name="labels[' . $record->id . ']"]')->length);
-        $selection = $xpath->query($cards . '//input[@name="deleteicons[' . $record->id . ']"]')->item(0);
-        $this->assertNotNull($selection);
-        $this->assertSame(get_string('selecticondelete', 'local_activityicons', $record->label),
-            $selection->getAttribute('aria-label'));
-        $lockedselection = $xpath->query($cards . '//input[@name="deleteicons[' . $locked->id . ']"]')->item(0);
-        $this->assertNotNull($lockedselection);
-        $this->assertSame('disabled', $lockedselection->getAttribute('disabled'));
-        $this->assertSame('true', $lockedselection->getAttribute('aria-hidden'));
-        $lockedtrigger = $xpath->query($cards . '//span[contains(concat(" ", @class, " "), ' .
-            '" local-activityicons-pool-delete-tooltip ")]')->item(0);
-        $this->assertNotNull($lockedtrigger);
-        $this->assertSame('tooltip', $lockedtrigger->getAttribute('data-toggle'));
-        $this->assertSame(get_string('iconinuse_batch', 'local_activityicons'),
-            $lockedtrigger->getAttribute('title'));
-        $this->assertStringContainsString(get_string('iconinuse_batch', 'local_activityicons'),
-            $lockedtrigger->getAttribute('aria-label'));
-        $this->assertSame(0, $xpath->query($cards . '//*[normalize-space(text())="' .
-            get_string('iconinuse_batch', 'local_activityicons') . '"]')->length);
-        $batchdelete = $xpath->query('//input[@name="deleteiconsubmit"]')->item(0);
-        $this->assertNotNull($batchdelete);
-        $this->assertStringEndsWith('/local/activityicons/delete.php', $batchdelete->getAttribute('formaction'));
-        $this->assertStringNotContainsString('outline-danger', $batchdelete->getAttribute('class'));
-        $batchrow = $xpath->query('//*[@id="fitem_id_deleteiconsubmit"]')->item(0);
-        $this->assertNotNull($batchrow);
-        $this->assertStringNotContainsString('outline-danger', $batchrow->getAttribute('class'));
-        $this->assertSame(1, $xpath->query('//select[@name="machine[0]"]')->length);
-        $this->assertSame(0, $xpath->query('//table')->length);
-        $remove = $xpath->query('//input[@name="removemapping[0]"]')->item(0);
-        $this->assertSame('×', $remove->getAttribute('value'));
-        $this->assertSame(get_string('removemapping', 'local_activityicons'), $remove->getAttribute('aria-label'));
-        $this->assertSame(0, $xpath->query('//input[@name="submitbutton"]/ancestor::fieldset')->length);
+        $group = \local_activityicons\local\pool_groups::save(0, 'PDF Workspace');
+        $renderer = $PAGE->get_renderer('core');
+        $source = new \local_activityicons\local\pool_browser('pdf', $renderer);
+        $this->assertSame(['copy' => 'copyselectedicons'], $source->actions());
+        $key = 'phosphor-light-highlighter';
+        $this->assertArrayHasKey($key, $source->selection([$key], 'copy'));
+        \local_activityicons\local\pool_groups::copy_icons([$key], $group);
+        $custom = new \local_activityicons\local\pool_browser('custom-' . $group, $renderer);
+        $this->assertArrayHasKey($key, $custom->selection([$key], 'remove'));
+        $this->expectException(\invalid_parameter_exception::class);
+        $source->selection([$key], 'delete');
     }
 
     public function test_compact_form_reuses_empty_mapping_slot_on_repeated_add(): void {
@@ -200,13 +155,13 @@ final class pool_test extends \advanced_testcase {
         $this->setAdminUser();
         $PAGE->set_context(\context_system::instance());
         set_config('h5pmapping', 'H5P.Video=video', 'local_activityicons');
-        $data = \local_activityicons\local\administration::defaults();
+        $data = \local_activityicons\local\administration::mapping_defaults();
         $data->machine = ['H5P.video', '', ''];
         $data->mappingicon = ['video', '', ''];
         $data->mappingcount = 3;
         $data->addmapping = 'Add';
-        \local_activityicons\form\administration::mock_submit((array) $data);
-        $form = new \local_activityicons\form\administration();
+        \local_activityicons\form\h5p_mapping::mock_submit((array) $data);
+        $form = new \local_activityicons\form\h5p_mapping();
         $this->assertTrue($form->is_submitted());
         $html = $form->render();
         $this->assertStringContainsString('name="machine[1]"', $html);
@@ -224,12 +179,12 @@ final class pool_test extends \advanced_testcase {
         $PAGE->set_context(\context_system::instance());
         set_config('h5pmapping', "H5P.Video=video\nH5P.Audio=audio", 'local_activityicons');
         $before = get_config('local_activityicons', 'h5pmapping');
-        $data = \local_activityicons\local\administration::defaults();
+        $data = \local_activityicons\local\administration::mapping_defaults();
         $data->mappingcount = 2;
         $data->mappingdeleted = [1, 0];
         $data->addmapping = 'Add';
-        \local_activityicons\form\administration::mock_submit((array) $data);
-        $form = new \local_activityicons\form\administration();
+        \local_activityicons\form\h5p_mapping::mock_submit((array) $data);
+        $form = new \local_activityicons\form\h5p_mapping();
         $submitted = $form->get_submitted_data();
         $this->assertSame('H5P.video', $submitted->machine[0]);
         $this->assertSame('video', $submitted->mappingicon[0]);
@@ -242,8 +197,8 @@ final class pool_test extends \advanced_testcase {
         // Native non-JavaScript undo also keeps the row values and does not save.
         unset($data->addmapping);
         $data->removemapping = [0 => 'Undo'];
-        \local_activityicons\form\administration::mock_submit((array) $data);
-        $form = new \local_activityicons\form\administration();
+        \local_activityicons\form\h5p_mapping::mock_submit((array) $data);
+        $form = new \local_activityicons\form\h5p_mapping();
         $undone = $form->get_submitted_data();
         $this->assertEquals(0, $undone->mappingdeleted[0]);
         $this->assertSame("H5P.video=video\nH5P.audio=audio",
@@ -253,11 +208,11 @@ final class pool_test extends \advanced_testcase {
         // Final Save alone commits the removal; the unmarked mapping is unchanged.
         unset($data->removemapping);
         $data->submitbutton = 'Save changes';
-        \local_activityicons\form\administration::mock_submit((array) $data);
-        $form = new \local_activityicons\form\administration();
+        \local_activityicons\form\h5p_mapping::mock_submit((array) $data);
+        $form = new \local_activityicons\form\h5p_mapping();
         $final = $form->get_data();
         $this->assertNotNull($final);
-        \local_activityicons\local\administration::save($final);
+        \local_activityicons\local\administration::save_mapping($final);
         $this->assertSame('H5P.audio=audio', get_config('local_activityicons', 'h5pmapping'));
     }
 
@@ -272,14 +227,12 @@ final class pool_test extends \advanced_testcase {
         $this->assertFalse(has_capability('moodle/site:config', $context));
         set_config('autoh5p', 0, 'local_activityicons');
         set_config('dynamicfallback', 1, 'local_activityicons');
-        $data = \local_activityicons\local\administration::defaults();
-        $data->autoh5p = 1;
-        $data->dynamicfallback = 0;
+        $data = \local_activityicons\local\administration::mapping_defaults();
         $data->h5pfallback = 'video';
-        \local_activityicons\local\administration::save($data);
-        $this->assertEquals(0, get_config('local_activityicons', 'autoh5p'));
-        $this->assertEquals(1, get_config('local_activityicons', 'dynamicfallback'));
+        \local_activityicons\local\administration::save_mapping($data);
         $this->assertSame('video', get_config('local_activityicons', 'h5pfallback'));
+        $this->expectException(\required_capability_exception::class);
+        \local_activityicons\local\administration::save_settings((object) ['autoh5p' => 1, 'dynamicfallback' => 0]);
     }
 
     public function test_svg_rejects_external_entities(): void {
@@ -304,16 +257,16 @@ final class pool_test extends \advanced_testcase {
         $this->setAdminUser();
         $record = pool::store('logo-n', 'logo-n.svg', self::SVG);
         $url = pool::url($record)->out(false);
-        $data = \local_activityicons\local\administration::defaults();
+        $data = \local_activityicons\local\administration::mapping_defaults();
         $data->machine = ['H5P.InteractiveVideo'];
         $data->mappingicon = [$record->iconkey];
-        $data->labels[$record->id] = 'My new name';
-        \local_activityicons\local\administration::save($data);
+        \local_activityicons\local\administration::save_labels([$record->id => 'My new name']);
+        \local_activityicons\local\administration::save_mapping($data);
         $this->assertSame($record->iconkey, h5p_resolver::configured_mapping()['interactivevideo']);
         $this->assertSame('My new name', pool::records()[$record->iconkey]->label);
         $this->assertSame($url, pool::url(pool::records()[$record->iconkey])->out(false));
         $this->assertArrayHasKey($record->iconkey, pool::used_keys());
-        $data = \local_activityicons\local\administration::defaults();
+        $data = \local_activityicons\local\administration::mapping_defaults();
         $this->assertSame([$record->iconkey], $data->mappingicon);
         $this->assertSame(['H5P.interactivevideo'], $data->machine);
         $this->expectException(\moodle_exception::class);

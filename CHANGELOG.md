@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.19.2 (2026111707) - 2026-11-17
+
+Browse the eight H5P basics and nine Phosphor Light pools in the icon picker. Create your own pools, choose cover icons, and move or copy selected icons. H5P Mapping and Settings have their own tabs. Developer mode lets site administrators review where an uploaded icon is used before confirming its deletion and restoring Moodle defaults.
+
 ## 1.12.1 (2026110300) - 2026-11-03
 
 Fixes activity icons being applied to another activity through prerequisite links, embedded activity links or adjacent images. Keeps each icon picker attached to its own activity in nested layouts and limits activity-link matching to the current Moodle installation, including installations in a subdirectory.

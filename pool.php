@@ -12,50 +12,47 @@
  * @copyright 2026 Andreas Giesen <andreas@108design.com>
  * @license   See LICENSE.md for the full terms.
  */
+
 require('../../config.php');
 require_once($CFG->libdir . '/adminlib.php');
 
-require_login();
-require_capability('local/activityicons:managepool', context_system::instance());
-admin_externalpage_setup('local_activityicons');
-\local_activityicons\local\context_help::prepare();
-// Keep the native page heading; the decorative SVG identifies this administration tool.
-$logo = html_writer::empty_tag('img', [
-    'src' => $OUTPUT->image_url('icon', 'local_activityicons'),
-    'alt' => '', 'aria-hidden' => 'true', 'width' => 32, 'height' => 32,
-    'class' => 'local-activityicons-admin-logo',
-]);
-$PAGE->set_heading(html_writer::span($logo .
-    html_writer::span(s(get_string('pluginname', 'local_activityicons'))),
-    'local-activityicons-admin-heading'), false);
-$url = new moodle_url('/local/activityicons/pool.php');
-$upload = new \local_activityicons\form\pool_icon($url);
-$form = new \local_activityicons\form\administration($url);
-if ($data = $upload->get_data()) {
-    $count = \local_activityicons\local\administration::import_draft((int) $data->iconfiles);
-    redirect($url, get_string('batchsaved', 'local_activityicons', $count), null,
-        \core\output\notification::NOTIFY_SUCCESS);
+use local_activityicons\form\pool_icon;
+use local_activityicons\local\admin_page;
+use local_activityicons\local\administration;
+use local_activityicons\local\context_help;
+use local_activityicons\local\pool_browser;
+use local_activityicons\local\pool;
+use local_activityicons\output\pool_browser as browser_output;
+
+$key = optional_param('pool', '', PARAM_ALPHANUMEXT);
+$url = pool_browser::url($key);
+admin_page::prepare($url);
+$browser = new browser_output($PAGE->get_renderer('core'));
+$view = $key === '' ? null : new pool_browser($key, $PAGE->get_renderer('core'));
+$upload = null;
+if ($view === null || $view->groupid !== null) {
+    $upload = new pool_icon($url, ['destination' => $view?->groupid]);
+    if ($data = $upload->get_data()) {
+        $destination = $view?->groupid ?? (int) ($data->destinationpool ?? 0);
+        $count = administration::import_draft((int) $data->iconfiles, $destination);
+        redirect($url, get_string('batchsaved', 'local_activityicons', $count), null,
+            \core\output\notification::NOTIFY_SUCCESS);
+    }
 }
-if ($data = $form->get_data()) {
-    \local_activityicons\local\administration::save($data);
-    redirect($url, get_string('adminsaved', 'local_activityicons'), null,
-        \core\output\notification::NOTIFY_SUCCESS);
-}
-$form->set_data(\local_activityicons\local\administration::defaults());
-$PAGE->requires->js_call_amd('local_activityicons/mapping', 'init', [[
-    'catalog' => \local_activityicons\local\icon_catalog::client_entries($PAGE->get_renderer('core')),
-    'choose' => get_string('chooseicon', 'local_activityicons'),
-    'chooseType' => get_string('chooseh5ptype', 'local_activityicons'),
-    'close' => get_string('closepicker', 'local_activityicons'),
-    'search' => get_string('searchicons', 'local_activityicons'),
-    'remove' => get_string('removemapping', 'local_activityicons'),
-    'undoRemove' => get_string('undoremovemapping', 'local_activityicons'),
-    'deleteSelected' => get_string('deleteiconsselected', 'local_activityicons'),
-]]);
+$PAGE->requires->js_call_amd('local_activityicons/mapping', 'initPool');
 echo $OUTPUT->header();
-echo html_writer::tag('p', get_string('adminintro', 'local_activityicons') .
-    \local_activityicons\local\context_help::icon('overview'));
-$upload->display();
-$form->display();
-echo \local_activityicons\local\context_help::render();
+echo admin_page::tabs('pool');
+if ($view !== null) {
+    echo $OUTPUT->heading(s($view->label), 2, 'mb-4');
+}
+if (pool::developer_mode_enabled() && $view?->has_used_uploads()) {
+    echo $OUTPUT->notification(get_string('developermodeactive', 'local_activityicons'), \core\output\notification::NOTIFY_WARNING);
+}
+if ($upload !== null) {
+    echo html_writer::start_tag('section', ['class' => 'mb-4']);
+    $upload->display();
+    echo html_writer::end_tag('section');
+}
+echo $view === null ? $browser->overview() : $browser->contents($view);
+echo context_help::render();
 echo $OUTPUT->footer();

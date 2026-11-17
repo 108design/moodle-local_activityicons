@@ -30,11 +30,21 @@ final class pool_icon extends \moodleform {
         $mform->addHelpButton('iconfiles', 'iconfiles', 'local_activityicons');
         $mform->addElement('static', 'iconfileslinkedhelp', '', \html_writer::span(\local_activityicons\local\context_help::icon('pool'), '', ['data-activityicons-help-field' => 'iconfiles']));
         $mform->addRule('iconfiles', null, 'required');
+        if (!isset($this->_customdata['destination'])) {
+            $mform->addElement('select', 'destinationpool', get_string('destinationpool', 'local_activityicons'),
+                array_map('s', [0 => get_string('ownuploads', 'local_activityicons')] + \local_activityicons\local\pool_groups::options()));
+            $mform->addHelpButton('destinationpool', 'destinationpool', 'local_activityicons');
+        }
+        $mform->setExpanded('uploadheader', true);
         $mform->addElement('submit', 'uploadiconsubmit', get_string('batchupload', 'local_activityicons'));
     }
 
     public function validation($data, $files): array {
         $errors = parent::validation($data, $files);
+        $destination = $this->_customdata['destination'] ?? (int) ($data['destinationpool'] ?? 0);
+        if (!array_key_exists($destination, \local_activityicons\local\pool_groups::options())) {
+            $errors['destinationpool'] = get_string('groupmissing', 'local_activityicons');
+        }
         if (!$errors) {
             try {
                 \local_activityicons\local\administration::validated_draft((int) $data['iconfiles']);

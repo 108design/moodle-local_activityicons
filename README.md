@@ -5,7 +5,7 @@
 # 108design Activity Icons
 
 Activity Icons lets course editors choose meaningful icons for Moodle activities.
-Use the eight supplied icons, upload your own icons, or automatically choose icons
+Filter the picker by icon pool, upload your own icons, or choose icons automatically
 for H5P content types such as video, quiz, presentation, audio and games.
 
 ## Screenshots
@@ -88,30 +88,31 @@ disables course automation. It requires confirmation and removes individual
 choices; back up the course first if you may need them again. Enabling automation
 after a reset takes effect only for activities returned to **Follow course policy**.
 
-## Manage the shared icon pool
+## Manage Icon Pools
 
 Open **Site administration → Plugins → Local plugins → Activity Icons**
-(`/local/activityicons/pool.php`). The shared pool is available to all courses.
+(`/local/activityicons/pool.php`). **Icon Pools** lists your pools, the eight
+H5P basics and nine Phosphor Light pools. Moodle's theme supplies the colours
+for the bundled icons.
 
-In **Add icons**, upload up to 50 SVG, PNG or WebP files at once. Each file may
-be up to 1 MiB; raster images may be up to 2048 × 2048 pixels. SVGs must have a
-`viewBox` and contain static shapes. Scripts, embedded images and external
-content are not supported. PNG and WebP uploads are stored as PNG.
+Choose a destination on the overview or open one of your pools to upload
+directly to it. Upload up to 50 SVG, PNG or WebP files, each up to 1 MiB.
+Raster images may be up to 2048 × 2048 pixels. SVGs require a `viewBox`
+and static shapes. Moodle stores PNG and WebP uploads as PNG. Uploaded icons
+are public decorative assets. Keep personal and confidential information out.
 
-Filenames provide the initial labels. Edit labels below the icon previews and
-choose **Save changes**; renaming an icon preserves its assignments. Identical
-uploads reuse the existing icon. Prefer monochrome icons for consistent results
-with Moodle's theme colours. Uploaded icons are publicly accessible decorative
-assets, so do not include personal or confidential information.
+Open a pool to edit labels or select icons for a batch action. You can move
+uploads between your pools and copy icons into another pool. A copy lets the
+same icon appear in both pools. **Edit metadata** changes a pool's name or cover icon.
 
-Save label and settings changes before uploading another batch: adding icons
-is a separate action. Select unused custom icons in the grid to delete them
-after confirmation. Icons used by activities, H5P mappings or the fallback
-cannot be deleted; supplied icons also remain in the pool.
+Deleting an unused upload requires confirmation. To delete a used upload, a
+site administrator must enable **Developer mode** in **Settings**, review its
+activity assignments and H5P mappings or fallback use, and confirm the reset
+to the original Moodle icons.
 
 ## Configure H5P mapping and site settings
 
-On the same administration page, use **Add mapping**, choose an H5P content type
+On the **H5P Mapping** tab, use **Add mapping**, choose an H5P content type
 in the searchable chooser, then select its icon. Each type has one mapping that
 applies to all its versions. To remove a mapping, mark its row for removal;
 the same control undoes the mark. **Save changes** applies your edits.
@@ -120,7 +121,7 @@ the same control undoes the mark. **Save changes** applies your edits.
 Select a supplied or uploaded icon, or Moodle's original H5P icon. If the mapping
 is empty, every automatically classified H5P activity uses this fallback.
 
-The **Automation and display** section contains these site settings:
+The **Settings** tab contains the site-wide automation and display options.
 
 - **Automatically classify unassigned H5P activities** supplies the site default
   for courses that inherit it. It is disabled after installation, so existing

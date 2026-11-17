@@ -1,0 +1,896 @@
+{
+    "source": "@phosphor-icons/core@2.1.1",
+    "pools": [
+        "learn",
+        "exchange",
+        "media",
+        "assessment",
+        "pdf",
+        "files",
+        "subjects",
+        "vocational",
+        "game"
+    ],
+    "icons": {
+        "phosphor-light-book-open-text": {
+            "pool": "learn",
+            "search": "book open text Lesen Reading Lektüre Textarbeit"
+        },
+        "phosphor-light-file-text": {
+            "pool": "learn",
+            "search": "file text Text lesen Read a document"
+        },
+        "phosphor-light-pencil-line": {
+            "pool": "learn",
+            "search": "pencil line Schreiben Writing"
+        },
+        "phosphor-light-pencil-simple": {
+            "pool": "learn",
+            "search": "pencil simple Schreibübung Writing exercise"
+        },
+        "phosphor-light-notebook": {
+            "pool": "learn",
+            "search": "notebook Lerntagebuch Learning journal"
+        },
+        "phosphor-light-note-pencil": {
+            "pool": "learn",
+            "search": "note pencil Reflexion Reflection Lernjournal"
+        },
+        "phosphor-light-list-checks": {
+            "pool": "learn",
+            "search": "list checks Checkliste Checklist Arbeitsplan"
+        },
+        "phosphor-light-clipboard-text": {
+            "pool": "learn",
+            "search": "clipboard text Arbeitsauftrag Task brief Aufgabenstellung worksheet"
+        },
+        "phosphor-light-exam": {
+            "pool": "learn",
+            "search": "exam Prüfung Exam Test Klausur"
+        },
+        "phosphor-light-check-square": {
+            "pool": "learn",
+            "search": "check square Erledigen Mark complete"
+        },
+        "phosphor-light-clock-countdown": {
+            "pool": "learn",
+            "search": "clock countdown Zeitaufgabe Timed task Zeitlimit"
+        },
+        "phosphor-light-hand-tap": {
+            "pool": "learn",
+            "search": "hand tap Interaktion Interaction Antippen Drag-and-drop"
+        },
+        "phosphor-light-magnifying-glass": {
+            "pool": "learn",
+            "search": "magnifying glass Recherchieren Research Suche search"
+        },
+        "phosphor-light-detective": {
+            "pool": "learn",
+            "search": "detective Fallanalyse Case analysis Fallstudie Spurensuche"
+        },
+        "phosphor-light-student": {
+            "pool": "learn",
+            "search": "student Lernende Learner"
+        },
+        "phosphor-light-graduation-cap": {
+            "pool": "learn",
+            "search": "graduation cap Abschluss Graduation Ausbildung Studium"
+        },
+        "phosphor-light-chalkboard-teacher": {
+            "pool": "learn",
+            "search": "chalkboard teacher Unterricht Teaching Unterweisung"
+        },
+        "phosphor-light-steps": {
+            "pool": "learn",
+            "search": "steps Schrittfolge Step-by-step Anleitung tutorial"
+        },
+        "phosphor-light-lightbulb": {
+            "pool": "learn",
+            "search": "lightbulb Idee Idea Brainstorming"
+        },
+        "phosphor-light-brain": {
+            "pool": "learn",
+            "search": "brain Nachdenken Thinking Gedächtnis Reflexion"
+        },
+        "phosphor-light-question-mark": {
+            "pool": "learn",
+            "search": "question mark Leitfrage Guiding question"
+        },
+        "phosphor-light-graph": {
+            "pool": "learn",
+            "search": "graph Mindmap Mind map Konzeptkarte"
+        },
+        "phosphor-light-presentation": {
+            "pool": "learn",
+            "search": "presentation Vortrag Talk"
+        },
+        "phosphor-light-books": {
+            "pool": "learn",
+            "search": "books Leseliste Reading list Literatur bibliography"
+        },
+        "phosphor-light-chats": {
+            "pool": "exchange",
+            "search": "chats Diskussion Discussion Forum Gespräch"
+        },
+        "phosphor-light-chat-circle-dots": {
+            "pool": "exchange",
+            "search": "chat circle dots Rückfrage Follow-up question"
+        },
+        "phosphor-light-chat-dots": {
+            "pool": "exchange",
+            "search": "chat dots Kommentar Comment"
+        },
+        "phosphor-light-megaphone": {
+            "pool": "exchange",
+            "search": "megaphone Ankündigung Announcement Mitteilung news"
+        },
+        "phosphor-light-users-three": {
+            "pool": "exchange",
+            "search": "users three Gruppenarbeit Group work Team Kollaboration"
+        },
+        "phosphor-light-users": {
+            "pool": "exchange",
+            "search": "users Partnerarbeit Pair work"
+        },
+        "phosphor-light-user-circle": {
+            "pool": "exchange",
+            "search": "user circle Einzelarbeit Individual work"
+        },
+        "phosphor-light-microphone": {
+            "pool": "exchange",
+            "search": "microphone Sprechübung Speaking practice Aufnahme Audio"
+        },
+        "phosphor-light-hand": {
+            "pool": "exchange",
+            "search": "hand Hand heben Raise hand"
+        },
+        "phosphor-light-hand-waving": {
+            "pool": "exchange",
+            "search": "hand waving Begrüßung Welcome"
+        },
+        "phosphor-light-hand-heart": {
+            "pool": "exchange",
+            "search": "hand heart Unterstützung Support Hilfe Mentoring"
+        },
+        "phosphor-light-presentation-chart": {
+            "pool": "exchange",
+            "search": "presentation chart Ergebnisse vorstellen Present results"
+        },
+        "phosphor-light-chalkboard": {
+            "pool": "exchange",
+            "search": "chalkboard Tafel Blackboard"
+        },
+        "phosphor-light-question": {
+            "pool": "exchange",
+            "search": "question Fragenforum Questions forum FAQ Hilfe"
+        },
+        "phosphor-light-phone-call": {
+            "pool": "exchange",
+            "search": "phone call Telefonübung Phone practice"
+        },
+        "phosphor-light-handshake": {
+            "pool": "exchange",
+            "search": "handshake Zusammenarbeit Collaboration Kooperation"
+        },
+        "phosphor-light-video-conference": {
+            "pool": "exchange",
+            "search": "video conference Videokonferenz Video conference Meeting Webinar"
+        },
+        "phosphor-light-calendar-dots": {
+            "pool": "exchange",
+            "search": "calendar dots Termin Appointment Sprechstunde"
+        },
+        "phosphor-light-users-four": {
+            "pool": "exchange",
+            "search": "users four Arbeitsgruppe Working group"
+        },
+        "phosphor-light-user-switch": {
+            "pool": "exchange",
+            "search": "user switch Rollenwechsel Role rotation Rollenspiel"
+        },
+        "phosphor-light-video-camera": {
+            "pool": "media",
+            "search": "video camera Video Video Kamera"
+        },
+        "phosphor-light-video": {
+            "pool": "media",
+            "search": "video Videoclip Video clip"
+        },
+        "phosphor-light-play-circle": {
+            "pool": "media",
+            "search": "play circle Abspielen Play Wiedergabe"
+        },
+        "phosphor-light-film-strip": {
+            "pool": "media",
+            "search": "film strip Filmsequenz Film sequence"
+        },
+        "phosphor-light-film-reel": {
+            "pool": "media",
+            "search": "film reel Film Film"
+        },
+        "phosphor-light-headphones": {
+            "pool": "media",
+            "search": "headphones Hörübung Listening practice Audio Hörverstehen"
+        },
+        "phosphor-light-waveform": {
+            "pool": "media",
+            "search": "waveform Tonspur Audio waveform Podcast Sound"
+        },
+        "phosphor-light-speaker-high": {
+            "pool": "media",
+            "search": "speaker high Audio abspielen Play audio"
+        },
+        "phosphor-light-subtitles": {
+            "pool": "media",
+            "search": "subtitles Untertitel Subtitles Captions"
+        },
+        "phosphor-light-translate": {
+            "pool": "media",
+            "search": "translate Übersetzung Translation Sprachen"
+        },
+        "phosphor-light-images": {
+            "pool": "media",
+            "search": "images Bildergalerie Image gallery"
+        },
+        "phosphor-light-image": {
+            "pool": "media",
+            "search": "image Einzelbild Image"
+        },
+        "phosphor-light-slideshow": {
+            "pool": "media",
+            "search": "slideshow Diashow Slideshow"
+        },
+        "phosphor-light-projector-screen": {
+            "pool": "media",
+            "search": "projector screen Präsentation Presentation Folien Slides"
+        },
+        "phosphor-light-tree-structure": {
+            "pool": "media",
+            "search": "tree structure Verzweigung Branching scenario H5P Entscheidung"
+        },
+        "phosphor-light-path": {
+            "pool": "media",
+            "search": "path Lernpfad Learning path Szenario Verlauf"
+        },
+        "phosphor-light-git-branch": {
+            "pool": "media",
+            "search": "git branch Alternativer Ablauf Alternative path Verzweigung"
+        },
+        "phosphor-light-cards": {
+            "pool": "media",
+            "search": "cards Karteikarten Flashcards H5P Lernkarten"
+        },
+        "phosphor-light-puzzle-piece": {
+            "pool": "media",
+            "search": "puzzle piece Zuordnungsübung Matching exercise H5P Puzzle"
+        },
+        "phosphor-light-game-controller": {
+            "pool": "media",
+            "search": "game controller Lernspiel Learning game H5P Gamification"
+        },
+        "phosphor-light-hand-pointing": {
+            "pool": "media",
+            "search": "hand pointing Hotspot Hotspot Interaktives Bild H5P"
+        },
+        "phosphor-light-text-aa": {
+            "pool": "media",
+            "search": "text aa Textübung Text exercise Lückentext H5P"
+        },
+        "phosphor-light-list-numbers": {
+            "pool": "media",
+            "search": "list numbers Reihenfolge Ordering Sortieren H5P"
+        },
+        "phosphor-light-selection-plus": {
+            "pool": "media",
+            "search": "selection plus Bereich auswählen Select area Markieren Hotspot"
+        },
+        "phosphor-light-check-circle": {
+            "pool": "assessment",
+            "search": "check circle Bestanden Passed"
+        },
+        "phosphor-light-check-fat": {
+            "pool": "assessment",
+            "search": "check fat Abgehakt Checked"
+        },
+        "phosphor-light-medal": {
+            "pool": "assessment",
+            "search": "medal Medaille Medal Auszeichnung Gamification"
+        },
+        "phosphor-light-trophy": {
+            "pool": "assessment",
+            "search": "trophy Pokal Trophy Auszeichnung Gamification"
+        },
+        "phosphor-light-certificate": {
+            "pool": "assessment",
+            "search": "certificate Zertifikat Certificate Nachweis Urkunde"
+        },
+        "phosphor-light-star": {
+            "pool": "assessment",
+            "search": "star Auszeichnung Award Stern Gamification"
+        },
+        "phosphor-light-seal-check": {
+            "pool": "assessment",
+            "search": "seal check Nachweis bestätigt Verified evidence"
+        },
+        "phosphor-light-target": {
+            "pool": "assessment",
+            "search": "target Lernziel Learning objective Ziel"
+        },
+        "phosphor-light-chart-bar": {
+            "pool": "assessment",
+            "search": "chart bar Auswertung Results overview Diagramm Report"
+        },
+        "phosphor-light-chart-line-up": {
+            "pool": "assessment",
+            "search": "chart line up Leistungsentwicklung Performance trend"
+        },
+        "phosphor-light-star-half": {
+            "pool": "assessment",
+            "search": "star half Teilbewertung Partial score"
+        },
+        "phosphor-light-thumbs-up": {
+            "pool": "assessment",
+            "search": "thumbs up Positives Feedback Positive feedback Rückmeldung"
+        },
+        "phosphor-light-flag": {
+            "pool": "assessment",
+            "search": "flag Meilenstein Milestone"
+        },
+        "phosphor-light-clipboard": {
+            "pool": "assessment",
+            "search": "clipboard Bewertungsbogen Assessment sheet Rubrik rubric"
+        },
+        "phosphor-light-gauge": {
+            "pool": "assessment",
+            "search": "gauge Leistungsstand Performance level"
+        },
+        "phosphor-light-chart-pie-slice": {
+            "pool": "assessment",
+            "search": "chart pie slice Notenverteilung Grade distribution"
+        },
+        "phosphor-light-check": {
+            "pool": "assessment",
+            "search": "check Richtig Correct"
+        },
+        "phosphor-light-x-circle": {
+            "pool": "assessment",
+            "search": "x circle Fehler Incorrect"
+        },
+        "phosphor-light-warning-circle": {
+            "pool": "assessment",
+            "search": "warning circle Überarbeiten Needs revision"
+        },
+        "phosphor-light-number-circle-one": {
+            "pool": "assessment",
+            "search": "number circle one Bewertungsstufe Grade level"
+        },
+        "phosphor-light-highlighter": {
+            "pool": "pdf",
+            "search": "highlighter Textmarker Highlighter PDF Workspace markieren hervorheben"
+        },
+        "phosphor-light-highlighter-circle": {
+            "pool": "pdf",
+            "search": "highlighter circle Markierung Highlight PDF Workspace Textmarker"
+        },
+        "phosphor-light-pencil-simple-line": {
+            "pool": "pdf",
+            "search": "pencil simple line Freihand-Anmerkung Freehand annotation zeichnen"
+        },
+        "phosphor-light-eraser": {
+            "pool": "pdf",
+            "search": "eraser Radiergummi Eraser löschen"
+        },
+        "phosphor-light-text-underline": {
+            "pool": "pdf",
+            "search": "text underline Unterstreichen Underline"
+        },
+        "phosphor-light-text-strikethrough": {
+            "pool": "pdf",
+            "search": "text strikethrough Durchstreichen Strikethrough"
+        },
+        "phosphor-light-textbox": {
+            "pool": "pdf",
+            "search": "textbox Textfeld Text box Anmerkung annotation"
+        },
+        "phosphor-light-note": {
+            "pool": "pdf",
+            "search": "note Notiz Note Kommentar PDF Workspace"
+        },
+        "phosphor-light-note-blank": {
+            "pool": "pdf",
+            "search": "note blank Leere Notiz Blank note"
+        },
+        "phosphor-light-stamp": {
+            "pool": "pdf",
+            "search": "stamp Stempel Stamp"
+        },
+        "phosphor-light-signature": {
+            "pool": "pdf",
+            "search": "signature Signatur Signature Unterschrift"
+        },
+        "phosphor-light-selection": {
+            "pool": "pdf",
+            "search": "selection Auswahlrahmen Selection"
+        },
+        "phosphor-light-selection-background": {
+            "pool": "pdf",
+            "search": "selection background Hintergrund auswählen Select background"
+        },
+        "phosphor-light-crop": {
+            "pool": "pdf",
+            "search": "crop Zuschneiden Crop"
+        },
+        "phosphor-light-scissors": {
+            "pool": "pdf",
+            "search": "scissors Ausschneiden Cut"
+        },
+        "phosphor-light-magnifying-glass-plus": {
+            "pool": "pdf",
+            "search": "magnifying glass plus Vergrößern Zoom in"
+        },
+        "phosphor-light-paperclip": {
+            "pool": "pdf",
+            "search": "paperclip Anhang Attachment"
+        },
+        "phosphor-light-bookmark-simple": {
+            "pool": "pdf",
+            "search": "bookmark simple Lesezeichen Bookmark"
+        },
+        "phosphor-light-file-magnifying-glass": {
+            "pool": "pdf",
+            "search": "file magnifying glass Dokument prüfen Review document PDF Dateisuche"
+        },
+        "phosphor-light-split-horizontal": {
+            "pool": "pdf",
+            "search": "split horizontal Seitenansicht teilen Split view"
+        },
+        "phosphor-light-arrows-out": {
+            "pool": "pdf",
+            "search": "arrows out Vollbild Fullscreen"
+        },
+        "phosphor-light-rows": {
+            "pool": "pdf",
+            "search": "rows Seitenübersicht Page overview"
+        },
+        "phosphor-light-file": {
+            "pool": "files",
+            "search": "file Datei File"
+        },
+        "phosphor-light-file-pdf": {
+            "pool": "files",
+            "search": "file pdf PDF PDF PDF Workspace"
+        },
+        "phosphor-light-file-doc": {
+            "pool": "files",
+            "search": "file doc Word (DOC) Word (DOC) docx Textdokument"
+        },
+        "phosphor-light-file-xls": {
+            "pool": "files",
+            "search": "file xls Excel (XLS) Excel (XLS) xlsx Tabelle spreadsheet"
+        },
+        "phosphor-light-file-ppt": {
+            "pool": "files",
+            "search": "file ppt PowerPoint (PPT) PowerPoint (PPT) pptx Präsentation"
+        },
+        "phosphor-light-file-csv": {
+            "pool": "files",
+            "search": "file csv CSV CSV Tabelle spreadsheet"
+        },
+        "phosphor-light-file-txt": {
+            "pool": "files",
+            "search": "file txt TXT TXT Klartext plain text"
+        },
+        "phosphor-light-file-md": {
+            "pool": "files",
+            "search": "file md Markdown Markdown md"
+        },
+        "phosphor-light-file-zip": {
+            "pool": "files",
+            "search": "file zip ZIP ZIP Archiv compressed"
+        },
+        "phosphor-light-file-archive": {
+            "pool": "files",
+            "search": "file archive Archivdatei Archive file tar gz 7z"
+        },
+        "phosphor-light-file-image": {
+            "pool": "files",
+            "search": "file image Bilddatei Image file Grafik raster"
+        },
+        "phosphor-light-file-jpg": {
+            "pool": "files",
+            "search": "file jpg JPG JPG jpeg"
+        },
+        "phosphor-light-file-png": {
+            "pool": "files",
+            "search": "file png PNG PNG"
+        },
+        "phosphor-light-file-svg": {
+            "pool": "files",
+            "search": "file svg SVG SVG Vektor vector"
+        },
+        "phosphor-light-file-audio": {
+            "pool": "files",
+            "search": "file audio Audiodatei Audio file mp3 wav Podcast"
+        },
+        "phosphor-light-file-video": {
+            "pool": "files",
+            "search": "file video Videodatei Video file mp4 webm"
+        },
+        "phosphor-light-file-code": {
+            "pool": "files",
+            "search": "file code Quellcodedatei Source code file json yaml xml"
+        },
+        "phosphor-light-file-html": {
+            "pool": "files",
+            "search": "file html HTML HTML Webseite website"
+        },
+        "phosphor-light-file-css": {
+            "pool": "files",
+            "search": "file css CSS CSS Stylesheet"
+        },
+        "phosphor-light-file-js": {
+            "pool": "files",
+            "search": "file js JavaScript JavaScript js"
+        },
+        "phosphor-light-file-ts": {
+            "pool": "files",
+            "search": "file ts TypeScript TypeScript ts"
+        },
+        "phosphor-light-file-py": {
+            "pool": "files",
+            "search": "file py Python-Datei Python file py"
+        },
+        "phosphor-light-file-sql": {
+            "pool": "files",
+            "search": "file sql SQL SQL Datenbank database"
+        },
+        "phosphor-light-folder-open": {
+            "pool": "files",
+            "search": "folder open Materialordner Resource folder"
+        },
+        "phosphor-light-files": {
+            "pool": "files",
+            "search": "files Dateisammlung File collection"
+        },
+        "phosphor-light-file-arrow-up": {
+            "pool": "files",
+            "search": "file arrow up Datei abgeben Submit file Upload"
+        },
+        "phosphor-light-file-arrow-down": {
+            "pool": "files",
+            "search": "file arrow down Datei herunterladen Download file"
+        },
+        "phosphor-light-file-lock": {
+            "pool": "files",
+            "search": "file lock Geschützte Datei Protected file"
+        },
+        "phosphor-light-flask": {
+            "pool": "subjects",
+            "search": "flask Experiment Experiment Chemie Labor"
+        },
+        "phosphor-light-atom": {
+            "pool": "subjects",
+            "search": "atom Physik Physics"
+        },
+        "phosphor-light-dna": {
+            "pool": "subjects",
+            "search": "dna Genetik Genetics Biologie"
+        },
+        "phosphor-light-microscope": {
+            "pool": "subjects",
+            "search": "microscope Mikroskopie Microscopy Labor"
+        },
+        "phosphor-light-globe-hemisphere-west": {
+            "pool": "subjects",
+            "search": "globe hemisphere west Geografie Geography"
+        },
+        "phosphor-light-map-trifold": {
+            "pool": "subjects",
+            "search": "map trifold Kartenarbeit Map reading"
+        },
+        "phosphor-light-compass": {
+            "pool": "subjects",
+            "search": "compass Orientierung Navigation"
+        },
+        "phosphor-light-compass-tool": {
+            "pool": "subjects",
+            "search": "compass tool Geometrie Geometry Zirkel"
+        },
+        "phosphor-light-calculator": {
+            "pool": "subjects",
+            "search": "calculator Rechnen Calculation Mathematik"
+        },
+        "phosphor-light-function": {
+            "pool": "subjects",
+            "search": "function Funktionen Functions Mathe Mathematik"
+        },
+        "phosphor-light-sigma": {
+            "pool": "subjects",
+            "search": "sigma Summe und Statistik Sum and statistics"
+        },
+        "phosphor-light-pi": {
+            "pool": "subjects",
+            "search": "pi Kreiszahl Pi Pi"
+        },
+        "phosphor-light-code": {
+            "pool": "subjects",
+            "search": "code Programmieren Programming"
+        },
+        "phosphor-light-code-block": {
+            "pool": "subjects",
+            "search": "code block Codebeispiel Code example"
+        },
+        "phosphor-light-terminal": {
+            "pool": "subjects",
+            "search": "terminal Kommandozeile Command line"
+        },
+        "phosphor-light-music-notes": {
+            "pool": "subjects",
+            "search": "music notes Musik Music"
+        },
+        "phosphor-light-piano-keys": {
+            "pool": "subjects",
+            "search": "piano keys Klavierübung Piano practice"
+        },
+        "phosphor-light-palette": {
+            "pool": "subjects",
+            "search": "palette Kunst und Farbe Art and colour"
+        },
+        "phosphor-light-paint-brush": {
+            "pool": "subjects",
+            "search": "paint brush Malen Painting"
+        },
+        "phosphor-light-leaf": {
+            "pool": "subjects",
+            "search": "leaf Ökologie Ecology Umwelt Natur"
+        },
+        "phosphor-light-scales": {
+            "pool": "subjects",
+            "search": "scales Recht und Ethik Law and ethics Waage"
+        },
+        "phosphor-light-first-aid": {
+            "pool": "subjects",
+            "search": "first aid Erste Hilfe First aid"
+        },
+        "phosphor-light-chart-scatter": {
+            "pool": "subjects",
+            "search": "chart scatter Datenanalyse Data analysis"
+        },
+        "phosphor-light-table": {
+            "pool": "subjects",
+            "search": "table Tabellenarbeit Working with tables"
+        },
+        "phosphor-light-globe": {
+            "pool": "subjects",
+            "search": "globe Globales Lernen Global learning"
+        },
+        "phosphor-light-bank": {
+            "pool": "subjects",
+            "search": "bank Politik und Institutionen Politics and institutions"
+        },
+        "phosphor-light-wrench": {
+            "pool": "vocational",
+            "search": "wrench Wartung Maintenance Werkstatt Reparatur"
+        },
+        "phosphor-light-hammer": {
+            "pool": "vocational",
+            "search": "hammer Handwerk Craft work"
+        },
+        "phosphor-light-toolbox": {
+            "pool": "vocational",
+            "search": "toolbox Werkstatt Workshop Werkzeug"
+        },
+        "phosphor-light-hard-hat": {
+            "pool": "vocational",
+            "search": "hard hat Arbeitsschutz Workplace safety Schutzhelm Baustelle"
+        },
+        "phosphor-light-goggles": {
+            "pool": "vocational",
+            "search": "goggles Schutzbrille Safety goggles Labor Arbeitsschutz"
+        },
+        "phosphor-light-fire-extinguisher": {
+            "pool": "vocational",
+            "search": "fire extinguisher Brandschutz Fire safety"
+        },
+        "phosphor-light-barricade": {
+            "pool": "vocational",
+            "search": "barricade Baustellensicherung Site safety"
+        },
+        "phosphor-light-pencil-ruler": {
+            "pool": "vocational",
+            "search": "pencil ruler Technisches Zeichnen Technical drawing"
+        },
+        "phosphor-light-ruler": {
+            "pool": "vocational",
+            "search": "ruler Messen Measuring"
+        },
+        "phosphor-light-engine": {
+            "pool": "vocational",
+            "search": "engine Fahrzeugtechnik Automotive engineering"
+        },
+        "phosphor-light-factory": {
+            "pool": "vocational",
+            "search": "factory Produktion Manufacturing Industrie"
+        },
+        "phosphor-light-circuitry": {
+            "pool": "vocational",
+            "search": "circuitry Elektrotechnik Electronics"
+        },
+        "phosphor-light-robot": {
+            "pool": "vocational",
+            "search": "robot Robotik Robotics Automatisierung"
+        },
+        "phosphor-light-tractor": {
+            "pool": "vocational",
+            "search": "tractor Landtechnik Agricultural machinery Landwirtschaft"
+        },
+        "phosphor-light-plant": {
+            "pool": "vocational",
+            "search": "plant Pflanzenbau Crop production Gartenbau Landwirtschaft"
+        },
+        "phosphor-light-barn": {
+            "pool": "vocational",
+            "search": "barn Stall und Landwirtschaft Barn and farming Tierhaltung"
+        },
+        "phosphor-light-cow": {
+            "pool": "vocational",
+            "search": "cow Rinderhaltung Cattle farming Tierhaltung Landwirtschaft"
+        },
+        "phosphor-light-paw-print": {
+            "pool": "vocational",
+            "search": "paw print Tierpflege Animal care Tierhaltung"
+        },
+        "phosphor-light-stethoscope": {
+            "pool": "vocational",
+            "search": "stethoscope Pflege und Medizin Nursing and medicine"
+        },
+        "phosphor-light-heartbeat": {
+            "pool": "vocational",
+            "search": "heartbeat Vitalzeichen Vital signs Puls"
+        },
+        "phosphor-light-syringe": {
+            "pool": "vocational",
+            "search": "syringe Medizinische Praxis Clinical practice"
+        },
+        "phosphor-light-chef-hat": {
+            "pool": "vocational",
+            "search": "chef hat Küche und Gastronomie Cooking and hospitality"
+        },
+        "phosphor-light-fork-knife": {
+            "pool": "vocational",
+            "search": "fork knife Service und Ernährung Food service and nutrition"
+        },
+        "phosphor-light-package": {
+            "pool": "vocational",
+            "search": "package Lager und Versand Storage and shipping"
+        },
+        "phosphor-light-truck": {
+            "pool": "vocational",
+            "search": "truck Logistik Logistics"
+        },
+        "phosphor-light-shopping-cart": {
+            "pool": "vocational",
+            "search": "shopping cart Handel Retail"
+        },
+        "phosphor-light-cash-register": {
+            "pool": "vocational",
+            "search": "cash register Kassenpraxis Cash register practice"
+        },
+        "phosphor-light-briefcase": {
+            "pool": "vocational",
+            "search": "briefcase Berufspraxis Work placement"
+        },
+        "phosphor-light-ranking": {
+            "pool": "game",
+            "search": "ranking Rangliste Leaderboard"
+        },
+        "phosphor-light-flag-checkered": {
+            "pool": "game",
+            "search": "flag checkered Ziel erreicht Finish line"
+        },
+        "phosphor-light-flag-banner": {
+            "pool": "game",
+            "search": "flag banner Etappe Stage Level"
+        },
+        "phosphor-light-treasure-chest": {
+            "pool": "game",
+            "search": "treasure chest Schatztruhe Treasure chest Belohnung Bonus"
+        },
+        "phosphor-light-key": {
+            "pool": "game",
+            "search": "key Freischaltung Unlock"
+        },
+        "phosphor-light-keyhole": {
+            "pool": "game",
+            "search": "keyhole Noch gesperrt Locked challenge"
+        },
+        "phosphor-light-confetti": {
+            "pool": "game",
+            "search": "confetti Erfolg feiern Celebrate success"
+        },
+        "phosphor-light-fire": {
+            "pool": "game",
+            "search": "fire Lernserie Streak Serie"
+        },
+        "phosphor-light-lightning": {
+            "pool": "game",
+            "search": "lightning Schnellrunde Speed round"
+        },
+        "phosphor-light-rocket-launch": {
+            "pool": "game",
+            "search": "rocket launch Levelstart Level start"
+        },
+        "phosphor-light-sparkle": {
+            "pool": "game",
+            "search": "sparkle Bonusaufgabe Bonus challenge"
+        },
+        "phosphor-light-crown-simple": {
+            "pool": "game",
+            "search": "crown simple Spitzenplatz Top rank"
+        },
+        "phosphor-light-shield-star": {
+            "pool": "game",
+            "search": "shield star Abzeichen Badge"
+        },
+        "phosphor-light-shield-checkered": {
+            "pool": "game",
+            "search": "shield checkered Schutzschild Shield"
+        },
+        "phosphor-light-sword": {
+            "pool": "game",
+            "search": "sword Duell Duel Challenge"
+        },
+        "phosphor-light-dice-five": {
+            "pool": "game",
+            "search": "dice five Zufallsaufgabe Random challenge Würfel"
+        },
+        "phosphor-light-joystick": {
+            "pool": "game",
+            "search": "joystick Minispiel Minigame"
+        },
+        "phosphor-light-ghost": {
+            "pool": "game",
+            "search": "ghost Geheime Aufgabe Hidden challenge Easter egg"
+        },
+        "phosphor-light-map-pin": {
+            "pool": "game",
+            "search": "map pin Station Checkpoint"
+        },
+        "phosphor-light-compass-rose": {
+            "pool": "game",
+            "search": "compass rose Entdeckungsmission Exploration quest"
+        },
+        "phosphor-light-timer": {
+            "pool": "game",
+            "search": "timer Zeit-Challenge Timed challenge"
+        },
+        "phosphor-light-hourglass-medium": {
+            "pool": "game",
+            "search": "hourglass medium Zeit läuft Time running"
+        },
+        "phosphor-light-ladder-simple": {
+            "pool": "game",
+            "search": "ladder simple Aufstieg Level up"
+        },
+        "phosphor-light-battery-charging": {
+            "pool": "game",
+            "search": "battery charging Energie aufladen Recharge"
+        },
+        "phosphor-light-gift": {
+            "pool": "game",
+            "search": "gift Belohnung Reward"
+        },
+        "phosphor-light-mountains": {
+            "pool": "game",
+            "search": "mountains Herausforderung Challenge"
+        },
+        "phosphor-light-star-four": {
+            "pool": "game",
+            "search": "star four Sammelstern Collectible star"
+        },
+        "phosphor-light-medal-military": {
+            "pool": "game",
+            "search": "medal military Sonderauszeichnung Special achievement"
+        }
+    }
+}

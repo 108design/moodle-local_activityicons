@@ -19,6 +19,7 @@ $course = get_course($courseid);
 require_login($course);
 $context = context_course::instance($courseid);
 require_capability('local/activityicons:manage', $context);
+require_capability('moodle/site:config', context_system::instance());
 $url = new moodle_url('/local/activityicons/reset.php', ['id' => $courseid]);
 $returnurl = new moodle_url('/local/activityicons/course.php', ['id' => $courseid]);
 $PAGE->set_url($url);
@@ -27,6 +28,7 @@ $PAGE->set_course($course);
 $PAGE->set_pagelayout('incourse');
 $PAGE->set_title(get_string('resetall', 'local_activityicons'));
 $PAGE->set_heading($course->fullname);
+\local_activityicons\local\context_help::prepare();
 $repository = new \local_activityicons\local\repository();
 if (data_submitted() && optional_param('confirm', false, PARAM_BOOL)) {
     require_sesskey();
@@ -37,6 +39,8 @@ if (data_submitted() && optional_param('confirm', false, PARAM_BOOL)) {
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('resetall', 'local_activityicons'));
 $confirm = new single_button(new moodle_url($url, ['confirm' => 1]),
-    get_string('resetall', 'local_activityicons'), 'post');
+    get_string('resetall', 'local_activityicons'), 'post', single_button::BUTTON_DANGER);
+$confirm->class .= ' local-activityicons-reset-confirm';
 echo $OUTPUT->confirm(get_string('resetconfirm', 'local_activityicons'), $confirm, $returnurl);
+echo \local_activityicons\local\context_help::render();
 echo $OUTPUT->footer();

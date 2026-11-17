@@ -19,16 +19,26 @@ defined('MOODLE_INTERNAL') || die();
 
 /** Contextual settings help, following the standalone Frontpage panel contract. */
 final class context_help {
-    private const TOPICS = ['overview', 'pool', 'mapping', 'behaviour'];
+    private const TOPICS = ['overview', 'pool', 'groups', 'mapping', 'behaviour'];
     private static bool $prepared = false;
+    private static bool $coursepage = false;
 
     /** Register only the permitted settings page before its header is rendered. */
     public static function prepare(): void {
         global $CFG, $PAGE;
-        if ($PAGE->url->get_path() !== (new \moodle_url('/local/activityicons/pool.php'))->get_path()) {
+        $allowed = ['/local/activityicons/pool.php', '/local/activityicons/groups.php', '/local/activityicons/delete.php',
+            '/local/activityicons/mapping.php', '/local/activityicons/preferences.php', '/local/activityicons/transfer.php'];
+        $coursepaths = ['/local/activityicons/course.php', '/local/activityicons/reset.php'];
+        $coursepaths = array_map(static fn($path) => (new \moodle_url($path))->get_path(), $coursepaths);
+        $paths = array_map(static fn($path) => (new \moodle_url($path))->get_path(), $allowed);
+        self::$coursepage = in_array($PAGE->url->get_path(), $coursepaths, true);
+        if (self::$coursepage) {
+            require_capability('local/activityicons:manage', $PAGE->context);
+        } else if (in_array($PAGE->url->get_path(), $paths, true)) {
+            require_capability('local/activityicons:managepool', \context_system::instance());
+        } else {
             throw new \coding_exception('Unknown Activity Icons help page.');
         }
-        require_capability('local/activityicons:managepool', \context_system::instance());
         self::$prepared = true;
         $PAGE->requires->css(new \moodle_url('/local/activityicons/styles/context_help.css', [
             'rev' => get_config('local_activityicons', 'version'),
@@ -43,7 +53,7 @@ final class context_help {
     /** Native popover with concise guidance and a direct link to the extended topic. */
     public static function icon(string $key): string {
         global $CFG, $PAGE;
-        if (!in_array($key, self::TOPICS, true)) {
+        if (!in_array($key, self::topics(), true)) {
             throw new \coding_exception('Unknown Activity Icons help topic.');
         }
         $url = new \moodle_url($PAGE->url);
@@ -55,6 +65,15 @@ final class context_help {
         $data['legacy'] = (int)$CFG->version < 2025041400;
         $data['infoicon'] = (int)$CFG->version < 2026100500 ? 'i/info' : 'i/circleinfo';
         return $renderer->render_from_template('local_activityicons/settings_help_icon', $data);
+    }
+
+    /** Only site configuration administrators see the developer controls and guidance. */
+    private static function topics(): array {
+        $isadmin = has_capability('moodle/site:config', \context_system::instance());
+        if (self::$coursepage) {
+            return $isadmin ? ['course', 'courseadmin'] : ['course'];
+        }
+        return $isadmin ? [...self::TOPICS, 'developer'] : self::TOPICS;
     }
 
     /** Always available in the native Topnav user area on the registered page. */
@@ -85,7 +104,7 @@ final class context_help {
         ]);
         $options = '';
         $articles = '';
-        foreach (self::TOPICS as $topic) {
+        foreach (self::topics() as $topic) {
             $label = get_string('settingshelp_' . $topic, 'local_activityicons');
             $options .= \html_writer::tag('option', $label, ['value' => $topic]);
             $articles .= \html_writer::tag('article', \html_writer::tag('h3', $label, ['class' => 'h5', 'tabindex' => '-1'])

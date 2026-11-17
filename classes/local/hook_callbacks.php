@@ -110,6 +110,7 @@ CSS;
                 array_filter(get_fast_modinfo($courseid)->get_cms(),
                     static fn($cm) => h5p_resolver::supports_module($cm->modname)))) : [],
             'catalog' => $canmanage ? icon_catalog::client_entries($hook->renderer) : [],
+            'pools' => $canmanage ? icon_catalog::pools() : [],
             'strings' => [
                 'choose' => get_string('chooseicon', 'local_activityicons'),
                 'inherit' => get_string('selectioninherit', 'local_activityicons'),
@@ -120,6 +121,9 @@ CSS;
                 'autoDescription' => get_string('selectionauto_desc', 'local_activityicons'),
                 'close' => get_string('closepicker', 'local_activityicons'),
                 'search' => get_string('searchicons', 'local_activityicons'),
+                'pool' => get_string('poolfilter', 'local_activityicons'),
+                'allPools' => get_string('allpools', 'local_activityicons'),
+                'noResults' => get_string('noiconresults', 'local_activityicons'),
                 'saved' => get_string('iconsaved', 'local_activityicons'),
             ],
         ]]);
