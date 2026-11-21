@@ -62,6 +62,7 @@
 "/classes/local/pool_groups.php" -export-ignore -export-subst
 "/classes/local/repository.php" -export-ignore -export-subst
 "/classes/local/update_guard.php" -export-ignore -export-subst
+"/classes/local/update_notice.php" -export-ignore -export-subst
 "/classes/output" -export-ignore -export-subst
 "/classes/output/pool_browser.php" -export-ignore -export-subst
 "/classes/privacy" -export-ignore -export-subst
@@ -332,6 +333,7 @@
 "/preferences.php" -export-ignore -export-subst
 "/release-guard-policy.json" -export-ignore -export-subst
 "/release-manifest.json" -export-ignore -export-subst
+"/release-metadata.php" -export-ignore -export-subst
 "/release-signature.txt" -export-ignore -export-subst
 "/reset.php" -export-ignore -export-subst
 "/resources" -export-ignore -export-subst
@@ -351,4 +353,5 @@
 "/tests/repository_test.php" -export-ignore -export-subst
 "/transfer.php" -export-ignore -export-subst
 "/update-guard.php" -export-ignore -export-subst
+"/update-notice.php" -export-ignore -export-subst
 "/version.php" -export-ignore -export-subst
