@@ -143,13 +143,13 @@ $string['behaviour_help'] = 'Site automation affects H5P activities that have no
 
 $string['settingshelp_behaviour_article'] = '<p><strong>Automatically classify unassigned H5P activities</strong> supplies a site default. It starts disabled so installing the plugin does not silently change existing courses. Review your type mappings and fallback before enabling it.</p><p>A course can enable or disable automatic H5P icons independently. For an activity, <strong>Use original icon</strong> keeps the native icon, a selected pool icon fixes that choice, and <strong>Detect H5P type</strong> requests type detection independently of the course policy.</p><p><strong>Enhance dynamically loaded activity lists</strong> also applies configured icons in standard lists such as Timeline and Recently accessed items. It does not change the activity content.</p><p>Site-wide switches are available only to users allowed to change site configuration.</p>';
 
-$string['overview'] = $string['settingshelp_overview'];
+$string['overview'] = 'Manage Activity Icons';
 
-$string['pool'] = $string['settingshelp_pool'];
+$string['pool'] = 'Add and Manage Icons';
 
-$string['mapping'] = $string['settingshelp_mapping'];
+$string['mapping'] = 'Map H5P Types';
 
-$string['behaviour'] = $string['settingshelp_behaviour'];
+$string['behaviour'] = 'Automation and Display';
 
 $string['cachedef_h5ptypes'] = 'H5P content types for activity icons';
 
@@ -510,3 +510,12 @@ $string['settingshelp_course_article'] = '<p>Choose <strong>Inherit the site set
 $string['settingshelp_courseadmin'] = 'Course Admin Actions';
 $string['courseadmin_help'] = 'Resetting clears individual icon choices for this course. The next page asks you to confirm.';
 $string['settingshelp_courseadmin_article'] = '<p>Use <strong>Admin Actions</strong> to open site-wide icon management or restore the original Moodle icons for this course.</p><p>The reset turns off H5P automation for the course. Afterwards, you can reassign individual icons or restore them from a suitable course backup.</p>';
+
+// Optional information before native package confirmation.
+$string['updateinfo_heading'] = 'Package information: {$a}';
+$string['updateinfo_verified'] = 'The embedded publisher record matches the installed release line.';
+$string['updateinfo_missing'] = 'This package has no embedded publisher verification record.';
+$string['updateinfo_line'] = 'This package identifies a different release line from the installed plugin.';
+$string['updateinfo_mismatch'] = 'The embedded publisher record could not be verified against the installed plugin\'s publisher information.';
+$string['updateinfo_unavailable'] = 'Publisher information for the selected package could not be read.';
+$string['updateinfo_choice'] = 'Review the package source and Moodle\'s validation details before continuing. Use "{$a}" below to cancel.';

@@ -143,13 +143,13 @@ $string['behaviour_help'] = 'Die Website-Automatik gilt für H5P-Aktivitäten oh
 
 $string['settingshelp_behaviour_article'] = '<p><strong>Nicht zugewiesene H5P-Aktivitäten automatisch klassifizieren</strong> legt die Website-Vorgabe fest. Diese Option ist nach der Installation ausgeschaltet, damit bestehende Kurse ihre Darstellung behalten. Prüfe vor dem Einschalten die Typzuordnungen und das Ersatzicon.</p><p>Ein Kurs kann die automatische H5P-Zuordnung unabhängig davon ein- oder ausschalten. An einer Aktivität behält <strong>Originalicon verwenden</strong> das Moodle-Icon bei; ein gewähltes Pool-Icon legt die Darstellung fest. <strong>H5P-Typ erkennen</strong> verwendet die Typerkennung unabhängig von der Kursvorgabe.</p><p><strong>Dynamisch geladene Aktivitätslisten ergänzen</strong> zeigt konfigurierte Icons auch in Standardlisten wie Zeitleiste und Zuletzt besuchte Elemente. Die Inhalte der Aktivitäten ändern sich dadurch nicht.</p><p>Die websiteweiten Schalter werden nur Personen angezeigt, die die Website-Konfiguration ändern dürfen.</p>';
 
-$string['overview'] = $string['settingshelp_overview'];
+$string['overview'] = 'Aktivitätsicons verwalten';
 
-$string['pool'] = $string['settingshelp_pool'];
+$string['pool'] = 'Icons hinzufügen und verwalten';
 
-$string['mapping'] = $string['settingshelp_mapping'];
+$string['mapping'] = 'H5P-Typen zuordnen';
 
-$string['behaviour'] = $string['settingshelp_behaviour'];
+$string['behaviour'] = 'Automatik und Darstellung';
 
 $string['cachedef_h5ptypes'] = 'H5P-Inhaltstypen für Aktivitätssymbole';
 
@@ -510,3 +510,12 @@ $string['settingshelp_course_article'] = '<p>Mit <strong>Website-Einstellung üb
 $string['settingshelp_courseadmin'] = 'Admin-Aktionen im Kurs';
 $string['courseadmin_help'] = 'Beim Zurücksetzen gehen individuelle Icon-Zuweisungen dieses Kurses verloren. Die nächste Seite fragt Dich nach einer Bestätigung.';
 $string['settingshelp_courseadmin_article'] = '<p>Unter <strong>Admin-Aktionen</strong> öffnest Du die websiteweite Verwaltung oder stellst alle ursprünglichen Moodle-Icons dieses Kurses wieder her.</p><p>Die Zurücksetzung deaktiviert die H5P-Automatik im Kurs. Du kannst individuelle Icons danach erneut zuweisen oder aus einer passenden Kurssicherung wiederherstellen.</p>';
+
+// Optional information before native package confirmation.
+$string['updateinfo_heading'] = 'Paketinformationen: {$a}';
+$string['updateinfo_verified'] = 'Der eingebettete Herausgebernachweis passt zur installierten Ausgabe.';
+$string['updateinfo_missing'] = 'Dieses Paket enthält keinen eingebetteten Herausgebernachweis.';
+$string['updateinfo_line'] = 'Dieses Paket gehört zu einer anderen Ausgabe als das installierte Plugin.';
+$string['updateinfo_mismatch'] = 'Der eingebettete Herausgebernachweis konnte mit den Angaben des installierten Plugins nicht bestätigt werden.';
+$string['updateinfo_unavailable'] = 'Die Herausgeberinformationen für das ausgewählte Paket konnten nicht gelesen werden.';
+$string['updateinfo_choice'] = 'Kontrolliere vor dem Fortfahren die Paketquelle und Moodles Prüfergebnisse. Mit „{$a}“ unten kannst Du abbrechen.';
