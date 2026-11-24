@@ -47,7 +47,7 @@ $string['resetdone'] = 'Die ursprünglichen Moodle-Modulicons wurden wiederherge
 $string['activityicon'] = 'Aktivitätsicon';
 $string['activityicon_help'] = 'Wählen Sie das ursprüngliche Icon des Aktivitätstyps oder ein Icon aus einem der Pools. Uploads stehen unter „Eigene Icons“. Für H5P können Sie außerdem die Kursregel übernehmen oder den H5P-Typ dieser Aktivität unabhängig davon erkennen lassen.';
 $string['autoh5p'] = 'Nicht zugewiesene H5P-Aktivitäten automatisch klassifizieren';
-$string['autoh5p_desc'] = 'Prüfe die Typzuordnung, bevor Du die Automatik einschaltest.';
+$string['autoh5p_desc'] = 'Prüfen Sie die Typzuordnung, bevor Sie die Automatik einschalten.';
 $string['h5pmapping'] = 'Manuelle H5P-Typzuordnung';
 $string['h5pmapping_desc'] = 'Eine Zuordnung pro Zeile, z. B. H5P.InteractiveVideo=video. Verwenden Sie den H5P-Maschinennamen ohne Versionsnummer. Groß-/Kleinschreibung spielt keine Rolle. Leerzeilen und Kommentare mit # sind erlaubt. Eine leere Liste verwendet für alle Typen das Ersatzicon. Verfügbare Icon-Schlüssel:';
 $string['mappinginvalidline'] = 'Ungültige oder doppelte Zuordnung {$a}. Wählen Sie einen gültigen H5P-Typ und ein Icon. Jeder Typ darf nur einmal zugeordnet werden.';
@@ -79,18 +79,18 @@ $string['iconaudio'] = 'Audio';
 $string['iconimage'] = 'Bild';
 $string['icongame'] = 'Spiel';
 $string['iconh5p'] = 'H5P (sonstige Typen)';
-$string['adminintro'] = 'Verwalte hier den gemeinsamen Icon-Pool und die automatische H5P-Zuordnung.';
+$string['adminintro'] = 'Verwalten Sie hier den gemeinsamen Icon-Pool und die automatische H5P-Zuordnung.';
 $string['batchupload'] = 'Icons hinzufügen';
 $string['iconfiles'] = 'Icon-Dateien';
-$string['batchhelp'] = 'Füge eigene Icons für Deine Kurse hinzu.';
+$string['batchhelp'] = 'Fügen Sie eigene Icons für Ihre Kurse hinzu.';
 $string['batchrequired'] = 'Wählen Sie 1 bis 50 Icon-Dateien aus.';
 $string['batchinvalid'] = 'Die Datei „{$a}“ ist kein unterstütztes, sicheres Icon. Es wurde kein Icon aus diesem Stapel übernommen.';
 $string['batchsaved'] = '{$a} unterschiedliche Icons aus dem Upload stehen im Pool zur Verfügung. Sie können ihre Bezeichnungen jetzt bearbeiten.';
 $string['adminsaved'] = 'Die Einstellungen und Bezeichnungen wurden gespeichert.';
 $string['poollabels'] = 'Icon-Pool und Bezeichnungen';
-$string['labelshelp'] = 'Benenne eigene Icons um oder entferne unbenutzte Icons.';
+$string['labelshelp'] = 'Benennen Sie eigene Icons um oder entfernen Sie unbenutzte Icons.';
 $string['iconkey'] = 'Schlüssel für die Zuordnung';
-$string['mappinghelp'] = 'Ordne jedem H5P-Typ ein Icon zu. Mit „Pool“ und der Suche grenzt Du die Auswahl ein.';
+$string['mappinghelp'] = 'Ordnen Sie jedem H5P-Typ ein Icon zu. Mit „Pool“ und der Suche grenzen Sie die Auswahl ein.';
 $string['sitebehaviour'] = 'Automatik und Darstellung';
 $string['dynamichelp'] = 'Ergänzt Icon-Zuordnungen in dynamisch geladenen Standardlisten, beispielsweise Zeitleiste und zuletzt aufgerufene Aktivitäten.';
 $string['adminlink'] = 'Icon-Pool, H5P-Zuordnung und Website-Automatik verwalten';
@@ -112,70 +112,46 @@ $string['deleteiconsconfirm'] = '{$a->selected} eigene Icons wurden ausgewählt.
 $string['iconsdeletedbatch'] = '{$a->deleted} Icons wurden gelöscht. {$a->kept} verwendete oder zugeordnete Icons wurden beibehalten.';
 $string['selecticonsfirst'] = 'Wählen Sie mindestens ein eigenes Icon aus.';
 $string['invalidiconselection'] = 'Die Icon-Auswahl ist ungültig.';
-
 $string['settingshelp'] = 'Hilfe zu Aktivitätsicons';
-
 $string['contexthelptopics'] = 'Hilfethemen';
-
 $string['settingshelpmore'] = 'Mehr dazu im Hilfepanel';
-
 $string['settingshelp_overview'] = 'Aktivitätsicons verwalten';
-
-$string['overview_help'] = 'Klicke auf den Namen oder das Bild einer Poolkarte, um ihre Icons zu öffnen.';
-
-$string['settingshelp_overview_article'] = '<p>Unter <strong>Icon-Pools</strong> lädst Du Dateien hoch und öffnest eigene oder mitgelieferte Pools. <strong>H5P-Mapping</strong> enthält die Typzuordnungen und das Ersatzicon. Unter <strong>Einstellungen</strong> finden Website-Admins die H5P-Automatik, dynamische Aktivitätslisten und den Entwicklermodus.</p>';
-
+$string['overview_help'] = 'Klicken Sie auf den Namen oder das Bild einer Poolkarte, um ihre Icons zu öffnen.';
+$string['settingshelp_overview_article'] = '<p>Unter <strong>Icon-Pools</strong> laden Sie Dateien hoch und öffnen eigene oder mitgelieferte Pools. <strong>H5P-Mapping</strong> enthält die Typzuordnungen und das Ersatzicon. Unter <strong>Einstellungen</strong> finden Website-Administrator/innen die H5P-Automatik, dynamische Aktivitätslisten und den Entwicklermodus.</p>';
 $string['settingshelp_pool'] = 'Icons hinzufügen und verwalten';
-
 $string['pool_help'] = 'Icons stehen kursübergreifend bereit und sind öffentlich abrufbar. Im Normalmodus sind verwendete Icons vor dem Löschen geschützt.';
-
-$string['settingshelp_pool_article'] = '<p>Du kannst bis zu 50 öffentlich nutzbare SVG-, PNG- oder WebP-Dateien mit jeweils höchstens 1 MB hochladen. Rasterbilder dürfen höchstens 2048 × 2048 Pixel groß sein. SVGs müssen statisch sein und eine viewBox enthalten. Öffnest Du einen eigenen Pool, lädt das Uploadfeld direkt dorthin.</p><p>Markiere Icons und wähle eine Aktion neben <strong>Ausführen</strong>. Verschieben ändert den Hauptpool eines Uploads. Kopieren zeigt dasselbe Icon zusätzlich im Zielpool. <strong>Aus diesem Pool entfernen</strong> blendet die Kopie in diesem Pool aus. Bestehende Zuweisungen behalten das Icon.</p><p>Für eine Namensänderung bearbeitest Du das Textfeld, markierst den Upload und wählst <strong>Bezeichnungen speichern</strong>. <strong>Ausgewählte Icons löschen</strong> öffnet die Bestätigung. Verwendete Uploads lassen sich über den Entwicklermodus löschen.</p>';
-
+$string['settingshelp_pool_article'] = '<p>Sie können bis zu 50 öffentlich nutzbare SVG-, PNG- oder WebP-Dateien mit jeweils höchstens 1 MB hochladen. Rasterbilder dürfen höchstens 2048 × 2048 Pixel groß sein. SVGs müssen statisch sein und eine viewBox enthalten. Öffnen Sie einen eigenen Pool, lädt das Uploadfeld direkt dorthin.</p><p>Markieren Sie Icons und wählen Sie eine Aktion neben <strong>Ausführen</strong>. Verschieben ändert den Hauptpool eines Uploads. Kopieren zeigt dasselbe Icon zusätzlich im Zielpool. <strong>Aus diesem Pool entfernen</strong> blendet die Kopie in diesem Pool aus. Bestehende Zuweisungen behalten das Icon.</p><p>Für eine Namensänderung bearbeiten Sie das Textfeld, markieren den Upload und wählen <strong>Bezeichnungen speichern</strong>. <strong>Ausgewählte Icons löschen</strong> öffnet die Bestätigung. Verwendete Uploads lassen sich über den Entwicklermodus löschen.</p>';
 $string['settingshelp_mapping'] = 'H5P-Typen zuordnen';
-
-$string['mapping_help'] = 'Wähle je H5P-Typ ein Icon. Zum Entfernen markierte Zeilen werden erst beim Speichern gelöscht; vorher kannst Du die Markierung zurücknehmen.';
-
-$string['settingshelp_mapping_article'] = '<p>Wähle unter <strong>Manuelle H5P-Typzuordnung</strong> die Aktion <strong>Zuordnung hinzufügen</strong>, anschließend den H5P-Inhaltstyp und sein Icon. Jeder Typ hat eine Zuordnung, die für seine verschiedenen Versionen gilt. Du kannst je Typ auch das Moodle-Originalicon wählen.</p><p>Mit × markierst Du eine Zuordnung zum Entfernen; ↶ nimmt die Markierung zurück. Erst <strong>Änderungen speichern</strong> übernimmt die Bearbeitung. Wähle für nicht zugeordnete Typen ein <strong>Icon für nicht zugeordnete H5P-Typen</strong> oder behalte das originale Moodle-H5P-Icon. Die Suche in <strong>Alle Pools</strong> umfasst auch eigene Icons. Wählst Du einen Pool, sucht sie nur darin.</p><p>Die Zuordnung greift, wenn die H5P-Typerkennung verwendet wird. Eine ausdrücklich an der Aktivität gewählte Darstellung hat weiterhin Vorrang.</p>';
-
+$string['mapping_help'] = 'Wählen Sie je H5P-Typ ein Icon. Zum Entfernen markierte Zeilen werden erst beim Speichern gelöscht; vorher können Sie die Markierung zurücknehmen.';
+$string['settingshelp_mapping_article'] = '<p>Wählen Sie unter <strong>Manuelle H5P-Typzuordnung</strong> die Aktion <strong>Zuordnung hinzufügen</strong>, anschließend den H5P-Inhaltstyp und sein Icon. Jeder Typ hat eine Zuordnung, die für seine verschiedenen Versionen gilt. Sie können je Typ auch das Moodle-Originalicon wählen.</p><p>Mit × markieren Sie eine Zuordnung zum Entfernen; ↶ nimmt die Markierung zurück. Erst <strong>Änderungen speichern</strong> übernimmt die Bearbeitung. Wählen Sie für nicht zugeordnete Typen ein <strong>Icon für nicht zugeordnete H5P-Typen</strong> oder behalten Sie das originale Moodle-H5P-Icon. Die Suche in <strong>Alle Pools</strong> umfasst auch eigene Icons. Wählen Sie einen Pool, sucht sie nur darin.</p><p>Die Zuordnung greift, wenn die H5P-Typerkennung verwendet wird. Eine ausdrücklich an der Aktivität gewählte Darstellung hat weiterhin Vorrang.</p>';
 $string['settingshelp_behaviour'] = 'Automatik und Darstellung';
-
 $string['behaviour_help'] = 'Die Website-Automatik gilt für H5P-Aktivitäten ohne individuelle Auswahl, deren Kurs die Website-Vorgabe verwendet. Kurse können davon abweichen.';
-
-$string['settingshelp_behaviour_article'] = '<p><strong>Nicht zugewiesene H5P-Aktivitäten automatisch klassifizieren</strong> legt die Website-Vorgabe fest. Diese Option ist nach der Installation ausgeschaltet, damit bestehende Kurse ihre Darstellung behalten. Prüfe vor dem Einschalten die Typzuordnungen und das Ersatzicon.</p><p>Ein Kurs kann die automatische H5P-Zuordnung unabhängig davon ein- oder ausschalten. An einer Aktivität behält <strong>Originalicon verwenden</strong> das Moodle-Icon bei; ein gewähltes Pool-Icon legt die Darstellung fest. <strong>H5P-Typ erkennen</strong> verwendet die Typerkennung unabhängig von der Kursvorgabe.</p><p><strong>Dynamisch geladene Aktivitätslisten ergänzen</strong> zeigt konfigurierte Icons auch in Standardlisten wie Zeitleiste und Zuletzt besuchte Elemente. Die Inhalte der Aktivitäten ändern sich dadurch nicht.</p><p>Die websiteweiten Schalter werden nur Personen angezeigt, die die Website-Konfiguration ändern dürfen.</p>';
-
+$string['settingshelp_behaviour_article'] = '<p><strong>Nicht zugewiesene H5P-Aktivitäten automatisch klassifizieren</strong> legt die Website-Vorgabe fest. Diese Option ist nach der Installation ausgeschaltet, damit bestehende Kurse ihre Darstellung behalten. Prüfen Sie vor dem Einschalten die Typzuordnungen und das Ersatzicon.</p><p>Ein Kurs kann die automatische H5P-Zuordnung unabhängig davon ein- oder ausschalten. An einer Aktivität behält <strong>Originalicon verwenden</strong> das Moodle-Icon bei; ein gewähltes Pool-Icon legt die Darstellung fest. <strong>H5P-Typ erkennen</strong> verwendet die Typerkennung unabhängig von der Kursvorgabe.</p><p><strong>Dynamisch geladene Aktivitätslisten ergänzen</strong> zeigt konfigurierte Icons auch in Standardlisten wie Zeitleiste und Zuletzt besuchte Elemente. Die Inhalte der Aktivitäten ändern sich dadurch nicht.</p><p>Die websiteweiten Schalter werden nur Personen angezeigt, die die Website-Konfiguration ändern dürfen.</p>';
 $string['overview'] = 'Aktivitätsicons verwalten';
-
 $string['pool'] = 'Icons hinzufügen und verwalten';
-
 $string['mapping'] = 'H5P-Typen zuordnen';
-
 $string['behaviour'] = 'Automatik und Darstellung';
-
 $string['cachedef_h5ptypes'] = 'H5P-Inhaltstypen für Aktivitätssymbole';
-
-$string['iconfiles_help'] = 'Lade dekorative Icons hoch, die öffentlich zugänglich sein dürfen. Das Entfernen aus diesem Entwurf löscht kein vorhandenes Pool-Icon.';
+$string['iconfiles_help'] = 'Laden Sie dekorative Icons hoch, die öffentlich zugänglich sein dürfen. Das Entfernen aus diesem Entwurf löscht kein vorhandenes Pool-Icon.';
 $string['h5pfallback_help'] = 'Dieses Icon gilt für H5P-Typen ohne Zuordnung. Eine individuelle Aktivitätsauswahl hat Vorrang.';
 $string['autoh5p_help'] = 'Die Website-Vorgabe gilt für Kurse, die sie übernehmen. Kurse können automatische H5P-Icons gesondert ein- oder ausschalten.';
-$string['dynamicfallback_help'] = 'Zeige zugeordnete Icons auch in dynamisch geladenen Aktivitätslisten wie Zeitleiste und zuletzt besuchten Elementen.';
-
-
+$string['dynamicfallback_help'] = 'Zeigen Sie zugeordnete Icons auch in dynamisch geladenen Aktivitätslisten wie Zeitleiste und zuletzt besuchten Elementen.';
 $string['updateguard_heading'] = 'Update angehalten';
 $string['updateguard_component'] = 'Das Paket für {$a} wurde abgewiesen.';
-$string['updateguard_hint'] = 'Verwende ein freigegebenes Paket für die installierte Ausgabe. Du kannst den Vorgang erneut prüfen.';
+$string['updateguard_hint'] = 'Verwenden Sie ein freigegebenes Paket für die installierte Ausgabe. Sie können den Vorgang erneut prüfen.';
 $string['updateguard_unchanged'] = 'Dieser Vorgang hat keine Plugin-Dateien ersetzt.';
 $string['updateguard_help'] = 'Das installierte Plugin prüft vor dem Ersetzen die Herausgebersignatur, den Paketinhalt, den erlaubten Updatekanal und die Kompatibilität. Eine gültige Signatur erlaubt keinen Wechsel auf eine andere Ausgabe. Wird ein Paket abgewiesen, stoppt die gesamte Sammelaktion.';
 $string['updateguard_signature'] = 'Die Herausgebersignatur oder der Paketinhalt konnte nicht bestätigt werden.';
 $string['updateguard_policy'] = 'Das Paket passt nicht zur installierten Ausgabe oder zum erlaubten Paketprofil.';
 $string['updateguard_channel'] = 'Updates über diesen Kanal sind für dieses Plugin nicht freigegeben.';
 $string['updateguard_metadata'] = 'Die Versions- oder Abhängigkeitsangaben sind nicht konsistent.';
-$string['updateguard_dependency'] = 'Eine benötigte Plugin-Version fehlt. Aktualisiere die Abhängigkeit gemeinsam mit diesem Plugin oder vorher.';
-$string['updateguard_approval'] = 'Die Pakete oder der installierte Stand haben sich seit der Vorschau geändert. Prüfe den Vorgang erneut.';
-$string['updateguard_busy'] = 'Eine andere Installation läuft. Versuche es nach deren Abschluss erneut.';
-$string['updateguard_installed'] = 'Der installierte Updateschutz ist unvollständig. Stelle die Dateien der zuletzt installierten freigegebenen Version wieder her.';
-$string['updateguard_operation'] = 'Diese Kombination von Installationsaktionen wird nicht unterstützt. Starte einen einzelnen Updatevorgang erneut.';
+$string['updateguard_dependency'] = 'Eine benötigte Plugin-Version fehlt. Aktualisieren Sie die Abhängigkeit gemeinsam mit diesem Plugin oder vorher.';
+$string['updateguard_approval'] = 'Die Pakete oder der installierte Stand haben sich seit der Vorschau geändert. Prüfen Sie den Vorgang erneut.';
+$string['updateguard_busy'] = 'Eine andere Installation läuft. Versuchen Sie es nach deren Abschluss erneut.';
+$string['updateguard_installed'] = 'Der installierte Updateschutz ist unvollständig. Stellen Sie die Dateien der zuletzt installierten freigegebenen Version wieder her.';
+$string['updateguard_operation'] = 'Diese Kombination von Installationsaktionen wird nicht unterstützt. Starten Sie einen einzelnen Updatevorgang erneut.';
 $string['updateguard_failed'] = 'Das Update konnte nicht geprüft werden. Es wurde keine Installation gestartet.';
 $string['updateguard_back'] = 'Zur Pluginübersicht';
-
 $string['allpools'] = 'Alle Pools';
 $string['noiconresults'] = 'Keine passenden Icons.';
 $string['phosphorlightarrowsout'] = 'Vollbild';
@@ -422,34 +398,34 @@ $string['iconsmoved'] = 'Icons wurden verschoben.';
 $string['destinationpool'] = 'Zielpool';
 $string['backtopool'] = 'Zurück zu Activity Icons';
 $string['groupmissing'] = 'Dieser Pool ist nicht mehr vorhanden.';
-$string['invalidgroupname'] = 'Gib einen Namen mit 1 bis 100 Zeichen ein.';
-$string['duplicategroupname'] = 'Wähle einen anderen Namen. Dieser Poolname wird bereits verwendet.';
+$string['invalidgroupname'] = 'Geben Sie einen Namen mit 1 bis 100 Zeichen ein.';
+$string['duplicategroupname'] = 'Wählen Sie einen anderen Namen. Dieser Poolname wird bereits verwendet.';
 $string['customgroupdisplay'] = '{$a} (eigener Pool)';
 $string['groupsaved'] = 'Der Pool wurde gespeichert.';
 $string['groupdeleted'] = 'Der Pool wurde gelöscht. Seine Uploads liegen jetzt unter „Eigene Icons“.';
 $string['groupdeleteconfirm'] = 'Den Pool „{$a}“ löschen? Seine Uploads gehen zurück zu „Eigene Icons“. Die Zuweisungen in Kursen und H5P bleiben bestehen.';
-$string['groupsintro'] = 'Lege hier Pools an und ordne sie. Inhalte bearbeitest Du über die Aktion am jeweiligen Pool.';
+$string['groupsintro'] = 'Legen Sie hier Pools an und ordnen Sie sie. Inhalte bearbeiten Sie über die Aktion am jeweiligen Pool.';
 $string['editgroupnamed'] = 'Pool „{$a}“ bearbeiten';
 $string['deletegroupnamed'] = 'Pool „{$a}“ löschen';
 $string['groupbundled_help'] = 'Mitgelieferte Icons erscheinen zusätzlich in diesem Pool. Ihre mitgelieferten Pools bleiben verfügbar.';
 $string['destinationpool_help'] = 'Neue Uploads landen im ausgewählten Pool. Ist eine Datei schon vorhanden, behält ihr Icon seine aktuelle Zuordnung.';
 $string['settingshelp_groups'] = 'Pools ansehen und verwalten';
 $string['groups'] = 'Eigene Pools verwalten';
-$string['groups_help'] = 'Klicke auf den Namen oder das Bild einer Poolkarte. Bei eigenen benannten Pools öffnet der Stift die Metadaten.';
-$string['settingshelp_groups_article'] = '<p>Unter <strong>Icon-Pools</strong> findest Du zuerst Deine eigenen Pools. <strong>Eigene Uploads</strong> enthält Dateien ohne eigenen Zielpool. Weitere Pools legst Du über <strong>Pool hinzufügen</strong> an.</p><p>Kopf und Mitte einer Karte öffnen den Pool. Wähle <strong>Metadaten ändern</strong>, um den Namen oder das Referenzicon eines eigenen Pools zu ändern. Ohne Auswahl zeigt die Karte das erste verfügbare Icon.</p><p>Öffne einen mitgelieferten Themenpool, um seine Motive in einen eigenen Pool zu kopieren. Wenn Du einen eigenen Pool löschst, kommen seine Uploads zurück zu <strong>Eigene Uploads</strong>. Die Zuweisungen in Kursen und H5P bleiben erhalten.</p>';
+$string['groups_help'] = 'Klicken Sie auf den Namen oder das Bild einer Poolkarte. Bei eigenen benannten Pools öffnet der Stift die Metadaten.';
+$string['settingshelp_groups_article'] = '<p>Unter <strong>Icon-Pools</strong> finden Sie zuerst Ihre eigenen Pools. <strong>Eigene Uploads</strong> enthält Dateien ohne eigenen Zielpool. Weitere Pools legen Sie über <strong>Pool hinzufügen</strong> an.</p><p>Kopf und Mitte einer Karte öffnen den Pool. Wählen Sie <strong>Metadaten ändern</strong>, um den Namen oder das Referenzicon eines eigenen Pools zu ändern. Ohne Auswahl zeigt die Karte das erste verfügbare Icon.</p><p>Öffnen Sie einen mitgelieferten Themenpool, um seine Motive in einen eigenen Pool zu kopieren. Wenn Sie einen eigenen Pool löschen, kommen seine Uploads zurück zu <strong>Eigene Uploads</strong>. Die Zuweisungen in Kursen und H5P bleiben erhalten.</p>';
 $string['developermode'] = 'Entwicklermodus';
 $string['developermodeenable'] = 'Entwicklermodus aktivieren';
-$string['developermodeenable_help'] = 'Erlaubt Website-Admins, verwendete eigene Icons nach Prüfung und Bestätigung zu löschen.';
-$string['developermodewarning'] = 'Im Entwicklermodus können Website-Admins verwendete eigene Icons entfernen. Betroffene Aktivitäten, H5P-Typregeln und das Ersatzicon verwenden anschließend das Moodle-Originalicon.';
+$string['developermodeenable_help'] = 'Erlaubt Website-Administrator/innen, verwendete eigene Icons nach Prüfung und Bestätigung zu löschen.';
+$string['developermodewarning'] = 'Im Entwicklermodus können Website-Administrator/innen verwendete eigene Icons entfernen. Betroffene Aktivitäten, H5P-Typregeln und das Ersatzicon verwenden anschließend das Moodle-Originalicon.';
 $string['developermodeactive'] = 'Entwicklermodus ist aktiv. Auch verwendete eigene Icons können zur Löschung ausgewählt werden.';
 $string['developermodedisabled'] = 'Der Entwicklermodus ist ausgeschaltet.';
 $string['iconcurrentlyused'] = 'In Verwendung';
 $string['deleteandreset'] = 'Icons löschen und Zuordnungen zurücksetzen';
 $string['deleteusedwarning'] = 'Dieses Löschen setzt die unten aufgeführten Verwendungen auf das Moodle-Originalicon zurück.';
-$string['deleteusageintro'] = 'Prüfe vor der Bestätigung, wo die ausgewählten Icons verwendet werden.';
+$string['deleteusageintro'] = 'Prüfen Sie vor der Bestätigung, wo die ausgewählten Icons verwendet werden.';
 $string['confirmoriginal'] = 'Ich habe die Verwendung geprüft und bestätige das Zurücksetzen auf das Moodle-Originalicon.';
-$string['confirmoriginalrequired'] = 'Bestätige erst das Zurücksetzen der aufgeführten Verwendungen.';
-$string['deleteusagechanged'] = 'Die Verwendung hat sich geändert. Prüfe die aktualisierte Liste und bestätige erneut.';
+$string['confirmoriginalrequired'] = 'Bestätigen Sie erst das Zurücksetzen der aufgeführten Verwendungen.';
+$string['deleteusagechanged'] = 'Die Verwendung hat sich geändert. Prüfen Sie die aktualisierte Liste und bestätigen Sie erneut.';
 $string['iconsdeletedreset'] = '{$a->deleted} Icons wurden gelöscht. Betroffene Zuweisungen verwenden das Moodle-Originalicon.';
 $string['usageassignments'] = 'Direkte Zuweisungen ({$a})';
 $string['usagemappings'] = 'H5P-Typen: {$a}';
@@ -457,8 +433,8 @@ $string['usagefallback'] = 'H5P-Ersatzicon';
 $string['usagenone'] = 'Unbenutzt';
 $string['developer'] = 'Entwicklermodus';
 $string['settingshelp_developer'] = 'Entwicklermodus';
-$string['developer_help'] = 'Beim Löschen eines verwendeten Icons siehst Du vorher die betroffenen Zuweisungen, H5P-Typen und die Verwendung als Ersatzicon.';
-$string['settingshelp_developer_article'] = '<p>Aktiviere den <strong>Entwicklermodus</strong> unter <strong>Einstellungen</strong>. Öffne unter <strong>Icon-Pools</strong> den Hauptpool des Uploads. Markiere ihn, wähle <strong>Ausgewählte Icons löschen</strong> und klicke auf <strong>Ausführen</strong>.</p><p>Die Bestätigung zeigt direkte Zuweisungen, H5P-Typregeln und die Verwendung als Ersatzicon. Beim Löschen greifen diese Stellen auf das Moodle-Originalicon zurück. Ändert sich eine Verwendung, prüfe und bestätige die aktualisierte Übersicht.</p>';
+$string['developer_help'] = 'Beim Löschen eines verwendeten Icons sehen Sie vorher die betroffenen Zuweisungen, H5P-Typen und die Verwendung als Ersatzicon.';
+$string['settingshelp_developer_article'] = '<p>Aktivieren Sie den <strong>Entwicklermodus</strong> unter <strong>Einstellungen</strong>. Öffnen Sie unter <strong>Icon-Pools</strong> den Hauptpool des Uploads. Markieren Sie ihn, wählen Sie <strong>Ausgewählte Icons löschen</strong> und klicken Sie auf <strong>Ausführen</strong>.</p><p>Die Bestätigung zeigt direkte Zuweisungen, H5P-Typregeln und die Verwendung als Ersatzicon. Beim Löschen greifen diese Stellen auf das Moodle-Originalicon zurück. Ändert sich eine Verwendung, prüfen Sie und bestätigen Sie die aktualisierte Übersicht.</p>';
 $string['developermodesave'] = 'Entwicklermodus speichern';
 $string['developermodesaved'] = 'Die Einstellung für den Entwicklermodus wurde gespeichert.';
 $string['tabpool'] = 'Icon-Pools';
@@ -466,29 +442,29 @@ $string['tabgroups'] = 'Gruppen';
 $string['tabmapping'] = 'H5P-Mapping';
 $string['groupcontents'] = 'Poolinhalt bearbeiten';
 $string['groupcontentsnamed'] = 'Poolinhalt bearbeiten – {$a}';
-$string['groupcontentsintro'] = 'Wähle hier Icons aus dem Katalog aus, die im Picker auch in diesem Pool erscheinen sollen.';
+$string['groupcontentsintro'] = 'Wählen Sie hier Icons aus dem Katalog aus, die im Picker auch in diesem Pool erscheinen sollen.';
 $string['groupcatalogue'] = 'Icons aus dem Katalog';
 $string['groupcataloguesearch'] = 'Katalogicons suchen';
-$string['groupcatalogue_help'] = 'Öffne die Vorschläge oder suche nach einem Motiv, etwa „Textmarker“. Die gewählten Icons findest Du im Picker in diesem und in ihrem ursprünglichen Themenpool.';
+$string['groupcatalogue_help'] = 'Öffnen Sie die Vorschläge oder suchen Sie nach einem Motiv, etwa „Textmarker“. Die gewählten Icons finden Sie im Picker in diesem und in ihrem ursprünglichen Themenpool.';
 $string['groupcopieduploads'] = 'Kopierte Uploads';
-$string['groupcopieduploads_help'] = 'Entferne einen Eintrag mit ×, um ihn aus diesem Pool zu nehmen. Der Upload bleibt in seinem Hauptpool und bestehende Zuweisungen behalten das Icon.';
+$string['groupcopieduploads_help'] = 'Entfernen Sie einen Eintrag mit ×, um ihn aus diesem Pool zu nehmen. Der Upload bleibt in seinem Hauptpool und bestehende Zuweisungen behalten das Icon.';
 $string['selecticonaction'] = '„{$a}“ für eine Aktion auswählen';
-$string['poolbulkintro'] = 'Markiere Icons und wähle eine Aktion. Wenn Du eine Bezeichnung geändert hast, markiere den Upload und wähle „Bezeichnungen speichern“.';
-$string['poolemptyuploads'] = 'Hier erscheinen Deine hochgeladenen Icons.';
+$string['poolbulkintro'] = 'Markieren Sie Icons und wählen Sie eine Aktion. Wenn Sie eine Bezeichnung geändert haben, markieren Sie den Upload und wählen Sie „Bezeichnungen speichern“.';
+$string['poolemptyuploads'] = 'Hier erscheinen Ihre hochgeladenen Icons.';
 $string['moveselectedicons'] = 'In anderen Pool verschieben';
 $string['copyselectedicons'] = 'In anderen Pool kopieren';
-$string['movetransferintro'] = 'Wähle den neuen Hauptpool für diese Icons.';
-$string['copytransferintro'] = 'Wähle einen zusätzlichen Pool. Die Icons bleiben auch in ihrem bisherigen Hauptpool verfügbar.';
+$string['movetransferintro'] = 'Wählen Sie den neuen Hauptpool für diese Icons.';
+$string['copytransferintro'] = 'Wählen Sie einen zusätzlichen Pool. Die Icons bleiben auch in ihrem bisherigen Hauptpool verfügbar.';
 $string['iconscopied'] = 'Icons sind jetzt auch im Zielpool verfügbar.';
-$string['transfernodestination'] = 'Lege unter Gruppen einen weiteren Zielpool an.';
+$string['transfernodestination'] = 'Legen Sie unter Gruppen einen weiteren Zielpool an.';
 $string['ownuploads'] = 'Eigene Uploads';
 $string['ownpools'] = 'Eigene Pools';
 $string['cataloguepools'] = 'Mitgelieferte Pools';
 $string['pooliconcount'] = 'Icons';
 $string['openpoolnamed'] = 'Pool „{$a}“ öffnen';
-$string['catalogueinstructions'] = 'Markiere die Icons, die Du in einem eigenen Pool anbieten möchtest.';
-$string['creategroupforcopy'] = 'Lege unter Icon-Pools einen eigenen Pool an, um Icons dorthin zu kopieren.';
-$string['poolisempty'] = 'Dieser Pool ist leer. Du kannst hier Dateien hochladen oder Icons aus einem anderen Pool hierher kopieren.';
+$string['catalogueinstructions'] = 'Markieren Sie die Icons, die Sie in einem eigenen Pool anbieten möchten.';
+$string['creategroupforcopy'] = 'Legen Sie unter Icon-Pools einen eigenen Pool an, um Icons dorthin zu kopieren.';
+$string['poolisempty'] = 'Dieser Pool ist leer. Sie können hier Dateien hochladen oder Icons aus einem anderen Pool hierher kopieren.';
 $string['choosepoolaction'] = 'Aktion auswählen';
 $string['selectedpoolaction'] = 'Aktion für markierte Icons';
 $string['runpoolaction'] = 'Ausführen';
@@ -501,21 +477,19 @@ $string['poolmetadatanamed'] = 'Metadaten ändern – {$a}';
 $string['poolreference'] = 'Referenzicon';
 $string['poolreferenceauto'] = 'Automatisch: erstes Icon im Pool';
 $string['poolreference_help'] = 'Das gewählte Icon erscheint in der Poolkarte. Zur Auswahl stehen die Icons aus diesem Pool. Bei „Automatisch“ oder wenn ein gewähltes Icon wegfällt, erscheint das erste verfügbare Icon.';
-$string['poolreferenceinvalid'] = 'Wähle ein Referenzicon aus diesem Pool.';
+$string['poolreferenceinvalid'] = 'Wählen Sie ein Referenzicon aus diesem Pool.';
 $string['poolcardcount'] = 'Icons: {$a}';
-$string['courseadmin'] = 'Admin-Aktionen';
+$string['courseadmin'] = 'Administrationsaktionen';
 $string['settingshelp_course'] = 'H5P-Automatik im Kurs';
 $string['course_help'] = 'Die Kursregel gilt für H5P-Aktivitäten ohne individuelle Auswahl.';
-$string['settingshelp_course_article'] = '<p>Mit <strong>Website-Einstellung übernehmen</strong> gilt die Website-Vorgabe. Du kannst die H5P-Automatik auch für diesen Kurs ein- oder ausschalten. Individuelle Einstellungen an einer Aktivität haben Vorrang.</p><p>Wenn eine Aktivität nach der Zurücksetzung wieder der Kursregel folgen soll, wähle an ihr <strong>Kursregel übernehmen</strong>.</p>';
-$string['settingshelp_courseadmin'] = 'Admin-Aktionen im Kurs';
-$string['courseadmin_help'] = 'Beim Zurücksetzen gehen individuelle Icon-Zuweisungen dieses Kurses verloren. Die nächste Seite fragt Dich nach einer Bestätigung.';
-$string['settingshelp_courseadmin_article'] = '<p>Unter <strong>Admin-Aktionen</strong> öffnest Du die websiteweite Verwaltung oder stellst alle ursprünglichen Moodle-Icons dieses Kurses wieder her.</p><p>Die Zurücksetzung deaktiviert die H5P-Automatik im Kurs. Du kannst individuelle Icons danach erneut zuweisen oder aus einer passenden Kurssicherung wiederherstellen.</p>';
-
-// Optional information before native package confirmation.
+$string['settingshelp_course_article'] = '<p>Mit <strong>Website-Einstellung übernehmen</strong> gilt die Website-Vorgabe. Sie können die H5P-Automatik auch für diesen Kurs ein- oder ausschalten. Individuelle Einstellungen an einer Aktivität haben Vorrang.</p><p>Wenn eine Aktivität nach der Zurücksetzung wieder der Kursregel folgen soll, wählen Sie an ihr <strong>Kursregel übernehmen</strong>.</p>';
+$string['settingshelp_courseadmin'] = 'Administrationsaktionen im Kurs';
+$string['courseadmin_help'] = 'Beim Zurücksetzen gehen individuelle Icon-Zuweisungen dieses Kurses verloren. Die nächste Seite fragt Sie nach einer Bestätigung.';
+$string['settingshelp_courseadmin_article'] = '<p>Unter <strong>Administrationsaktionen</strong> öffnen Sie die websiteweite Verwaltung oder stellen alle ursprünglichen Moodle-Icons dieses Kurses wieder her.</p><p>Die Zurücksetzung deaktiviert die H5P-Automatik im Kurs. Sie können individuelle Icons danach erneut zuweisen oder aus einer passenden Kurssicherung wiederherstellen.</p>';
 $string['updateinfo_heading'] = 'Paketinformationen: {$a}';
 $string['updateinfo_verified'] = 'Der eingebettete Herausgebernachweis passt zur installierten Ausgabe.';
 $string['updateinfo_missing'] = 'Dieses Paket enthält keinen eingebetteten Herausgebernachweis.';
 $string['updateinfo_line'] = 'Dieses Paket gehört zu einer anderen Ausgabe als das installierte Plugin.';
 $string['updateinfo_mismatch'] = 'Der eingebettete Herausgebernachweis konnte mit den Angaben des installierten Plugins nicht bestätigt werden.';
 $string['updateinfo_unavailable'] = 'Die Herausgeberinformationen für das ausgewählte Paket konnten nicht gelesen werden.';
-$string['updateinfo_choice'] = 'Kontrolliere vor dem Fortfahren die Paketquelle und Moodles Prüfergebnisse. Mit „{$a}“ unten kannst Du abbrechen.';
+$string['updateinfo_choice'] = 'Kontrollieren Sie vor dem Fortfahren die Paketquelle und Moodles Prüfergebnisse. Mit „{$a}“ unten können Sie abbrechen.';
